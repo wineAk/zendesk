@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "login": "zcli login -i",
+    "preview": "zcli themes:preview"
+  },
+  "dependencies": {
+    "@zendesk/zcli": "^1.0.0-beta.52",
+  }
+}
