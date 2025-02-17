@@ -1442,6 +1442,7 @@ ul {
   font-size: 13px;
 }
 .recent-activity-item-comment {
+  display: none;
   padding-left: 5px;
 }
 [dir=rtl] .recent-activity-item-comment {
