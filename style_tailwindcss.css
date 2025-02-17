@@ -1,0 +1,12 @@
+@import "./style_copenhagen.css";
+@import "tailwindcss";
+
+.recent-activity-item-comment {
+  display: none;
+}
+a.no-underline {
+  text-decoration-line: none;
+}
+.hover\:bg-gray-50:hover {
+  background-color: var(--color-gray-50);
+}
