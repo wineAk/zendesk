@@ -20,20 +20,20 @@
   // Navigation
 
   window.addEventListener("DOMContentLoaded", () => {
-    const menuButton = document.querySelector(".header .menu-button-mobile");
-    const menuList = document.querySelector("#user-nav-mobile");
+    //const menuButton = document.querySelector(".header .menu-button-mobile");
+    //const menuList = document.querySelector("#user-nav-mobile");
 
-    menuButton.addEventListener("click", (event) => {
-      event.stopPropagation();
-      toggleNavigation(menuButton, menuList);
-    });
+    //menuButton.addEventListener("click", (event) => {
+    //  event.stopPropagation();
+    //  toggleNavigation(menuButton, menuList);
+    //});
 
-    menuList.addEventListener("keyup", (event) => {
-      if (event.keyCode === ESCAPE) {
-        event.stopPropagation();
-        closeNavigation(menuButton, menuList);
-      }
-    });
+    //menuList.addEventListener("keyup", (event) => {
+    //  if (event.keyCode === ESCAPE) {
+    //    event.stopPropagation();
+    //    closeNavigation(menuButton, menuList);
+    //  }
+    //});
 
     // Toggles expanded aria to collapsible elements
     const collapsible = document.querySelectorAll(
