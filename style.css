@@ -637,12 +637,12 @@ ul {
     width: 90%;
   }
 }
-
+/*
 .logo img {
   max-height: 37px;
   vertical-align: middle;
 }
-
+*/
 .logo span {
   margin: 0 10px;
   color: $brand_color;

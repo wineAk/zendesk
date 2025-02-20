@@ -1,11 +1,11 @@
 <a class="skip-navigation" tabindex="1" href="#main-content">{{t 'skip_navigation' }}</a>
 
-<header class="header">
-  <div class="logo">
+<header class="border-b border-gray-200 p-6">
+  <div class="max-w-6xl m-auto">
     {{#link 'help_center'}}
-      <img src="{{settings.logo}}" alt="{{t 'home_page' name=help_center.name}}" />
+      <img src="{{settings.logo}}" alt="{{t 'home_page' name=help_center.name}}"  class="h-6 sm:h-9" />
       {{#if settings.show_brand_name}}
-        <span aria-hidden="true">{{help_center.name}}</span>
+        <span aria-hidden="true" class="hidden">{{help_center.name}}</span>
       {{/if}}
     {{/link}}
   </div>
