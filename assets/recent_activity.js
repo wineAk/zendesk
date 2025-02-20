@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </li>
               </ol>
             </nav>
-            <p class="font-bold text-xl text-gray-700 mb-1">
+            <p class="font-bold text-xl text-gray-700 mb-1 truncate">
               ${name}
             </p>
             <p class="text-gray-500">
