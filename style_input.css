@@ -36,3 +36,38 @@ a.consulting {
 .hero {
   background: #fff url(https://www.saaske.com/include/img/technology/bg.png) repeat 50% 0;
 }
+
+.hero-title {
+  position: relative;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 30px;
+  background-color: #ecf1e4;
+  color: #3d8256;
+  border: 1px solid #3d8256;
+  font-weight: bold;
+  font-size: 28px;
+  font-size: 1.75rem;
+  line-height: 1.14286;
+  text-align: center;
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    border-style: solid;
+    border-width: 20px 10px 0 10px;
+    border-color: #3d8256 transparent transparent;
+    translate: -50% 100%;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    border-style: solid;
+    border-width: 19.8px 9.9px 0 9.9px;
+    border-color: #ecf1e4 transparent transparent;
+    translate: -50% 90%;
+  }
+}

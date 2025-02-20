@@ -2,11 +2,10 @@
 
 <section id="main-content" class="section hero">
   <div class="hero-inner">
-    <!--
-    <h2 class="rounded-xl bg-lime-50 text-lime-800 p-4">
+    <h2 class="hero-title">
       なにかお困りですか？
     </h2>
-    -->
+    <p class="text-center my-2">あなたの悩みを検索してみましょう</p>
     <h2 class="visibility-hidden">{{ t 'search' }}</h2>
     <div class="relative">
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
@@ -38,7 +37,7 @@
           {{#if ../has_multiple_categories}}
             <a
               href='{{url}}'
-              class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+              class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
             >
               <div class="flex flex-col gap-2 p-4 h-full">  
                 <div>
@@ -55,7 +54,7 @@
             {{#each sections}}
               <a
                 href='{{url}}'
-                class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+                class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
               >
                 <div class="flex flex-col gap-2 p-4 h-full">  
                   <div>
@@ -261,7 +260,7 @@
 
         <a
           href="https://www.saaske.com/document/00M01.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -286,7 +285,7 @@
 
         <a
           href="https://www.saaske.com/document/04M01.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -311,7 +310,7 @@
 
         <a
           href="https://www.saaske.com/document/04M02.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -336,7 +335,7 @@
 
         <a
           href="https://www.saaske.com/document/04M03.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -360,7 +359,7 @@
 
         <a
           href="https://www.saaske.com/document/07M01.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -385,7 +384,7 @@
 
         <a
           href="https://www.saaske.com/document/07M02.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -410,7 +409,7 @@
 
         <a
           href="https://www.saaske.com/document/07M03.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -434,7 +433,7 @@
 
         <a
           href="https://www.saaske.com/document/08M01.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -459,7 +458,7 @@
 
         <a
           href="https://www.saaske.com/document/05M01.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -484,7 +483,7 @@
 
         <a
           href="https://www.saaske.com/document/09M01.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -507,10 +506,9 @@
           </div>
         </a>
 
-
         <a
           href="https://www.saaske.com/document/09M02.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -534,7 +532,7 @@
 
         <a
           href="https://www.saaske.com/document/10M01.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -557,10 +555,9 @@
           </div>
         </a>
 
-
         <a
           href="https://www.saaske.com/document/10M02.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -582,10 +579,9 @@
           </div>
         </a>
 
-
         <a
           href="https://www.saaske.com/document/11M01.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -610,7 +606,7 @@
 
         <a
           href="https://www.saaske.com/document/11M05.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -634,7 +630,7 @@
 
         <a
           href="https://www.saaske.com/document/11M03.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
@@ -658,7 +654,7 @@
 
         <a
           href="https://www.saaske.com/document/11M02.pdf" target="_blank"
-          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50"
+          class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
         >
           <div class="flex flex-col gap-2 p-4 h-full">  
             <div>
