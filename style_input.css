@@ -32,3 +32,7 @@ a.consulting {
     width: 100%;
   }
 }
+
+.hero {
+  background: #fff url(https://www.saaske.com/include/img/technology/bg.png) repeat 50% 0;
+}
