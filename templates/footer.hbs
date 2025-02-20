@@ -1,25 +1,16 @@
-<footer class="footer">
-  <div class="footer-inner">
-    {{#link 'help_center'}}{{help_center.name}}{{/link}}
-
-    <div class="footer-language-selector">
-      {{#if alternative_locales}}
-        <div class="dropdown language-selector">
-          <button class="dropdown-toggle" aria-haspopup="true">
-            {{current_locale.name}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-            </svg>
-          </button>
-          <span class="dropdown-menu dropdown-menu-end" role="menu">
-            {{#each alternative_locales}}
-              <a href="{{url}}" dir="{{direction}}" rel="nofollow" role="menuitem">
-                {{name}}
-              </a>
-            {{/each}}
-          </span>
-        </div>
+<footer class="border-t border-gray-200 p-6">
+  <div class="max-w-6xl m-auto flex flex-col sm:flex-row gap-4 sm:gap-0 justify-between items-center">
+    {{#link 'help_center'}}
+      <img src="{{settings.logo}}" alt="{{t 'home_page' name=help_center.name}}"  class="h-10" />
+      {{#if settings.show_brand_name}}
+        <span aria-hidden="true" class="hidden">{{help_center.name}}</span>
       {{/if}}
-    </div>
+    {{/link}}
+    <div class="flex items-center gap-4">
+      <span class="text-sm text-gray-500 text-center">
+        Copyright(C) Interpark.,
+        Co. Ltd. All rights reserved.
+      </span>
   </div>
+
 </footer>

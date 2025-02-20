@@ -1,13 +1,20 @@
 <a class="skip-navigation" tabindex="1" href="#main-content">{{t 'skip_navigation' }}</a>
 
 <header class="border-b border-gray-200 p-6">
-  <div class="max-w-6xl m-auto">
+  <div class="max-w-6xl m-auto flex flex-col sm:flex-row gap-4 sm:gap-0 justify-between items-center">
     {{#link 'help_center'}}
-      <img src="{{settings.logo}}" alt="{{t 'home_page' name=help_center.name}}"  class="h-6 sm:h-9" />
+      <img src="{{settings.logo}}" alt="{{t 'home_page' name=help_center.name}}"  class="h-10" />
       {{#if settings.show_brand_name}}
         <span aria-hidden="true" class="hidden">{{help_center.name}}</span>
       {{/if}}
     {{/link}}
+    <div class="hidden sm:flex items-center gap-4">
+      <div class="border rounded-lg p-2 text-xs">平日 9時～17時半</div>
+      <div>
+        <p class="text-xs mb-1">サスケサポートセンター</p>
+        <img src="https://cdn.saaske.com/include/img/icon/dial-technology.png">
+      </div>
+    </div>
   </div>
 
 </header>
