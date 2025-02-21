@@ -144,7 +144,7 @@
           "options": [
             {
               "label": "System",
-              "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+              "value": "'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;"
             },
             {
               "label": "Arial",
@@ -224,7 +224,7 @@
           "type": "checkbox",
           "description": "show_brand_name_description",
           "label": "show_brand_name_label",
-          "value": true
+          "value": false
         },
         {
           "identifier": "favicon",
@@ -310,21 +310,21 @@
           "type": "checkbox",
           "description": "article_author_description",
           "label": "article_author_label",
-          "value": true
+          "value": false
         },
         {
           "identifier": "show_article_comments",
           "type": "checkbox",
           "description": "article_comments_description",
           "label": "article_comments_label",
-          "value": true
+          "value": false
         },
         {
           "identifier": "show_follow_article",
           "type": "checkbox",
           "description": "follow_article_description",
           "label": "follow_article_label",
-          "value": true
+          "value": false
         },
         {
           "identifier": "show_recently_viewed_articles",
@@ -345,7 +345,7 @@
           "type": "checkbox",
           "description": "article_sharing_description",
           "label": "article_sharing_label",
-          "value": true
+          "value": false
         }
       ]
     },
@@ -357,7 +357,7 @@
           "type": "checkbox",
           "description": "follow_section_description",
           "label": "follow_section_label",
-          "value": true
+          "value": false
         }
       ]
     },
@@ -369,14 +369,14 @@
           "type": "checkbox",
           "description": "follow_post_description",
           "label": "follow_post_label",
-          "value": true
+          "value": false
         },
         {
           "identifier": "show_post_sharing",
           "type": "checkbox",
           "description": "post_sharing_description",
           "label": "post_sharing_label",
-          "value": true
+          "value": false
         }
       ]
     },
@@ -388,7 +388,7 @@
           "type": "checkbox",
           "description": "follow_topic_description",
           "label": "follow_topic_label",
-          "value": true
+          "value": false
         }
       ]
     },
