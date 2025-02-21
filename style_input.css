@@ -71,3 +71,7 @@ a.consulting {
     translate: -50% 90%;
   }
 }
+
+.article-body img {
+  cursor: pointer;
+}
