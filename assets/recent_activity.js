@@ -26,10 +26,47 @@ document.addEventListener("DOMContentLoaded", function () {
     return text.length > maxLen ? text.slice(0, maxLen) + "…" : text;
   }
   /**
+   * キャッシュがあれば期限切れを確認して返す
+   * @param {string} cacheName "storage名"
+   * @returns {object | null} 記事データ または null
+   */
+  function getCached(cacheName) {
+    const cacheLifetime = 60 * 60 * 1000 * 12; // 12時間（ミリ秒）
+    const cachedData = localStorage.getItem(cacheName);
+    if (cachedData) {
+      const { data, timestamp } = JSON.parse(cachedData);
+      const now = Date.now();
+      if (now - timestamp < cacheLifetime) {
+        console.log("Returning cached data.");
+        return data; // 有効期限内ならキャッシュを返す
+      } else {
+        console.log("Cache expired. Removing old cache.");
+        localStorage.removeItem(cacheName); // 期限切れなら削除
+      }
+    }
+    return null; // キャッシュがないか期限切れなら null を返す
+  }
+  /**
+   * ローカルストレージにキャッシュとして保存
+   * @param {string} cacheName "storage名"
+   * @param {object} data 記事データ
+   */
+  function setCached(cacheName, data) {
+    const cacheData = {
+      data: data,
+      timestamp: Date.now() // 現在の時刻を記録
+    };
+    localStorage.setItem(cacheName, JSON.stringify(cacheData));
+  }
+  /**
    * 記事データを取得
    * @returns {object} 記事オブジェクト
    */
   async function getArticles() {
+    // 0. ローカルストレージにキャッシュがあれば返す
+    const cacheName = `C.${location.pathname}.articles`
+    const cache = getCached(cacheName);
+    if (cache) return cache;
     // 1. 全カテゴリを取得
     const categoriesResponse = await fetch('/api/v2/help_center/ja/categories.json?per_page=100');
     const categoriesData = await categoriesResponse.json();
@@ -53,6 +90,8 @@ document.addEventListener("DOMContentLoaded", function () {
         category_name: category.name,
       }
     })
+    // 5. ローカルストレージにキャッシュとして保存
+    setCached(cacheName, articles);
     return articles
   }
   getArticles().then(articles => {
