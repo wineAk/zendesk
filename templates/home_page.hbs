@@ -30,6 +30,88 @@
   </section>
 
   <section class="section home-section">
+    <h2 class="font-bold">📂カテゴリ一覧</h2>
+    <h2 class="visibility-hidden">{{ t 'categories' }}</h2>
+    <section class="categories blocks">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {{#each categories}}
+          {{#if ../has_multiple_categories}}
+            <a
+              href='{{url}}'
+              class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
+            >
+              <div class="flex flex-col gap-2 p-4 h-full">  
+                <div>
+                  <p class="font-bold text-xl text-center text-gray-700 mb-1">
+                    {{name}}
+                  </p>
+                  <p class="text-gray-700">
+                    {{excerpt description}}
+                  </p>
+                </div>
+              </div>
+            </a>
+          {{else}}
+            {{#each sections}}
+              <a
+                href='{{url}}'
+                class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
+              >
+                <div class="flex flex-col gap-2 p-4 h-full">  
+                  <div>
+                    <p class="font-bold text-xl text-center text-gray-700 mb-1">
+                      {{name}}
+                    </p>
+                    <p class="text-gray-700">
+                      {{excerpt description}}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            {{/each}}
+          {{/if}}
+        {{/each}}
+      </div>
+      {{pagination}}
+    </section>
+
+    {{#if promoted_articles}}
+      <section class="articles">
+        <h2 class="font-bold">{{t 'promoted_articles'}}</h2>
+        <ul class="article-list promoted-articles">
+          {{#each promoted_articles}}
+            <li class="promoted-articles-item">
+                <a href="{{url}}">
+                  {{title}}
+
+                  {{#if internal}}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" class="icon-lock" title="{{t 'internal'}}">
+                      <rect width="12" height="9" x="2" y="7" fill="currentColor" rx="1" ry="1"/>
+                      <path fill="none" stroke="currentColor" d="M4.5 7.5V4a3.5 3.5 0 017 0v3.5"/>
+                    </svg>
+                  {{/if}}
+                </a>
+            </li>
+          {{/each}}
+        </ul>
+      </section>
+    {{/if}}
+  </section>
+
+  {{#if help_center.community_enabled}}
+    <section class="section home-section community">
+      <h2 class="font-bold">{{t 'community'}}</h2>
+      {{#link 'community' class='community-link'}}
+        {{t 'join_conversation'}}
+      {{/link}}
+
+      <div class="community-image"></div>
+    </section>
+  {{/if}}
+
+  <hr class="my-8 border-slate-200">
+
+  <section class="section home-section">
     <h2 class="font-bold">📜旧マニュアル</h2>
     <section class="categories blocks">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -455,88 +537,6 @@
       </div>
     </section>
   </section>
-
-  <hr class="my-8 border-slate-200">
-
-  <section class="section home-section">
-    <h2 class="font-bold">📂カテゴリ一覧</h2>
-    <h2 class="visibility-hidden">{{ t 'categories' }}</h2>
-    <section class="categories blocks">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {{#each categories}}
-          {{#if ../has_multiple_categories}}
-            <a
-              href='{{url}}'
-              class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
-            >
-              <div class="flex flex-col gap-2 p-4 h-full">  
-                <div>
-                  <p class="font-bold text-xl text-center text-gray-700 mb-1">
-                    {{name}}
-                  </p>
-                  <p class="text-gray-700">
-                    {{excerpt description}}
-                  </p>
-                </div>
-              </div>
-            </a>
-          {{else}}
-            {{#each sections}}
-              <a
-                href='{{url}}'
-                class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
-              >
-                <div class="flex flex-col gap-2 p-4 h-full">  
-                  <div>
-                    <p class="font-bold text-xl text-center text-gray-700 mb-1">
-                      {{name}}
-                    </p>
-                    <p class="text-gray-700">
-                      {{excerpt description}}
-                    </p>
-                  </div>
-                </div>
-              </a>
-            {{/each}}
-          {{/if}}
-        {{/each}}
-      </div>
-      {{pagination}}
-    </section>
-
-    {{#if promoted_articles}}
-      <section class="articles">
-        <h2 class="font-bold">{{t 'promoted_articles'}}</h2>
-        <ul class="article-list promoted-articles">
-          {{#each promoted_articles}}
-            <li class="promoted-articles-item">
-                <a href="{{url}}">
-                  {{title}}
-
-                  {{#if internal}}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" class="icon-lock" title="{{t 'internal'}}">
-                      <rect width="12" height="9" x="2" y="7" fill="currentColor" rx="1" ry="1"/>
-                      <path fill="none" stroke="currentColor" d="M4.5 7.5V4a3.5 3.5 0 017 0v3.5"/>
-                    </svg>
-                  {{/if}}
-                </a>
-            </li>
-          {{/each}}
-        </ul>
-      </section>
-    {{/if}}
-  </section>
-
-  {{#if help_center.community_enabled}}
-    <section class="section home-section community">
-      <h2 class="font-bold">{{t 'community'}}</h2>
-      {{#link 'community' class='community-link'}}
-        {{t 'join_conversation'}}
-      {{/link}}
-
-      <div class="community-image"></div>
-    </section>
-  {{/if}}
 
   <hr class="my-8 border-slate-200">
 
