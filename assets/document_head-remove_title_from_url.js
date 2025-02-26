@@ -1,18 +1,22 @@
-const pathSegments = window.location.pathname.split("/");
-if (pathSegments.length > 3) {
-    let type = pathSegments[3]; // categories, sections, articles など
-    let idPart = pathSegments[4]?.split("-")[0];
-    if (idPart) {
-        let cleanUrl = `/hc/ja/${type}/${idPart}`;
-        if (window.location.pathname !== cleanUrl) {
-            history.replaceState(null, "", cleanUrl);
-        }
-    }
+/**
+ * URLからタイトルを削除
+ * @param {string} url /hc/ja/articles/35749118295321-%E3%82%B9%E3%82%B3%E3%82%A2-%E8%A8%AD%E5%AE%9A
+ * @returns /hc/ja/articles/35749118295321
+ */
+function removeTitle(url) {
+  return url.replace(/(categories|sections|articles)(\/\d+)(\-.*)/, '$1$2') 
 }
+
+// 現在のページ
+const pathname = window.location.pathname
+const replacePath = removeTitle(pathname)
+if (pathname !== replacePath) history.replaceState(null, "", replacePath)
+
+// aタグ
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll('a[href^="/hc/ja/"]').forEach(function(elm) {
-        const url = elm.href;
-        const cleanUrl = url.split('-')[0];
-        elm.href = cleanUrl;
-    });
-});
+  document.querySelectorAll('a').forEach(function(elm) {
+    const href = elm.href
+    const replaceHref = removeTitle(href)
+    if (href !== replaceHref) elm.href = replaceHref
+  })
+})
