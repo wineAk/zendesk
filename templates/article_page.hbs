@@ -1,4 +1,8 @@
+<!--<link rel="stylesheet" href="{{asset '-tocbot.css'}}">-->
+<script src="{{asset '-tocbot.min.js'}}"></script>
 <script src="{{asset 'article_page-image_modal.js'}}"></script>
+<script src="{{asset 'article_page-toc.js'}}"></script>
+
 <div id="image-modal" tabindex="-1" role="dialog" aria-hidden="true" aria-modal="false" class="hidden select-none">
   <div class="flex justify-center items-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-full bg-gray-900/70 p-4" data-modal-hide="image-modal">
     <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="image-modal">
@@ -28,7 +32,7 @@
   </div>
 
   <div class="article-container" id="article-container">
-    <aside class="article-sidebar" aria-labelledby="section-articles-title">
+    <aside class="article-sidebar order-1" aria-labelledby="section-articles-title">
       {{#if settings.show_articles_in_section}}
         <div class="collapsible-sidebar">
           <button type="button" class="collapsible-sidebar-toggle" aria-labelledby="section-articles-title" aria-expanded="false">
@@ -62,7 +66,7 @@
       {{/if}}
     </aside>
 
-    <article id="main-content" class="article">
+    <article id="main-content" class="article order-3 lg:order-2">
       <header class="article-header">
         <h1 title="{{article.title}}" class="article-title">
           {{article.title}}
@@ -338,5 +342,26 @@
         </div>
       {{/if}}
     </article>
+    
+    <aside class="article-sidebar order-2 lg:order-3" aria-labelledby="section-articles-title">
+      <div class="collapsible-sidebar lg:sticky lg:top-6">
+        <div class="lg:border-slate-200 lg:rounded-xl lg:border-2 lg:p-2">
+          <button type="button" class="collapsible-sidebar-toggle" aria-labelledby="section-articles-title" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon">
+              <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3"/>
+            </svg>
+          </button>
+          <div id="section-articles-title" class="collapsible-sidebar-title sidenav-title flex items-center lg:justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M8 4H21V6H8V4ZM3 3.5H6V6.5H3V3.5ZM3 10.5H6V13.5H3V10.5ZM3 17.5H6V20.5H3V17.5ZM8 11H21V13H8V11ZM8 18H21V20H8V18Z"></path></svg>
+            <span class="ml-2">目次</span>
+          </div>
+          <div class="collapsible-sidebar-body js-toc"></div>
+        </div>
+      </div>
+    </aside>
+    
   </div>
 </div>

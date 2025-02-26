@@ -75,3 +75,9 @@ a.consulting {
 .article-body img {
   cursor: pointer;
 }
+
+.collapsible-sidebar.lg\:sticky {
+  @media (width >= 64rem) {
+      position: sticky;
+  }
+}
