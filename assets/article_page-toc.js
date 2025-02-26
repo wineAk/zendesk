@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 折りたたまれるべきだが、必ずしも折りたたまれていない場合に追加されるクラスです。
     collapsibleClass: 'is-collapsible',
     // リストアイテムに追加するクラスです。
-    listItemClass: 'toc-list-item my-1.5',
+    listItemClass: 'toc-list-item my-2',
     // アクティブなリストアイテムに追加するクラスです。
     activeListItemClass: 'is-active-li',
   })
