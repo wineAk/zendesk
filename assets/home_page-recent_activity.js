@@ -145,13 +145,12 @@ document.addEventListener("DOMContentLoaded", function () {
    */
   async function getCategories() {
     // 0. ローカルストレージにキャッシュがあれば返す
-    const cacheName = `C.${location.pathname}.categories`
+    const cacheName = 'C.categories'
     const cache = getCached(cacheName)
     if (cache) return cache
     // 1. カテゴリを取得
     const categoriesResponse = await fetch('/api/v2/help_center/ja/categories.json?per_page=100')
-    const categoriesData = await categoriesResponse.json()
-    const categories = Object.fromEntries(categoriesData.categories.map(category => [category.id, { ...category }]))
+    const categories = await categoriesResponse.json()
     // 2. ローカルストレージにキャッシュとして保存
     setCached(cacheName, categories)
     return categories
@@ -163,13 +162,12 @@ document.addEventListener("DOMContentLoaded", function () {
    */
   async function getSections() {
     // 0. ローカルストレージにキャッシュがあれば返す
-    const cacheName = `C.${location.pathname}.sections`
+    const cacheName = 'C.sections'
     const cache = getCached(cacheName)
     if (cache) return cache
     // 1. セクションを取得
     const sectionsResponse = await fetch('/api/v2/help_center/sections.json?per_page=100')
-    const sectionsData = await sectionsResponse.json()
-    const sections = Object.fromEntries(sectionsData.sections.map(section => [section.id, { ...section }]))
+    const sections = await sectionsResponse.json()
     // 2. ローカルストレージにキャッシュとして保存
     setCached(cacheName, sections)
     return sections
@@ -182,13 +180,15 @@ document.addEventListener("DOMContentLoaded", function () {
    */
   async function getArticles(sort_by) {
     // 0. ローカルストレージにキャッシュがあれば返す
-    const cacheName = `C.${location.pathname}.articles.${sort_by}`
+    const cacheName = `C.articles.${sort_by}`
     const cache = getCached(cacheName)
     if (cache) return cache
     // 1. カテゴリを取得
-    const categories = await getCategories()
+    const categoriesData = await getCategories()
+    const categories = Object.fromEntries(categoriesData.categories.map(category => [category.id, { ...category }]))
     // 2. セクションを取得
-    const sections = await getSections()
+    const sectionsData = await getSections()
+    const sections = Object.fromEntries(sectionsData.sections.map(section => [section.id, { ...section }]))
     // 3. 記事を取得
     const articlesResponse = await fetch(`/api/v2/help_center/articles.json?sort_by=${sort_by}&per_page=9`)
     const articlesData = await articlesResponse.json()
