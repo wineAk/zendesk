@@ -81,3 +81,11 @@ a.consulting {
       position: sticky;
   }
 }
+aside {
+  .search,
+  .search input[type=search],
+  .search .clear-button {
+    border-color: var(--color-gray-200);
+    border-radius: .5rem;
+  }
+}
