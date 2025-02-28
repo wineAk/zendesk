@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
-a.technology {
-  background: url(https://my.saaske.com/home/img/technology_bg.png) repeat-x left top #64716d;
+.technology {
+  background: url(https://my.saaske.com/home/img/technology_bg.png) repeat-x
+    left top #64716d;
   background-size: contain;
   border: 1px solid #3d4d48;
   display: block;
   line-height: 0;
   text-align: center;
   &&:before {
-    background: url(https://my.saaske.com/home/img/technology.png) center center no-repeat;
+    background: url(https://my.saaske.com/home/img/technology.png) center center
+      no-repeat;
     background-size: auto 100%;
     content: "";
     display: block;
@@ -16,15 +18,18 @@ a.technology {
     width: 100%;
   }
 }
-a.consulting {
-  background: url(https://my.saaske.com/home/img/consulting_bg.png) center center no-repeat #d7e7b9;
+
+.consulting {
+  background: url(https://my.saaske.com/home/img/consulting_bg.png) center
+    center no-repeat #d7e7b9;
   background-size: contain;
   border: 1px solid #6a9644;
   display: block;
   line-height: 0;
   text-align: center;
   &&:before {
-    background: url(https://my.saaske.com/home/img/consulting.png) center center no-repeat;
+    background: url(https://my.saaske.com/home/img/consulting.png) center center
+      no-repeat;
     background-size: auto 65%;
     content: "";
     display: block;
@@ -34,7 +39,8 @@ a.consulting {
 }
 
 .hero {
-  background: #fff url(https://www.saaske.com/include/img/technology/bg.png) repeat 50% 0;
+  background: #fff url(https://www.saaske.com/include/img/technology/bg.png)
+    repeat 50% 0;
 }
 
 .hero-title {
@@ -76,16 +82,34 @@ a.consulting {
   cursor: pointer;
 }
 
-.collapsible-sidebar.lg\:sticky {
-  @media (width >= 64rem) {
-      position: sticky;
-  }
-}
 aside {
   .search,
-  .search input[type=search],
+  .search input[type="search"],
   .search .clear-button {
     border-color: var(--color-gray-200);
-    border-radius: .5rem;
+    border-radius: 0.5rem;
+  }
+}
+
+/**
+ * tailwindcss
+ */
+.collapsible-sidebar.lg\:sticky {
+  @media (width >= 64rem) {
+    position: sticky;
+  }
+}
+
+.hover\:bg-gray-50 {
+  &:hover {
+      @media (hover: hover) {
+          background-color: var(--color-gray-50);
+      }
+  }
+}
+
+a {
+  &.no-underline {
+    text-decoration-line: none;
   }
 }
