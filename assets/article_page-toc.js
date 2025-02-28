@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // リストに追加するエクストラクラスです。
     extraListClasses: '',
     // リストが折りたたまれるべき時に追加されるクラス。
-    isCollapsedClass: 'is-collapsed pl-2',
+    isCollapsedClass: 'is-collapsed',
     // リストが折り畳まれるべき時に追加されるクラスです。
     // 折りたたまれるべきだが、必ずしも折りたたまれていない場合に追加されるクラスです。
     collapsibleClass: 'is-collapsible',

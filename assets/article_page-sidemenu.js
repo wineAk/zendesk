@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return sections
   }
 
-  async function test() {
+  async function setSidemenu() {
     // セクションをカテゴリIDごとにする
     const sectionsData = await getSections()
     const { sections } = sectionsData
@@ -155,22 +155,54 @@ document.addEventListener('DOMContentLoaded', function () {
           </div>`
       }).join('')
       const html = `
-        <div class="bg-gray-50 rounded-md">
-          <div class="flex items-center justify-between p-2">
-            <a href="${category.html_url}">${category.name}</a>
-            <button class="hover:bg-gray-200">
-              <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        <div class="flex flex-col gap-2 bg-gray-50 rounded-md p-2" data-accordion="collapse">
+          <div class="flex items-center gap-1">
+            <button class="hover:bg-gray-200 rotate-270">
+              <svg aria-hidden="true" class="w-6 h-6 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
+            <a href="${category.html_url}">${category.name}</a>
           </div>
-          <div class="p-4 pt-0">
+          <div class="hidden flex-col gap-2 pl-2">
             ${sectionsHtml}
           </div>
         </div>`
       return html
     }).join('')
     document.getElementById('categories').innerHTML = categoryHtml
+    // ボタンクリック
+    document.querySelectorAll('[data-accordion="collapse"]').forEach(collapseElm => {
+      collapseElm.querySelector('button').addEventListener('click', event => {
+        const buttonElm = event.target
+        const categoryElm = buttonElm.closest('[data-accordion="collapse"]')
+        const sectionsElm = categoryElm.lastElementChild
+        const isSectionsHidden = sectionsElm.classList.contains('hidden')
+        if (isSectionsHidden) {
+          sectionsElm.classList.replace('hidden', 'flex')
+          buttonElm.classList.remove('rotate-270')
+        } else {
+          sectionsElm.classList.replace('flex', 'hidden')
+          buttonElm.classList.add('rotate-270')
+        }
+      })
+
+    })
   }
 
-  test().then(e => console.log('end'))
+  setSidemenu().then(e => console.log('Side menu has been added.'))
 
+  /**
+   * サイドメニューの高さをスクロールに合わせて可変
+   */
+  let lastSetPx = 0
+  addEventListener("scroll", (event) => {
+    const scrollPosition = window.scrollY
+    // 24を差し引かないといけない謎
+    // mb-4(16px)*2 や .article-containerの20pxあたり？
+    const setPx = scrollPosition < 168 - 24 ? scrollPosition : 168 - 24
+    if (lastSetPx === setPx) return
+    lastSetPx = setPx
+    document.querySelectorAll('.article-container > aside').forEach(elm => {
+      elm.style.setProperty('--js-scroll', `${setPx}px`)
+    })
+  });
 })
