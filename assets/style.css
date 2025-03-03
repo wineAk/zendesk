@@ -1118,6 +1118,11 @@
       gap: calc(var(--spacing) * 4);
     }
   }
+  .lg\:overflow-y-auto {
+    @media (width >= 64rem) {
+      overflow-y: auto;
+    }
+  }
   .lg\:overflow-y-scroll {
     @media (width >= 64rem) {
       overflow-y: scroll;
