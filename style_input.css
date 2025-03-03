@@ -127,6 +127,12 @@
   }
 }
 
+.lg\:pr-2 {
+  @media (width >= 64rem) {
+      padding-right: calc(var(--spacing)* 2);
+  }
+}
+
 .hover\:bg-gray-50 {
   &:hover {
     @media (hover: hover) {
