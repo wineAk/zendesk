@@ -130,39 +130,102 @@ document.addEventListener('DOMContentLoaded', function () {
     return sections
   }
 
+  /**
+   * 
+   */
+  async function getArticles() {
+    // 0. ローカルストレージにキャッシュがあれば返す
+    const cacheName = 'C.articles.all'
+    const cache = getCached(cacheName)
+    if (cache) return cache
+    // 1. セクションを取得
+    let articlesList = []
+    let next_page = '/api/v2/help_center/articles.json?page=1&per_page=100'
+    while (next_page) {
+        const response = await fetch(next_page)
+        const data = await response.json()
+        if (data.articles) {
+          articlesList = [...articlesList, ...data.articles]
+        }
+        next_page = data.next_page
+    }
+    const articles = articlesList.map(article => {
+      // bodyを除外したオブジェクトを作成
+      const { body, ...rest } = article
+      return rest
+    })
+    // 2. ローカルストレージにキャッシュとして保存
+    setCached(cacheName, articles)
+    return articles
+  }
+
   async function setSidemenu() {
-    // セクションをカテゴリIDごとにする
+    // 記事を取得
+    const articles = await getArticles()
+    // 記事をセクションIDごとにする
+    const articlesBySection = articles.reduce((acc, article) => {
+      const { section_id } = article
+      if (!acc[section_id]) acc[section_id] = []
+      acc[section_id].push(article)
+      return acc
+    }, {})
+
+    // セクション取得
     const sectionsData = await getSections()
     const { sections } = sectionsData
-    const newSections = sections.reduce((acc, section) => {
+    // セクションごとに記事を含める
+    const sectionsInArticles = sections.map(section => {
+      return { ...section, articles: articlesBySection[section.id] }
+    })
+    // セクションをカテゴリIDごとにする
+    const sectionsByCategories = sectionsInArticles.reduce((acc, section) => {
       const { category_id } = section
       if (!acc[category_id]) acc[category_id] = []
       acc[category_id].push(section)
       return acc
     }, {})
-    // カテゴリごとにセクションを含める
+
+    // カテゴリを取得
     const categoriesData = await getCategories()
     const { categories } = categoriesData
-    const newCategories = categories.map(category => {
-      return { ...category, sections: newSections[category.id] }
+    // カテゴリごとにセクションを含める
+    const categoriesInSections = categories.map(category => {
+      return { ...category, sections: sectionsByCategories[category.id] }
     })
+
     // HTML作成
-    const categoryHtml = newCategories.map(category => {
+    const categoryHtml = categoriesInSections.map(category => {
       const sectionsHtml = category.sections.map(section => {
+        const { articles } = section
+        const articlesHtml = articles.map(article => `<div class="truncate pl-2"><a href="${article.html_url}" title="${article.name}">${article.name}</a></div>`).join('')
         return `
-          <div class="truncate">
+        <div class="flex flex-col gap-2 bg-gray-50 rounded-md p-2" data-accordion="collapse">
+          <div class="flex items-center gap-1">
+            <button class="hover:bg-gray-200 rotate-270">
+              <svg aria-hidden="true" class="w-6 h-6 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd">
+                </path>
+              </svg>
+            </button>
             <a href="${section.html_url}" title="${section.name}">${section.name}</a>
-          </div>`
+          </div>
+          <div class="hidden flex-col gap-2">
+            ${articlesHtml}
+          </div>
+        </div>`
       }).join('')
       const html = `
         <div class="flex flex-col gap-2 bg-gray-50 rounded-md p-2" data-accordion="collapse">
           <div class="flex items-center gap-1">
             <button class="hover:bg-gray-200 rotate-270">
-              <svg aria-hidden="true" class="w-6 h-6 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <svg aria-hidden="true" class="w-6 h-6 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd">
+                </path>
+              </svg>
             </button>
             <a href="${category.html_url}">${category.name}</a>
           </div>
-          <div class="hidden flex-col gap-2 pl-2">
+          <div class="hidden flex-col gap-2">
             ${sectionsHtml}
           </div>
         </div>`
