@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+::-webkit-scrollbar {
+  --scrollbar-width: .5rem;
+  width: var(--scrollbar-width);
+}
+::-webkit-scrollbar-track {
+  background: var(--color-gray-300);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-500);
+  border-radius: 6px;
+}
+
 .technology {
   background: url(https://my.saaske.com/home/img/technology_bg.png) repeat-x
     left top #64716d;
@@ -88,15 +101,7 @@
 
 .article-container {
   ::-webkit-scrollbar {
-    width: calc(var(--spacing) * 1);
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--color-gray-300);
-    border-radius: calc(var(--spacing) * 1);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-gray-500);
-    border-radius: calc(var(--spacing) * 1);
+    --scrollbar-width: .25rem;
   }
   aside {
     max-height: calc(100dvh - 168px + var(--js-scroll, 0px));

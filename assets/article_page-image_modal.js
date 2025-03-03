@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
       modalElm.classList.remove('hidden');
       modalElm.setAttribute('aria-hidden', 'false');
       modalElm.setAttribute('aria-modal', 'true');
-      bodyElm.style.paddingRight = '17px';
+      bodyElm.style.paddingRight = '.5rem';
       bodyElm.style.overflow = 'hidden';
     });
   })
