@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ページの一番上の見出しに対応するリンクです。
     activeLinkClass: 'is-active-link font-bold',
     // リストに追加するメインクラス
-    listClass: 'toc-list list-decimal list-inside ',
+    listClass: 'toc-list list-decimal list-inside pr-1',
     // リストに追加するエクストラクラスです。
     extraListClasses: '',
     // リストが折りたたまれるべき時に追加されるクラス。
