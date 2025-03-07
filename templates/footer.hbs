@@ -1,16 +1,46 @@
-<footer class="relative bg-white border-t border-gray-200 p-6">
-  <div class="max-w-6xl m-auto flex flex-col sm:flex-row gap-4 sm:gap-0 justify-between items-center">
-    {{#link 'help_center'}}
-      <img src="{{settings.logo}}" alt="{{t 'home_page' name=help_center.name}}"  class="h-10" />
-      {{#if settings.show_brand_name}}
-        <span aria-hidden="true" class="hidden">{{help_center.name}}</span>
-      {{/if}}
-    {{/link}}
-    <div class="flex items-center gap-4">
-      <span class="text-sm text-gray-500 text-center">
-        Copyright(C) Interpark.,
-        Co. Ltd. All rights reserved.
-      </span>
-  </div>
+<script src="{{asset 'footer-categories.js'}}" type="module"></script>
 
+<footer class="relative border-t border-gray-200 bg-white p-6">
+
+  <div class="m-auto grid max-w-6xl gap-6">
+
+    <ul class="grid grid-cols-3 justify-between gap-2 md:grid-cols-5 lg:flex" id="footer_categories">
+    </ul>
+
+    <div class="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
+      <div>
+        {{#link "help_center"}}
+          <img
+            src="{{settings.logo}}"
+            alt="{{t 'home_page' name=help_center.name}}"
+            class="m-auto h-20"
+          />
+          {{#if settings.show_brand_name}}
+            <span aria-hidden="true" class="hidden">{{help_center.name}}</span>
+          {{/if}}
+        {{/link}}
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <ul>
+          <li><a href="https://www.saaske.com/">ホームページ</a></li>
+          <li><a href="https://www.interpark.co.jp/">運営会社</a></li>
+        </ul>
+        <ul>
+          <li><a href="https://www.saaske.com/topics/">プレスリリース</a></li>
+          <li><a href="https://www.saaske.com/trouble/">障害報告</a></li>
+        </ul>
+        <ul>
+          <li><a href="https://www.saaske.com/information/privacy.html">プライバシーポリシー</a></li>
+          <li><a href="https://www.saaske.com/information/rule.html">利用約款</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="text-center md:text-left">
+      <span class="text-center text-sm text-gray-500">
+        Copyright(C) Interpark., Co. Ltd. All rights reserved.
+      </span>
+    </div>
+
+  </div>
 </footer>
