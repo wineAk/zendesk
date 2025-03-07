@@ -1,70 +1,4 @@
-/**
- * @typedef {Object} Category
- * @property {number} id - カテゴリーのID
- * @property {string} url - APIエンドポイントのURL
- * @property {string} html_url - ヘルプセンターのHTML URL
- * @property {number} position - カテゴリーの表示順
- * @property {string} created_at - 作成日時 (ISO 8601 形式)
- * @property {string} updated_at - 更新日時 (ISO 8601 形式)
- * @property {string} name - カテゴリー名
- * @property {string} description - カテゴリーの説明 (空の場合もあり)
- * @property {string} locale - 言語ロケール
- * @property {string} source_locale - 元の言語ロケール
- * @property {boolean} outdated - 古い情報かどうか
- * @typedef {Object.<string, Category>} Categories
- */
-
-/**
- * @typedef {Object} Section
- * @property {number} id - セクションのID
- * @property {string} url - APIエンドポイントのURL
- * @property {string} html_url - ヘルプセンターのHTML URL
- * @property {number} category_id - カテゴリーID
- * @property {number} position - セクションの表示順
- * @property {string} sorting - 並び順の方法 (例: "manual")
- * @property {string} created_at - 作成日時 (ISO 8601 形式)
- * @property {string} updated_at - 更新日時 (ISO 8601 形式)
- * @property {string} name - セクション名
- * @property {string} description - セクションの説明 (空の場合もあり)
- * @property {string} locale - 言語ロケール
- * @property {string} source_locale - 元の言語ロケール
- * @property {boolean} outdated - 古い情報かどうか
- * @property {number|null} parent_section_id - 親セクションID (nullの場合もあり)
- * @property {string} theme_template - テーマテンプレートの種類
- * @typedef {Object.<string, Section>} Sections
- */
-
-/**
- * @typedef {Object} Article
- * @property {number} id - 記事のID
- * @property {string} url - APIエンドポイントのURL
- * @property {string} html_url - ヘルプセンターのHTML URL
- * @property {number} author_id - 記事の作成者ID
- * @property {boolean} comments_disabled - コメントが無効かどうか
- * @property {boolean} draft - 下書きかどうか
- * @property {boolean} promoted - 推奨記事かどうか
- * @property {number} position - 記事の表示順
- * @property {number} vote_sum - 投票の合計
- * @property {number} vote_count - 投票数
- * @property {number} section_id - 記事が属するセクションのID
- * @property {string} created_at - 作成日時 (ISO 8601 形式)
- * @property {string} updated_at - 更新日時 (ISO 8601 形式)
- * @property {string} name - 記事の名前
- * @property {string} title - 記事のタイトル
- * @property {string} source_locale - 記事の元言語
- * @property {string} locale - 言語ロケール
- * @property {boolean} outdated - 記事が古いかどうか
- * @property {Array.<string>} outdated_locales - 古いロケールのリスト
- * @property {string} edited_at - 最終編集日時 (ISO 8601 形式)
- * @property {number|null} user_segment_id - ユーザーセグメントID (nullの場合もあり)
- * @property {number} permission_group_id - 権限グループID
- * @property {Array.<number>} content_tag_ids - コンテンツタグのIDリスト
- * @property {Array.<string>} label_names - ラベル名のリスト
- * @property {string} body - 記事の本文 (HTML形式)
- * @property {string} section_name - セクション名
- * @property {string} category_name - カテゴリー名
- * @typedef {Array.<Article>} Articles
- */
+import { getCategories, getSections, getArticles } from "./module-getZendeskAPI.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   const recentActivity = document.querySelector('#recent_activity')
@@ -89,133 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
     return `${diffYears}年前`
   }
 
-
-  /**
-   * HTMLタグを除去
-   * @param {string} htmlString <p>本文</p>
-   * @returns {string} 本文
-   */
-  function extractTextAndTruncate(htmlString) {
-    const maxLen = 70
-    const divElm = document.createElement("div")
-    divElm.innerHTML = htmlString
-    const text = divElm.innerText || divElm.textContent
-    return text.length > maxLen ? text.slice(0, maxLen) + "…" : text
-  }
-
-  /**
-   * キャッシュがあれば期限切れを確認して返す
-   * @param {string} cacheName storage名
-   * @param {number} cacheTime hour
-   * @returns {Categories|Sections|Articles|null} データ または null
-   */
-  function getCached(cacheName, cacheTime = 24) {
-    const cacheLifetime = 60 * 60 * 1000 * cacheTime // n時間（ミリ秒）
-    const cachedData = localStorage.getItem(cacheName)
-    if (cachedData) {
-      const { data, timestamp } = JSON.parse(cachedData)
-      const now = Date.now()
-      if (now - timestamp < cacheLifetime) {
-        console.log("Returning cached data.")
-        return data // 有効期限内ならキャッシュを返す
-      } else {
-        console.log("Cache expired. Removing old cache.")
-        localStorage.removeItem(cacheName) // 期限切れなら削除
-      }
-    }
-    return null // キャッシュがないか期限切れなら null を返す
-  }
-
-  /**
-   * ローカルストレージにキャッシュとして保存
-   * @param {string} cacheName storage名
-   * @param {Categories|Sections|Articles} data データ
-   */
-  function setCached(cacheName, data) {
-    const cacheData = {
-      data: data,
-      timestamp: Date.now() // 現在の時刻を記録
-    }
-    localStorage.setItem(cacheName, JSON.stringify(cacheData))
-  }
-
-  /**
-   * カテゴリー情報を取得する関数
-   * @returns {Categories} カテゴリー情報のオブジェクト
-   */
-  async function getCategories() {
-    // 0. ローカルストレージにキャッシュがあれば返す
-    const cacheName = 'C.categories'
-    const cache = getCached(cacheName)
-    if (cache) return cache
-    // 1. カテゴリを取得
-    const categoriesResponse = await fetch('/api/v2/help_center/ja/categories.json?per_page=100')
-    const categories = await categoriesResponse.json()
-    // 2. ローカルストレージにキャッシュとして保存
-    setCached(cacheName, categories)
-    return categories
-  }
-
-  /**
-   * セクション情報を取得する関数
-   * @returns {Sections} セクション情報のオブジェクト
-   */
-  async function getSections() {
-    // 0. ローカルストレージにキャッシュがあれば返す
-    const cacheName = 'C.sections'
-    const cache = getCached(cacheName)
-    if (cache) return cache
-    // 1. セクションを取得
-    const sectionsResponse = await fetch('/api/v2/help_center/sections.json?per_page=100')
-    const sections = await sectionsResponse.json()
-    // 2. ローカルストレージにキャッシュとして保存
-    setCached(cacheName, sections)
-    return sections
-  }
-
-  /**
-   * 記事情報を取得する関数
-   * @param {string} sort_by ソート順 ( created_at | updated_at )
-   * @returns {Articles} 記事情報のオブジェクト
-   */
-  async function getArticles(sort_by) {
-    // 0. ローカルストレージにキャッシュがあれば返す
-    const cacheName = `C.articles.${sort_by}`
-    const cache = getCached(cacheName)
-    if (cache) return cache
-    // 1. カテゴリを取得
-    const categoriesData = await getCategories()
-    const categories = Object.fromEntries(categoriesData.categories.map(category => [category.id, { ...category }]))
-    // 2. セクションを取得
-    const sectionsData = await getSections()
-    const sections = Object.fromEntries(sectionsData.sections.map(section => [section.id, { ...section }]))
-    // 3. 記事を取得
-    const articlesResponse = await fetch(`/api/v2/help_center/articles.json?sort_by=${sort_by}&per_page=9`)
-    const articlesData = await articlesResponse.json()
-    // 4. 記事にカテゴリ名とセクション名を追加
-    const articles = articlesData.articles.map(article => {
-      const { section_id } = article
-      const section = sections[section_id]
-      const { category_id } = section
-      const category = categories[category_id]
-      return {
-        ...article,
-        section_name: section.name,
-        category_name: category.name,
-      }
-    })
-    // 5. ローカルストレージにキャッシュとして保存
-    setCached(cacheName, articles)
-    return articles
-  }
-
   /**
    * HTMLを書き込む
    * @param {string} sort_by ソート順 ( created_at | updated_at )
    * @param {Element} element 対象の要素
    * @param {Articles} articles 記事情報のオブジェクト
    */
-  function HTMLRewriting(sort_by, elm, articles) {
+  function HTMLRewriting(sort_by, element, articles) {
     const articlesElms = articles.map(article => {
       const { body, name, html_url, section_name, category_name } = article
       const html = `
@@ -246,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
               ${name}
             </p>
             <p class="text-gray-500">
-              ${extractTextAndTruncate(body)}
+              ${body}
             </p>
           </div>
           <p class="text-right text-sm text-gray-500 mt-auto">${timeAgo(article[sort_by])}</p>
@@ -254,9 +68,39 @@ document.addEventListener("DOMContentLoaded", function () {
       </a>`
       return html
     })
-    elm.innerHTML = articlesElms.join('')
+    element.innerHTML = articlesElms.join('')
   }
 
-  getArticles("created_at").then(articles => HTMLRewriting("created_at", recentActivity, articles))
-  getArticles("updated_at").then(articles => HTMLRewriting("updated_at", recentUpdates, articles))
+  /**
+   * 記事情報を取得する関数
+   * @param {string} sort_by ソート順 ( created_at | updated_at )
+   * @returns {Articles} 記事情報のオブジェクト
+   */
+  async function getArticlesData(sort_by) {
+    // 1. カテゴリを取得
+    const categories = await getCategories()
+    // 2. セクションを取得
+    const sections = await getSections()
+    // 3. 記事を取得
+    const articlesData = await getArticles()
+    const articlesSort = [...articlesData].sort((a, b) => new Date(b[sort_by]) - new Date(a[sort_by])) // ソート
+    const articlesSlice = articlesSort.slice(0, 12) // 最大12記事に絞り込み
+    const articles = articlesSlice.map(article => {
+      const { section_id } = article
+      const section = sections.find((section) => section.id === section_id)
+      const { category_id } = section
+      const category = categories.find((category) => category.id === category_id)
+      const object = {
+        ...article,
+        section_name: section.name,
+        category_name: category.name,
+      }
+      return object
+    })
+    return articles
+  }
+
+  getArticlesData('created_at').then(articles => HTMLRewriting('created_at', recentActivity, articles))
+  getArticlesData('updated_at').then(articles => HTMLRewriting('updated_at', recentUpdates, articles))
+
 })

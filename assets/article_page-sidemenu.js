@@ -1,164 +1,10 @@
-/**
- * @typedef {Object} Category
- * @property {number} id - カテゴリーのID
- * @property {string} url - APIエンドポイントのURL
- * @property {string} html_url - ヘルプセンターのHTML URL
- * @property {number} position - カテゴリーの表示順
- * @property {string} created_at - 作成日時 (ISO 8601 形式)
- * @property {string} updated_at - 更新日時 (ISO 8601 形式)
- * @property {string} name - カテゴリー名
- * @property {string} description - カテゴリーの説明 (空の場合もあり)
- * @property {string} locale - 言語ロケール
- * @property {string} source_locale - 元の言語ロケール
- * @property {boolean} outdated - 古い情報かどうか
- */
-
-/**
- * @typedef {Object} Categories
- * @property {Array.<Category>} categories - カテゴリーのリスト
- * @property {number} page - 現在のページ番号
- * @property {number|null} previous_page - 前のページ番号 (null の場合なし)
- * @property {number|null} next_page - 次のページ番号 (null の場合なし)
- * @property {number} per_page - 1ページあたりのカテゴリー数
- * @property {number} page_count - 総ページ数
- * @property {number} count - 総カテゴリー数
- * @property {string} sort_by - ソート基準 (例: "position")
- * @property {string} sort_order - ソート順 (例: "asc")
- */
-
-/**
- * @typedef {Object} Section
- * @property {number} id - セクションのID
- * @property {string} url - APIエンドポイントのURL
- * @property {string} html_url - ヘルプセンターのHTML URL
- * @property {number} category_id - 所属するカテゴリーのID
- * @property {number} position - セクションの表示順
- * @property {string} sorting - ソート方法 (例: "manual")
- * @property {string} created_at - 作成日時 (ISO 8601 形式)
- * @property {string} updated_at - 更新日時 (ISO 8601 形式)
- * @property {string} name - セクション名
- * @property {string} description - セクションの説明 (空の場合もあり)
- * @property {string} locale - 言語ロケール
- * @property {string} source_locale - 元の言語ロケール
- * @property {boolean} outdated - 古い情報かどうか
- * @property {number|null} parent_section_id - 親セクションのID (null の場合なし)
- * @property {string} theme_template - 使用されるテーマテンプレート
- */
-
-/**
- * @typedef {Object} Sections
- * @property {Array.<Section>} sections - セクションのリスト
- * @property {number} page - 現在のページ番号
- * @property {number|null} previous_page - 前のページ番号 (null の場合なし)
- * @property {number|null} next_page - 次のページ番号 (null の場合なし)
- * @property {number} per_page - 1ページあたりのセクション数
- * @property {number} page_count - 総ページ数
- * @property {number} count - 総セクション数
- * @property {string} sort_by - ソート基準 (例: "position")
- * @property {string} sort_order - ソート順 (例: "asc")
- */
-
+import { getCategories, getSections, getArticles } from "./module-getZendeskAPI.js";
 
 document.addEventListener('DOMContentLoaded', function () {
-  /**
-   * キャッシュがあれば期限切れを確認して返す
-   * @param {string} cacheName storage名
-   * @param {number} cacheTime hour
-   * @returns {Categories|Sections|null} データ または null
-   */
-  function getCached(cacheName, cacheTime = 24) {
-    const cacheLifetime = 60 * 60 * 1000 * cacheTime // n時間（ミリ秒）
-    const cachedData = localStorage.getItem(cacheName)
-    if (cachedData) {
-      const { data, timestamp } = JSON.parse(cachedData)
-      const now = Date.now()
-      if (now - timestamp < cacheLifetime) {
-        console.log("Returning cached data.")
-        return data // 有効期限内ならキャッシュを返す
-      } else {
-        console.log("Cache expired. Removing old cache.")
-        localStorage.removeItem(cacheName) // 期限切れなら削除
-      }
-    }
-    return null // キャッシュがないか期限切れなら null を返す
-  }
 
   /**
-   * ローカルストレージにキャッシュとして保存
-   * @param {string} cacheName storage名
-   * @param {Categories|Sections} data データ
+   * サイドメニューを実装する関数
    */
-  function setCached(cacheName, data) {
-    const cacheData = {
-      data: data,
-      timestamp: Date.now() // 現在の時刻を記録
-    }
-    localStorage.setItem(cacheName, JSON.stringify(cacheData))
-  }
-
-  /**
-   * カテゴリー情報を取得する関数
-   * @returns {Categories} カテゴリー情報のオブジェクト
-   */
-  async function getCategories() {
-    // 0. ローカルストレージにキャッシュがあれば返す
-    const cacheName = 'C.categories'
-    const cache = getCached(cacheName)
-    if (cache) return cache
-    // 1. カテゴリを取得
-    const categoriesResponse = await fetch('/api/v2/help_center/ja/categories.json?per_page=100')
-    const categories = await categoriesResponse.json()
-    // 2. ローカルストレージにキャッシュとして保存
-    setCached(cacheName, categories)
-    return categories
-  }
-
-  /**
-   * セクション情報を取得する関数
-   * @returns {Sections} セクション情報のオブジェクト
-   */
-  async function getSections() {
-    // 0. ローカルストレージにキャッシュがあれば返す
-    const cacheName = 'C.sections'
-    const cache = getCached(cacheName)
-    if (cache) return cache
-    // 1. セクションを取得
-    const sectionsResponse = await fetch('/api/v2/help_center/sections.json?per_page=100')
-    const sections = await sectionsResponse.json()
-    // 2. ローカルストレージにキャッシュとして保存
-    setCached(cacheName, sections)
-    return sections
-  }
-
-  /**
-   * 
-   */
-  async function getArticles() {
-    // 0. ローカルストレージにキャッシュがあれば返す
-    const cacheName = 'C.articles.all'
-    const cache = getCached(cacheName)
-    if (cache) return cache
-    // 1. セクションを取得
-    let articlesList = []
-    let next_page = '/api/v2/help_center/articles.json?page=1&per_page=100'
-    while (next_page) {
-        const response = await fetch(next_page)
-        const data = await response.json()
-        if (data.articles) {
-          articlesList = [...articlesList, ...data.articles]
-        }
-        next_page = data.next_page
-    }
-    const articles = articlesList.map(article => {
-      // bodyを除外したオブジェクトを作成
-      const { body, ...rest } = article
-      return rest
-    })
-    // 2. ローカルストレージにキャッシュとして保存
-    setCached(cacheName, articles)
-    return articles
-  }
-
   async function setSidemenu() {
     // 記事を取得
     const articles = await getArticles()
@@ -171,8 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, {})
 
     // セクション取得
-    const sectionsData = await getSections()
-    const { sections } = sectionsData
+    const sections = await getSections()
     // セクションごとに記事を含める
     const sectionsInArticles = sections.map(section => {
       return { ...section, articles: articlesBySection[section.id] }
@@ -186,8 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, {})
 
     // カテゴリを取得
-    const categoriesData = await getCategories()
-    const { categories } = categoriesData
+    const categories = await getCategories()
     // カテゴリごとにセクションを含める
     const categoriesInSections = categories.map(category => {
       return { ...category, sections: sectionsByCategories[category.id] }
