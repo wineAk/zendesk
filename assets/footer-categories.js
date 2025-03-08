@@ -1,4 +1,4 @@
-import { getCategories } from "./module-getZendeskAPI.js";
+import { getCategories } from "getZendeskAPI";
 
 document.addEventListener("DOMContentLoaded", function () {
   getCategories().then(categories => {
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </li>
       `
     }).join('')
-    document.querySelector('footer #categories').innerHTML = html
+    document.querySelector('#footer_categories').innerHTML = html
   })
 
 })

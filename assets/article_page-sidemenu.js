@@ -1,4 +1,4 @@
-import { getCategories, getSections, getArticles } from "./module-getZendeskAPI.js";
+import { getCategories, getSections, getArticles } from "getZendeskAPI";
 
 document.addEventListener('DOMContentLoaded', function () {
 
