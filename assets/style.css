@@ -1175,6 +1175,23 @@
   background: var(--color-gray-500);
   border-radius: 6px;
 }
+a {
+  &:after {
+    margin: 0 0 0 3px;
+    font-family: "Font Awesome 6 Free";
+    content: "\f35d";
+    font-weight: 900;
+    display: inline-block;
+    text-decoration: none;
+    color: var(--color-gray-500);
+    font-size: 80%;
+  }
+  &:empty, &:not([href]), &[href=""], &[href^="#"], &[href^="/"], &[href^="./"], &[href^="../"], &[href^="http://saaske.zendesk.com/"], &[href^="https://saaske.zendesk.com/"], &[href^="https://www.saaske.com/document/"][href$=".pdf"] {
+    &:after {
+      display: none;
+    }
+  }
+}
 .technology {
   background: url(https://my.saaske.com/home/img/technology_bg.png) repeat-x left top #64716d;
   background-size: contain;
