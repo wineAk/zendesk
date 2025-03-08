@@ -5,11 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const html = categories.map(category => {
       const { html_url, name } = category
       return `
-      <li class="w-full text-center">
-        <a href="${html_url}">
+      <a href="${html_url}" class="border border-slate-200 rounded-lg hover:bg-gray-50 no-underline">
+        <div class="px-4 py-2 text-gray-500 text-center">
           ${name}
-        </a>
-      </li>
+        </div>
+      </a>
       `
     }).join('')
     document.querySelector('#footer_categories').innerHTML = html

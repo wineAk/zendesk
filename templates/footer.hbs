@@ -4,34 +4,56 @@
 
   <div class="m-auto grid max-w-6xl gap-6">
 
-    <ul class="grid grid-cols-3 justify-between gap-2 md:grid-cols-5 lg:flex" id="footer_categories">
-    </ul>
+    <div
+      id="footer_categories"
+      class="grid grid-cols-3 md:grid-cols-5 lg:flex justify-between gap-2">
+    </div>
 
-    <div class="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
+    <div class="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
       <div>
         {{#link "help_center"}}
-          <img
-            src="{{settings.logo}}"
-            alt="{{t 'home_page' name=help_center.name}}"
-            class="m-auto h-20"
-          />
-          {{#if settings.show_brand_name}}
-            <span aria-hidden="true" class="hidden">{{help_center.name}}</span>
-          {{/if}}
+        <img src="{{settings.logo}}" alt="{{t 'home_page' name=help_center.name}}" class="m-auto h-20" />
+        {{#if settings.show_brand_name}}
+        <span aria-hidden="true" class="hidden">{{help_center.name}}</span>
+        {{/if}}
         {{/link}}
       </div>
-      <div class="grid grid-cols-3 gap-4">
+      <div class="grid grid-cols-3 gap-4 text-sm">
         <ul>
-          <li><a href="https://www.saaske.com/">ホームページ</a></li>
-          <li><a href="https://www.interpark.co.jp/">運営会社</a></li>
+          <li>
+            <a href="https://www.saaske.com/" class="text-sm no-underline">
+              <span class="text-gray-500">ホームページ</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.interpark.co.jp/" class="text-sm no-underline">
+              <span class="text-gray-500">運営会社</span>
+            </a>
+          </li>
         </ul>
         <ul>
-          <li><a href="https://www.saaske.com/topics/">プレスリリース</a></li>
-          <li><a href="https://www.saaske.com/trouble/">障害報告</a></li>
+          <li>
+            <a href="https://www.saaske.com/topics/" class="text-sm no-underline">
+              <span class="text-gray-500">プレスリリース</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.saaske.com/trouble/" class="text-sm no-underline">
+              <span class="text-gray-500">障害報告</span>
+            </a>
+          </li>
         </ul>
         <ul>
-          <li><a href="https://www.saaske.com/information/privacy.html">プライバシーポリシー</a></li>
-          <li><a href="https://www.saaske.com/information/rule.html">利用約款</a></li>
+          <li>
+            <a href="https://www.saaske.com/information/privacy.html" class="text-sm no-underline">
+              <span class="text-gray-500">プライバシーポリシー</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.saaske.com/information/rule.html" class="text-sm no-underline">
+              <span class="text-gray-500">利用約款</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
