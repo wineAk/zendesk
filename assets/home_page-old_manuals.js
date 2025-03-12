@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const roleColor = roleClasses(role, ['bg', 'text']) || "";
     return `
       <a href="${url}" role="_blank" class="grid grid-cols-1 gap-2 lg:flex p-4 hover:bg-gray-50 no-underline">
-        <div class="flex lg:items-center gap-4">
+        <div class="flex flex-col sm:flex-row lg:items-center gap-2 sm:gap-4">
           <div class="w-60 lg:w-30 grid grid-cols-2 lg:grid-cols-1 gap-2">
             <p class="flex items-center justify-center text-xs px-2.5 py-0.5 rounded-sm ${serviceColor}">${service}</p>
             <p class="flex items-center justify-center text-xs px-2.5 py-0.5 rounded-sm ${roleColor}">${role}</p>
