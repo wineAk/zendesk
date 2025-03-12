@@ -1,12 +1,14 @@
 import { getCategories } from "getZendeskAPI";
+import { serviceClasses } from "getClasses";
 
 document.addEventListener("DOMContentLoaded", function () {
   getCategories().then(categories => {
     const html = categories.map(category => {
       const { html_url, name } = category
+      const serviceColor = serviceClasses(name, ['text', 'border', 'hover']) || "";
       return `
-      <a href="${html_url}" class="border border-slate-200 rounded-lg hover:bg-gray-50 no-underline w-30 py-2">
-        <div class="text-gray-500 text-center">
+      <a href="${html_url}" class="no-underline w-30">
+        <div class="border-1 text-center h-full py-2 rounded-lg ${serviceColor}">
           ${name}
         </div>
       </a>

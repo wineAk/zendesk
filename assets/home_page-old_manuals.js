@@ -1,26 +1,12 @@
+import { serviceClasses, roleClasses } from "getClasses";
+
 document.addEventListener("DOMContentLoaded", function () {
-  const serviceClasses = {
-    "サスケ共通": "bg-gray-100 text-gray-700",
-    "サスケLead": "bg-lime-100 text-lime-700",
-    "サスケSales": "bg-blue-100 text-blue-700",
-    "テレアポ職人": "bg-emerald-100 text-emerald-700",
-    "Works": "",
-    "Webフォーム": "bg-purple-100 text-purple-700",
-    "Web行動解析": "bg-amber-100 text-amber-700",
-    "Cloud CTI": "bg-cyan-100 text-cyan-700",
-    "Cloud Scan": "bg-red-100 text-red-700",
-    "API": ""
-  };
-  const roleClasses = {
-    "管理者": "bg-pink-100 text-pink-700",
-    "ユーザー": "bg-gray-100 text-gray-700"
-  };
   const manuals = [
     {
       fileName: "00M01",
       title: "管理者マニュアル 設定編",
       description: "サスケ共通の管理者向け設定マニュアルです。\nアカウントの作成方法や権限の設定方法等を解説しています。",
-      service: "サスケ共通",
+      service: "サスケ全般",
       role: "管理者",
       type: "設定",
     },
@@ -164,8 +150,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const htmlAry = manuals.map(manual => {
     const { fileName, title, description, service, role, type } = manual
     const url = `https://www.saaske.com/document/${fileName}.pdf`
-    const serviceColor = serviceClasses[service] || "";
-    const roleColor = roleClasses[role] || "";
+    const serviceColor = serviceClasses(service, ['bg', 'text']) || "";
+    const roleColor = roleClasses(role, ['bg', 'text']) || "";
     return `
       <a href="${url}" role="_blank" class="grid grid-cols-1 gap-2 lg:flex p-4 hover:bg-gray-50 no-underline">
         <div class="flex lg:items-center gap-4">
