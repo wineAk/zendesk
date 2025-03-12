@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
           <p class="font-bold text-xl text-gray-700 w-90">${title}</p>
         </div>
-        <div class="flex items-center text-gray-500 lg:flex-1 whitespace-pre-line">${description}</div>
+        <div class="flex items-center text-gray-500 lg:flex-1 sm:whitespace-pre-line">${description}</div>
       </a>
     `
   })
