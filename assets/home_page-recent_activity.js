@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <a href="${html_url}" class="border border-slate-200 rounded-lg hover:bg-gray-50 no-underline">
         <div class="flex flex-col gap-2 p-4 h-full">  
           <div>
-            <nav class="flex text-gray-400 text-xs mb-1" aria-label="Breadcrumb">
+            <nav class="flex text-gray-400 text-xs mb-2" aria-label="Breadcrumb">
               <ol class="inline-flex items-center truncate">
                 <li>
                   <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </li>
               </ol>
             </nav>
-            <p class="font-bold text-xl text-gray-700 mb-1 truncate">
+            <p class="font-bold text-xl text-gray-700 mb-2 truncate">
               ${name}
             </p>
             <p class="text-gray-500">
