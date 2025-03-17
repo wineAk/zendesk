@@ -1,4 +1,3 @@
-<script src="{{asset 'home_page-old_manuals.js'}}" type="module"></script>
 <script src="{{asset 'home_page-recent_activity.js'}}" type="module"></script>
 <h1 class="visibility-hidden">{{ help_center.name }}</h1>
 
@@ -114,7 +113,67 @@
   <section class="section home-section">
     <h2 class="font-bold">📜 旧マニュアル</h2>
     <section class="categories blocks">
-      <div id="old_manuals" class="grid grid-cols-1 divide-y-1 divide-solid divide-slate-200">
+      <div
+        x-data="{
+          manuals: [
+            { service: 'サスケ全般',   role: '管理者', type: '設定', fileName: '00M01', title: '管理者マニュアル 設定編', description: 'サスケ共通の管理者向け設定マニュアルです。\nアカウントの作成方法や権限の設定方法等を解説しています。' },
+            { service: 'サスケLead',   role: '管理者', type: '設定', fileName: '07M01', title: '管理者マニュアル 設定編', description: 'サスケLeadの管理者向け設定マニュアルです。\nサスケLeadの運用に向けての初期設定や運用フローに合わせた設定方法を解説しています。' },
+            { service: 'サスケLead',   role: '管理者', type: '操作', fileName: '07M02', title: '管理者マニュアル 操作編', description: 'サスケLeadの管理者向け操作マニュアルです。\n実際にサスケLeadを運用していく上で必要な操作方法を解説しています。' },
+            { service: 'サスケLead',   role: 'ユーザ', type: '操作', fileName: '07M03', title: 'ユーザーマニュアル', description: 'ユーザー権限の利用者がサスケLeadを利用する上で必要な操作方法を解説しています。' },
+            { service: 'サスケSales',  role: '管理者', type: '設定', fileName: '05M01', title: '管理者マニュアル 設定編', description: 'サスケSalesの管理者向け設定マニュアルです。\nサスケSalesの運用に向けての初期設定や運用フローに合わせた設定方法を解説しています。' },
+            { service: 'テレアポ職人', role: '管理者', type: '設定', fileName: '04M01', title: '管理者マニュアル 設定編', description: 'テレアポ職人の管理者向け設定マニュアルです。\nテレアポ職人の運用に向けての初期設定や運用フローに合わせた設定方法を解説しています。' },
+            { service: 'テレアポ職人', role: '管理者', type: '操作', fileName: '04M02', title: '管理者マニュアル 操作編', description: 'テレアポ職人の管理者向け操作マニュアルです。\n実際にテレアポ職人を運用していく上で必要な操作方法を解説しています。' },
+            { service: 'テレアポ職人', role: '管理者', type: 'インポート', fileName: '04M10', title: '対応履歴インポートマニュアル', description: 'テレアポ職人の管理者向け操作マニュアルです。\n本機能はインターパークにお問い合わせいただくことで利用出来ます。' },
+            { service: 'テレアポ職人', role: 'ユーザ', type: '操作', fileName: '04M03', title: 'ユーザーマニュアル', description: 'ユーザー権限の利用者がテレアポ職人を利用する上で必要な操作方法を解説しています。' },
+            { service: 'Webフォーム',  role: '管理者', type: '設定', fileName: '08M01', title: '管理者マニュアル 設定編', description: 'Webフォームの管理者向け設定マニュアルです。\nWebフォームの運用に向けての初期設定や各サービスとの連携方法を解説しています。' },
+            { service: 'Web行動解析',  role: '管理者', type: '設定', fileName: '09M01', title: '管理者マニュアル 設定編', description: 'Web行動解析の管理者向け設定マニュアルです。\nWeb行動解析の運用に向けての初期設定や運用フローに合わせた設定方法を解説しています。' },
+            { service: 'Web行動解析',  role: 'ユーザ', type: '操作', fileName: '09M02', title: 'ユーザーマニュアル', description: 'ユーザー権限の利用者がWeb行動解析を利用する上で必要な操作方法を解説しています。' },
+            { service: 'Cloud CTI',    role: '管理者', type: '設定', fileName: '10M01', title: '管理者マニュアル 設定編', description: 'Cloud CTIの管理者向け設定マニュアルです。\nCloud CTIの運用に向けての初期設定や運用フローに合わせた設定方法を解説しています。' },
+            { service: 'Cloud CTI',    role: 'ユーザ', type: '操作', fileName: '10M02', title: 'ユーザーマニュアル', description: 'ユーザー権限の利用者がCloud CTIを利用する上で必要な操作方法を解説しています。' },
+            { service: 'Cloud Scan',   role: '管理者', type: '設定', fileName: '11M01', title: '管理者マニュアル 設定編', description: 'Cloud Scanの管理者向け設定マニュアルです。\nCloud Scanの運用に向けての初期設定や運用フローに合わせた設定方法を解説しています。' },
+            { service: 'Cloud Scan',   role: 'ユーザ', type: 'スマホ アプリ', fileName: '11M05', title: 'ユーザーマニュアル iOS版', description: 'ユーザー権限の利用者がCloud Scanを利用する上で必要な操作方法を解説しています。' },
+            { service: 'Cloud Scan',   role: 'ユーザ', type: 'タブレット アプリ', fileName: '11M03', title: 'ユーザーマニュアル タブレット版', description: 'ユーザー権限の利用者がCloud Scanを利用する上で必要な操作方法を解説しています。' },
+            { service: 'Cloud Scan',   role: 'ユーザ', type: 'タブレット操作', fileName: '11M02', title: 'タブレットマニュアル', description: 'Cloud Scanアプリで使用するタブレット端末の操作・設定方法を解説しています。' },
+          ],
+          getServiceClass(service) {
+            return {
+              'サスケ全般': 'bg-gray-100 text-gray-700',
+              'サスケLead': 'bg-lime-50 text-lime-700',
+              'サスケSales': 'bg-blue-50 text-blue-700',
+              'テレアポ職人': 'bg-emerald-50 text-emerald-700',
+              'Works': '',
+              'Webフォーム': 'bg-purple-50 text-purple-700',
+              'Web行動解析': 'bg-amber-50 text-amber-700',
+              'Cloud CTI': 'bg-cyan-50 text-cyan-700',
+              'Cloud Scan': 'bg-red-50 text-red-700',
+              'API': 'bg-indigo-50 text-indigo-700',
+            }[service] || '';
+          },
+          getRoleClass(role) {
+            return {
+              '管理者': 'bg-pink-50 text-pink-700',
+              'ユーザ': 'bg-gray-100 text-gray-700'
+            }[role] || '';
+          }
+        }" id="old_manuals" class="grid grid-cols-1 divide-y-1 divide-solid divide-slate-200">
+        <template x-for="manual in manuals" :key="manual.fileName">
+          <a :href="`https://www.saaske.com/document/${manual.fileName}.pdf`"
+            target="_blank"
+            class="grid grid-cols-1 gap-2 lg:flex p-4 hover:bg-gray-50 no-underline">
+            <div class="flex flex-col sm:flex-row lg:items-center gap-2 sm:gap-4">
+              <div class="w-60 lg:w-30 grid grid-cols-2 lg:grid-cols-1 gap-2">
+                <p class="flex items-center justify-center text-xs px-2.5 py-0.5 rounded-sm" :class="getServiceClass(manual.service)">
+                  <span x-text="manual.service"></span>
+                </p>
+                <p class="flex items-center justify-center text-xs px-2.5 py-0.5 rounded-sm" :class="getRoleClass(manual.role)">
+                  <span x-text="manual.role"></span>
+                </p>
+              </div>
+              <p class="font-bold text-xl text-gray-700 w-90" x-text="manual.title"></p>
+            </div>
+            <div class="flex items-center text-gray-500 lg:flex-1 sm:whitespace-pre-line" x-text="manual.description"></div>
+          </a>
+        </template>
       </div>
     </section>
   </section>
