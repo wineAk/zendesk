@@ -107,7 +107,6 @@
         <div class="article-content">
           <div x-data="{ modalOpen: false, imgSrc: ''  }"
             @keydown.escape.window="modalOpen = false"
-            :class="{ 'z-40': modalOpen }" 
             class="article-body">
             {{article.body}}
             <template x-teleport="body">
