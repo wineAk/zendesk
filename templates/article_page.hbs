@@ -1,6 +1,5 @@
 <script src="{{asset 'module-tocbot.min.js'}}"></script>
 <script src="{{asset 'article_page-toc.js'}}"></script>
-<script src="{{asset 'article_page-copy.js'}}"></script>
 <script src="{{asset 'article_page-sidemenu.js'}}" type="module"></script>
 <script src="{{asset 'article_page-image_modal.js'}}"></script>
 
@@ -361,23 +360,33 @@
         {{search scoped=settings.scoped_kb_search submit=false}}
       </div>
       <!-- copy -->
-      <button
-        data-copy-to-clipboard-target="{{article.title}} - {{help_center.name}}\nhttps://saaske.zendesk.com/hc/ja/articles/{{article.id}}"
-        title="ページタイトル と URL をコピーする"
-        class="cursor-pointer text-gray-900 hover:bg-gray-100 rounded-lg py-5 pl-4 inline-flex items-center bg-white border-gray-200 border h-8">
-        <span id="default-message" class="inline-flex items-center">
-          <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-            <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
-          </svg>
-          <span class="">Copy</span>
-        </span>
-        <span id="success-message" class="inline-flex items-center" style="display: none;">
-          <svg class="w-4 h-4 text-blue-700 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-          </svg>
-          <span class="font-semibold text-blue-700 ">Copied</span>
-        </span>
-      </button>
+      <div x-data="{
+        copyText: '{{article.title}} - {{help_center.name}}\nhttps://saaske.zendesk.com/hc/ja/articles/{{article.id}}',
+        copyNotification: false,
+        copyToClipboard() {
+            navigator.clipboard.writeText(this.copyText);
+            this.copyNotification = true;
+            let that = this;
+            setTimeout(function(){
+                that.copyNotification = false;
+            }, 3000);
+        }
+      }" class="w-full" title="ページタイトル と URL をコピーする">
+        <button @click="copyToClipboard();" class="cursor-pointer text-gray-900 hover:bg-gray-100 rounded-lg py-5 pl-4 inline-flex items-center bg-white border-gray-200 border h-8 w-full">
+          <span class="inline-flex items-center" x-show="!copyNotification">
+            <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+              <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+            </svg>
+            <span class="">Copy</span>
+          </span>
+          <span class="inline-flex items-center" x-show="copyNotification" style="display: none;">
+            <svg class="w-4 h-4 text-blue-700 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+            </svg>
+            <span class="text-blue-700 ">Copied</span>
+          </span>
+        </button>
+      </div>
       <!-- toc -->
       <div class="border-gray-200 rounded-md border pl-2 pt-2 mb-4">
         <div class="flex items-center pl-2">
