@@ -1,13 +1,21 @@
-<script src="{{asset 'footer-categories.js'}}" type="module"></script>
-
-<footer class="relative border-t border-gray-200 bg-white p-6">
+<footer class="relative border-t border-slate-200 bg-white p-6">
 
   <div class="m-auto grid max-w-6xl gap-6">
-
-    <div
+    <ul
       id="footer_categories"
-      class="flex justify-center flex-wrap gap-2">
-    </div>
+      class="flex justify-center flex-wrap gap-2"
+      x-data="{ categories:'' }"
+      x-init="getZendeskCategories().then(data => categories = data)">
+      <template x-for="category in categories" :key="category.name">
+        <li class="w-30 text-center">
+          <a
+            :href="category.html_url"
+            class="text-sm text-gray-500"
+            x-text="category.name"
+          ></a>
+        </li>
+      </template>
+    </ul>
 
     <div class="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
       <div>
@@ -21,37 +29,37 @@
       <div class="flex flex-col sm:flex-row gap-2 sm:gap-0 text-sm">
         <ul class="w-auto sm:w-40">
           <li>
-            <a href="https://www.saaske.com/" class="text-sm no-underline" target="_blank">
-              <span class="text-gray-500">ホームページ</span>
+            <a href="https://www.saaske.com/" class="text-sm text-gray-500" target="_blank">
+              ホームページ
             </a>
           </li>
           <li>
-            <a href="https://www.interpark.co.jp/" class="text-sm no-underline" target="_blank">
-              <span class="text-gray-500">運営会社</span>
-            </a>
-          </li>
-        </ul>
-        <ul class="w-auto sm:w-40">
-          <li>
-            <a href="https://www.saaske.com/topics/" class="text-sm no-underline" target="_blank">
-              <span class="text-gray-500">プレスリリース</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.saaske.com/trouble/" class="text-sm no-underline" target="_blank">
-              <span class="text-gray-500">障害報告</span>
+            <a href="https://www.interpark.co.jp/" class="text-sm text-gray-500" target="_blank">
+              運営会社
             </a>
           </li>
         </ul>
         <ul class="w-auto sm:w-40">
           <li>
-            <a href="https://www.saaske.com/information/privacy.html" class="text-sm no-underline" target="_blank">
-              <span class="text-gray-500">プライバシーポリシー</span>
+            <a href="https://www.saaske.com/topics/" class="text-sm text-gray-500" target="_blank">
+              プレスリリース
             </a>
           </li>
           <li>
-            <a href="https://www.saaske.com/information/rule.html" class="text-sm no-underline" target="_blank">
-              <span class="text-gray-500">利用約款</span>
+            <a href="https://www.saaske.com/trouble/" class="text-sm text-gray-500" target="_blank">
+              障害報告
+            </a>
+          </li>
+        </ul>
+        <ul class="w-auto sm:w-40">
+          <li>
+            <a href="https://www.saaske.com/information/privacy.html" class="text-sm text-gray-500" target="_blank">
+              プライバシーポリシー
+            </a>
+          </li>
+          <li>
+            <a href="https://www.saaske.com/information/rule.html" class="text-sm text-gray-500" target="_blank">
+              利用約款
             </a>
           </li>
         </ul>
