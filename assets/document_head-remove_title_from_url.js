@@ -10,10 +10,10 @@ function removeTitle(url) {
 // 現在のページ
 const pathname = window.location.pathname
 const replacePath = removeTitle(pathname)
-if (pathname !== replacePath) history.replaceState(null, "", replacePath)
+if (pathname !== replacePath) history.replaceState(null, '', replacePath)
 
 // aタグ
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('load', function () {
   document.querySelectorAll('a').forEach(function(elm) {
     const href = elm.href
     const replaceHref = removeTitle(href)
