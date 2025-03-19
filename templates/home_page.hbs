@@ -185,7 +185,7 @@
       ],
       getData() {
         this.categories.forEach(category => {
-          getZendeskAllArticles({ sort_by: category.sort_by, per_page: 12 }).then(data => category.articles = data)
+          fetchAllZendeskArticles({ sort_by: category.sort_by, per_page: 12 }).then(data => category.articles = data)
         });
       }
     }"

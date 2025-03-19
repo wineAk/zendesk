@@ -57,7 +57,7 @@
           x-data="{
             categories:[],
             getData() {
-              getZendeskAllCategoriesWithSectionsAndArticles().then(data => this.categories = data)
+              fetchZendeskHierarchy().then(data => this.categories = data)
             }
           }"
           x-init="getData()">

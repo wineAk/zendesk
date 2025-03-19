@@ -17,16 +17,16 @@
  * カテゴリー情報を取得する関数
  * @returns {Promise<Category[]>} カテゴリー情報のオブジェクト
  */
-async function getZendeskCategories() {
+async function fetchZendeskCategories() {
   const name = 'categories'
   // 0. ローカルストレージにキャッシュがあれば返す
   const cacheName = `C.${name}`
-  const cache = getZendeskCached(cacheName)
+  const cache = retrieveZendeskCache(cacheName)
   if (cache) return cache
   // 1. カテゴリを取得
-  const categories = await getZendeskContent(name)
+  const categories = await fetchZendeskContentByType(name)
   // 2. ローカルストレージにキャッシュとして保存
-  setZendeskCached(cacheName, categories)
+  cacheZendeskData(cacheName, categories)
   return categories
 }
 
@@ -53,16 +53,16 @@ async function getZendeskCategories() {
  * セクション情報を取得する関数
  * @returns {Promise<Sections[]>} セクション情報のオブジェクト
  */
-async function getZendeskSections() {
+async function fetchZendeskSections() {
   const name = 'sections'
   // 0. ローカルストレージにキャッシュがあれば返す
   const cacheName = `C.${name}`
-  const cache = getZendeskCached(cacheName)
+  const cache = retrieveZendeskCache(cacheName)
   if (cache) return cache
   // 1. セクションを取得
-  const sections = await getZendeskContent(name)
+  const sections = await fetchZendeskContentByType(name)
   // 2. ローカルストレージにキャッシュとして保存
-  setZendeskCached(cacheName, sections)
+  cacheZendeskData(cacheName, sections)
   return sections
 }
 
@@ -98,14 +98,14 @@ async function getZendeskSections() {
  * アーティクル情報を取得する関数
  * @returns {Promise<Article[]>} アーティクル情報のオブジェクト
  */
-async function getZendeskArticles() {
+async function fetchZendeskArticles() {
   const name = 'articles'
   // 0. ローカルストレージにキャッシュがあれば返す
   const cacheName = `C.${name}`
-  const cache = getZendeskCached(cacheName)
+  const cache = retrieveZendeskCache(cacheName)
   if (cache) return cache
   // 1. アーティクルを取得
-  const articles = await getZendeskContent(name)
+  const articles = await fetchZendeskContentByType(name)
   // 2. bodyを70文字に制限する
   const mappedArticles = articles.map(article => {
     const { body, ...rest } = article
@@ -118,7 +118,7 @@ async function getZendeskArticles() {
     return { body: maxBody, ...rest }
   })
   // 3. ローカルストレージにキャッシュとして保存
-  setZendeskCached(cacheName, mappedArticles)
+  cacheZendeskData(cacheName, mappedArticles)
   return mappedArticles
 }
 
@@ -127,7 +127,7 @@ async function getZendeskArticles() {
  * @param {string} name categories | sections | articles
  * @returns {Category[] | Sections[] | Article[]}
  */
-async function getZendeskContent(name) {
+async function fetchZendeskContentByType(name) {
   let list = []
   let next_page = `/api/v2/help_center/${name}.json?page=1&per_page=100`
   while (next_page) {
@@ -144,7 +144,7 @@ async function getZendeskContent(name) {
  * @param {string} cacheName storage名
  * @param {Category[] | Sections[] | Article[]} data データ
  */
-function setZendeskCached(cacheName, data) {
+function cacheZendeskData(cacheName, data) {
   const cacheData = {
     data: data,
     timestamp: Date.now() // 現在の時刻を記録
@@ -158,7 +158,7 @@ function setZendeskCached(cacheName, data) {
  * @param {number} [cacheTime=24] - キャッシュの有効時間（時間単位）。
  * @returns {Category[] | Sections[] | Article[] | null} 有効なキャッシュデータがあれば返し、なければ null を返す。
  */
-function getZendeskCached(cacheName, cacheTime = 24) {
+function retrieveZendeskCache(cacheName, cacheTime = 24) {
   const cacheLifetime = cacheTime * 60 * 60 * 1000 // 指定時間（ミリ秒）
   const cachedData = localStorage.getItem(cacheName)
   if (!cachedData) {
@@ -182,9 +182,9 @@ function getZendeskCached(cacheName, cacheTime = 24) {
 }
 
 /**
- * Zendeskの全情報を取得する関数
+ * Zendeskの全記事を取得する関数
  */
-async function getZendeskAllArticles(options) {
+async function fetchAllZendeskArticles(options) {
   const { sort_by = 'created_at', per_page} = options
   /**
    * 作成日を表示
@@ -204,11 +204,11 @@ async function getZendeskAllArticles(options) {
     return `${diffYears}年前`
   }
   // 1. カテゴリを取得
-  const categories = await getZendeskCategories()
+  const categories = await fetchZendeskCategories()
   // 2. セクションを取得
-  const sections = await getZendeskSections()
+  const sections = await fetchZendeskSections()
   // 3. 記事を取得
-  const articlesData = await getZendeskArticles()
+  const articlesData = await fetchZendeskArticles()
   // 3. ソート
   const articlesSort = [...articlesData].sort((a, b) => new Date(b[sort_by]) - new Date(a[sort_by]))
   // 4. 表示数を制限
@@ -238,9 +238,9 @@ async function getZendeskAllArticles(options) {
 /**
  * Zendeskの全記事を取得する関数
  */
-async function getZendeskAllCategoriesWithSectionsAndArticles() {
+async function fetchZendeskHierarchy() {
   // 1-1. 記事を取得
-  const articles = await getZendeskArticles()
+  const articles = await fetchZendeskArticles()
   // 1-2. 記事をセクションIDごとにする
   const articlesBySection = articles.reduce((acc, article) => {
     const { section_id } = article
@@ -249,7 +249,7 @@ async function getZendeskAllCategoriesWithSectionsAndArticles() {
     return acc
   }, {})
   // 2-1. セクションを取得
-  const sections = await getZendeskSections()
+  const sections = await fetchZendeskSections()
   // 2-2. セクションごとに記事を含める
   const sectionsInArticles = sections.map(section => {
     return { ...section, articles: articlesBySection[section.id] }
@@ -262,7 +262,7 @@ async function getZendeskAllCategoriesWithSectionsAndArticles() {
     return acc
   }, {})
   // 3-1. カテゴリを取得
-  const categories = await getZendeskCategories()
+  const categories = await fetchZendeskCategories()
   // 3-2. カテゴリごとにセクションを含める
   const categoriesInSections = categories.map(category => {
     return { ...category, sections: sectionsByCategories[category.id] }
