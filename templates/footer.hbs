@@ -59,9 +59,12 @@
       </div>
     </div>
 
-    <div class="text-center md:text-left">
-      <span class="text-center text-sm text-gray-500">
-        Copyright(C) Interpark., Co. Ltd. All rights reserved.
+    <div class="text-center text-sm text-gray-500 md:text-left">
+      Copyright &#xA9;
+      <span x-init="date = new Date().getFullYear()" x-text="date"></span>
+      Interpark., Co. Ltd.
+      <span class="block sm:inline">
+        All rights reserved.
       </span>
     </div>
 
