@@ -180,3 +180,57 @@ function getZendeskCached(cacheName, cacheTime = 24) {
       return null
   }
 }
+
+/**
+ * Zendeskの全情報を取得する関数
+ */
+async function getZendeskAllArticles(options) {
+  const { sort_by = 'created_at', per_page} = options
+  /**
+   * 作成日を表示
+   * @param {string} dateString 2025-02-10T08:22:59Z
+   * @returns {string} 今日 / 9日前 / 2か月前 / 1年前
+   */
+  function timeAgo(dateString) {
+    const createdDate = new Date(dateString)
+    const now = new Date()
+    const diffTime = now - createdDate
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+    const diffMonths = Math.floor(diffDays / 30)
+    const diffYears = Math.floor(diffDays / 365)
+    if (diffDays === 0) return '今日'
+    if (diffDays < 30) return `${diffDays}日前`
+    if (diffMonths < 12) return `${diffMonths}か月前`
+    return `${diffYears}年前`
+  }
+  // 1. カテゴリを取得
+  const categories = await getZendeskCategories()
+  // 2. セクションを取得
+  const sections = await getZendeskSections()
+  // 3. 記事を取得
+  const articlesData = await getZendeskArticles()
+  // 3. ソート
+  const articlesSort = [...articlesData].sort((a, b) => new Date(b[sort_by]) - new Date(a[sort_by]))
+  // 4. 表示数を制限
+  const articlesSlice = per_page ? articlesSort.slice(0, per_page) : articlesSort
+  // 5. ｎ日前を追加
+  const articlesReplaceTime = articlesSlice.map(article => {
+    const {created_at, updated_at} = article
+    const created_at_timeAgo = timeAgo(created_at)
+    const updated_at_timeAgo = timeAgo(updated_at)
+    return { ...article, created_at_timeAgo, updated_at_timeAgo }
+  })
+  const articles = articlesReplaceTime.map(article => {
+    const { section_id } = article
+    const section = sections.find((section) => section.id === section_id)
+    const { category_id } = section
+    const category = categories.find((category) => category.id === category_id)
+    const object = {
+      ...article,
+      section_name: section.name,
+      category_name: category.name,
+    }
+    return object
+  })
+  return articles
+}

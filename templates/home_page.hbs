@@ -1,4 +1,3 @@
-<script src="{{asset 'home_page-recent_activity.js'}}"></script>
 <h1 class="visibility-hidden">{{ help_center.name }}</h1>
 
 <section id="main-content" class="section hero">
@@ -178,20 +177,47 @@
     </section>
   </section>
 
-  <section class="section home-section">
-    <h2 class="font-bold">🚀 最新の投稿</h2>
-    <section class="categories blocks">
-      <div id="recent_activity" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      </div>
-    </section>
-  </section>
-
-  <section class="section home-section">
-    <h2 class="font-bold">♻️ 最近のアップデート</h2>
-    <section class="categories blocks">
-      <div id="recent_updates" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      </div>
-    </section>
+  <section
+    x-data="{
+      categories: [
+        { articles: [], sort_by: 'created_at', title: '🚀 最新の投稿', },
+        { articles: [], sort_by: 'updated_at', title: '♻️ 最近のアップデート', }
+      ],
+      getData() {
+        this.categories.forEach(category => {
+          getZendeskAllArticles({ sort_by: category.sort_by, per_page: 12 }).then(data => category.articles = data)
+        });
+      }
+    }"
+    x-init="getData()">
+    <template x-for="category in categories">
+      <section class="section home-section">
+        <h2 class="font-bold" x-text="category.title"></h2>
+        <section class="categories blocks">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <template x-for="article in category.articles">
+              <a :href="article.html_url" class="border border-slate-200 rounded-lg hover:bg-gray-50 no-underline text-gray-500">
+                <div class="flex flex-col gap-2 p-4 h-full">
+                  <div>
+                    <nav class="flex text-gray-400 text-xs mb-2" aria-label="Breadcrumb">
+                      <ol class="flex items-center gap-2 truncate">
+                        <li><i class="fa-solid fa-house w-3 h-3"></i></li>
+                        <li x-text="article.category_name"></li>
+                        <li><i class="fa-solid fa-chevron-right w-3 h-3"></i></li>
+                        <li class="truncate" x-text="article.section_name"></li>
+                      </ol>
+                    </nav>
+                    <p class="font-bold text-xl text-gray-700 mb-2 truncate" x-text="article.name"></p>
+                    <p x-text="article.body"></p>
+                  </div>
+                  <p class="text-right text-sm mt-auto" x-text="article[`${category.sort_by}_timeAgo`]"></p>
+                </div>
+              </a>
+            </template>
+          </div>
+        </section>
+      </section>
+    </template>
   </section>
 
 </div>
