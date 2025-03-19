@@ -17,16 +17,16 @@
  * カテゴリー情報を取得する関数
  * @returns {Promise<Category[]>} カテゴリー情報のオブジェクト
  */
-export async function getCategories() {
+async function getZendeskCategories() {
   const name = 'categories'
   // 0. ローカルストレージにキャッシュがあれば返す
   const cacheName = `C.${name}`
-  const cache = getCached(cacheName)
+  const cache = getZendeskCached(cacheName)
   if (cache) return cache
   // 1. カテゴリを取得
-  const categories = await getAllZendeskContent(name)
+  const categories = await getZendeskContent(name)
   // 2. ローカルストレージにキャッシュとして保存
-  setCached(cacheName, categories)
+  setZendeskCached(cacheName, categories)
   return categories
 }
 
@@ -53,16 +53,16 @@ export async function getCategories() {
  * セクション情報を取得する関数
  * @returns {Promise<Sections[]>} セクション情報のオブジェクト
  */
-export async function getSections() {
+async function getZendeskSections() {
   const name = 'sections'
   // 0. ローカルストレージにキャッシュがあれば返す
   const cacheName = `C.${name}`
-  const cache = getCached(cacheName)
+  const cache = getZendeskCached(cacheName)
   if (cache) return cache
   // 1. セクションを取得
-  const sections = await getAllZendeskContent(name)
+  const sections = await getZendeskContent(name)
   // 2. ローカルストレージにキャッシュとして保存
-  setCached(cacheName, sections)
+  setZendeskCached(cacheName, sections)
   return sections
 }
 
@@ -98,14 +98,14 @@ export async function getSections() {
  * アーティクル情報を取得する関数
  * @returns {Promise<Article[]>} アーティクル情報のオブジェクト
  */
-export async function getArticles() {
+async function getZendeskArticles() {
   const name = 'articles'
   // 0. ローカルストレージにキャッシュがあれば返す
   const cacheName = `C.${name}`
-  const cache = getCached(cacheName)
+  const cache = getZendeskCached(cacheName)
   if (cache) return cache
   // 1. アーティクルを取得
-  const articles = await getAllZendeskContent(name)
+  const articles = await getZendeskContent(name)
   // 2. bodyを70文字に制限する
   const mappedArticles = articles.map(article => {
     const { body, ...rest } = article
@@ -118,7 +118,7 @@ export async function getArticles() {
     return { body: maxBody, ...rest }
   })
   // 3. ローカルストレージにキャッシュとして保存
-  setCached(cacheName, mappedArticles)
+  setZendeskCached(cacheName, mappedArticles)
   return mappedArticles
 }
 
@@ -127,7 +127,7 @@ export async function getArticles() {
  * @param {string} name categories | sections | articles
  * @returns {Category[] | Sections[] | Article[]}
  */
-async function getAllZendeskContent(name) {
+async function getZendeskContent(name) {
   let list = []
   let next_page = `/api/v2/help_center/${name}.json?page=1&per_page=100`
   while (next_page) {
@@ -144,7 +144,7 @@ async function getAllZendeskContent(name) {
  * @param {string} cacheName storage名
  * @param {Category[] | Sections[] | Article[]} data データ
  */
-function setCached(cacheName, data) {
+function setZendeskCached(cacheName, data) {
   const cacheData = {
     data: data,
     timestamp: Date.now() // 現在の時刻を記録
@@ -158,7 +158,7 @@ function setCached(cacheName, data) {
  * @param {number} [cacheTime=24] - キャッシュの有効時間（時間単位）。
  * @returns {Category[] | Sections[] | Article[] | null} 有効なキャッシュデータがあれば返し、なければ null を返す。
  */
-function getCached(cacheName, cacheTime = 24) {
+function getZendeskCached(cacheName, cacheTime = 24) {
   const cacheLifetime = cacheTime * 60 * 60 * 1000 // 指定時間（ミリ秒）
   const cachedData = localStorage.getItem(cacheName)
   if (!cachedData) {

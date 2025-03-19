@@ -1,8 +1,7 @@
-import { getCategories } from "getZendeskAPI";
 import { serviceClasses } from "getClasses";
 
 document.addEventListener("DOMContentLoaded", function () {
-  getCategories().then(categories => {
+  getZendeskCategories().then(categories => {
     const html = categories.map(category => {
       const { html_url, name } = category
       const serviceColor = serviceClasses(name, ['text', 'border', 'hover']) || "";

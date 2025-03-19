@@ -1,5 +1,3 @@
-import { getCategories, getSections, getArticles } from "getZendeskAPI";
-
 document.addEventListener('DOMContentLoaded', function () {
 
   /**
@@ -7,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
    */
   async function setSidemenu() {
     // 記事を取得
-    const articles = await getArticles()
+    const articles = await getZendeskArticles()
     // 記事をセクションIDごとにする
     const articlesBySection = articles.reduce((acc, article) => {
       const { section_id } = article
@@ -17,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, {})
 
     // セクション取得
-    const sections = await getSections()
+    const sections = await getZendeskSections()
     // セクションごとに記事を含める
     const sectionsInArticles = sections.map(section => {
       return { ...section, articles: articlesBySection[section.id] }
@@ -31,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, {})
 
     // カテゴリを取得
-    const categories = await getCategories()
+    const categories = await getZendeskCategories()
     // カテゴリごとにセクションを含める
     const categoriesInSections = categories.map(category => {
       return { ...category, sections: sectionsByCategories[category.id] }

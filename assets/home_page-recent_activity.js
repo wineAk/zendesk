@@ -1,6 +1,4 @@
-import { getCategories, getSections, getArticles } from "getZendeskAPI";
-
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   const recentActivity = document.querySelector('#recent_activity')
   const recentUpdates = document.querySelector('#recent_updates')
   if (recentActivity == null || recentUpdates == null) return
@@ -78,11 +76,11 @@ document.addEventListener("DOMContentLoaded", function () {
    */
   async function getArticlesData(sort_by) {
     // 1. カテゴリを取得
-    const categories = await getCategories()
+    const categories = await getZendeskCategories()
     // 2. セクションを取得
-    const sections = await getSections()
+    const sections = await getZendeskSections()
     // 3. 記事を取得
-    const articlesData = await getArticles()
+    const articlesData = await getZendeskArticles()
     const articlesSort = [...articlesData].sort((a, b) => new Date(b[sort_by]) - new Date(a[sort_by])) // ソート
     const articlesSlice = articlesSort.slice(0, 12) // 最大12記事に絞り込み
     const articles = articlesSlice.map(article => {
