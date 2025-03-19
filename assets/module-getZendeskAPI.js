@@ -234,3 +234,38 @@ async function getZendeskAllArticles(options) {
   })
   return articles
 }
+
+/**
+ * Zendeskの全記事を取得する関数
+ */
+async function getZendeskAllCategoriesWithSectionsAndArticles() {
+  // 1-1. 記事を取得
+  const articles = await getZendeskArticles()
+  // 1-2. 記事をセクションIDごとにする
+  const articlesBySection = articles.reduce((acc, article) => {
+    const { section_id } = article
+    if (!acc[section_id]) acc[section_id] = []
+    acc[section_id].push(article)
+    return acc
+  }, {})
+  // 2-1. セクションを取得
+  const sections = await getZendeskSections()
+  // 2-2. セクションごとに記事を含める
+  const sectionsInArticles = sections.map(section => {
+    return { ...section, articles: articlesBySection[section.id] }
+  })
+  // 2-3. セクションをカテゴリIDごとにする
+  const sectionsByCategories = sectionsInArticles.reduce((acc, section) => {
+    const { category_id } = section
+    if (!acc[category_id]) acc[category_id] = []
+    acc[category_id].push(section)
+    return acc
+  }, {})
+  // 3-1. カテゴリを取得
+  const categories = await getZendeskCategories()
+  // 3-2. カテゴリごとにセクションを含める
+  const categoriesInSections = categories.map(category => {
+    return { ...category, sections: sectionsByCategories[category.id] }
+  })
+  return categoriesInSections
+}
