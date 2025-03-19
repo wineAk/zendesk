@@ -1,6 +1,7 @@
 <script src="{{asset 'module-tocbot.min.js'}}"></script>
 <script src="{{asset 'article_page-toc.js'}}"></script>
 <script src="{{asset 'article_page-image_modal.js'}}"></script>
+<script src="{{asset 'article_page-sidemenu.js'}}"></script>
 
 <div class="container-divider"></div>
 
@@ -73,16 +74,17 @@
                   x-on:click="isCategoryExpanded = !isCategoryExpanded"
                   x-bind:aria-expanded="isCategoryExpanded ? 'true' : 'false'"
                   x-bind:class="isCategoryExpanded  ?  'rotate-90'  :  ''"
-                  >
+                >
                   <i class="fa-solid fa-chevron-right"></i>
                 </button>
-                <a :href="category.html_url" x-text="category.name"></a>
+                <a :href="category.html_url" :title="category.name" x-text="category.name" class="flex-1 truncate"></a>
               </div>
               <!-- セクション -->
-              <div x-cloak x-show="isCategoryExpanded" x-collapse>
+              <div
+                class="flex flex-col gap-2 bg-gray-100 rounded-md p-2"
+                x-cloak x-collapse x-show="isCategoryExpanded">
                 <template x-for="section in category.sections">
                   <div
-                    class="flex flex-col gap-2 bg-gray-100 rounded-md p-2"
                     data-accordion="collapse"
                     x-data="{ isSectionExpanded: false }">
                     <div class="flex items-center gap-1">
@@ -91,13 +93,13 @@
                         x-on:click="isSectionExpanded = !isSectionExpanded"
                         x-bind:aria-expanded="isSectionExpanded ? 'true' : 'false'"
                         x-bind:class="isSectionExpanded  ?  'rotate-90'  :  ''"
-                        >
+                      >
                         <i class="fa-solid fa-chevron-right"></i>
                       </button>
-                      <a :href="section.html_url" :title="section.name" x-text="section.name" class="truncate"></a>
+                      <a :href="section.html_url" :title="section.name" x-text="section.name" class="flex-1 truncate"></a>
                     </div>
                     <!-- 記事 -->
-                    <div x-cloak x-show="isSectionExpanded" x-collapse>
+                    <div x-cloak x-collapse x-show="isSectionExpanded">
                       <div class="flex flex-col gap-2 bg-[oklch(0.949_0.004_281.245)] rounded-md p-2">
                         <template x-for="article in section.articles">
                           <a :href="article.html_url" :title="article.name" x-text="article.name" class="truncate"></a>
