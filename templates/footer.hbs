@@ -26,43 +26,36 @@
         {{/if}}
         {{/link}}
       </div>
-      <div class="flex flex-col sm:flex-row gap-2 sm:gap-0 text-sm">
-        <ul class="w-auto sm:w-40">
-          <li>
-            <a href="https://www.saaske.com/" class="text-sm text-gray-500" target="_blank">
-              ホームページ
-            </a>
-          </li>
-          <li>
-            <a href="https://www.interpark.co.jp/" class="text-sm text-gray-500" target="_blank">
-              運営会社
-            </a>
-          </li>
-        </ul>
-        <ul class="w-auto sm:w-40">
-          <li>
-            <a href="https://www.saaske.com/topics/" class="text-sm text-gray-500" target="_blank">
-              プレスリリース
-            </a>
-          </li>
-          <li>
-            <a href="https://www.saaske.com/trouble/" class="text-sm text-gray-500" target="_blank">
-              障害報告
-            </a>
-          </li>
-        </ul>
-        <ul class="w-auto sm:w-40">
-          <li>
-            <a href="https://www.saaske.com/information/privacy.html" class="text-sm text-gray-500" target="_blank">
-              プライバシーポリシー
-            </a>
-          </li>
-          <li>
-            <a href="https://www.saaske.com/information/rule.html" class="text-sm text-gray-500" target="_blank">
-              利用約款
-            </a>
-          </li>
-        </ul>
+      <div
+        class="flex flex-col sm:flex-row gap-2 sm:gap-0 text-sm"
+        x-data="{ links: [
+          [
+            { name: 'ホームページ', html_url: 'https://www.saaske.com/' },
+            { name: '運営会社', html_url: 'https://www.interpark.co.jp/' },
+          ],
+          [
+            { name: 'プレスリリース', html_url: 'https://www.saaske.com/topics/' },
+            { name: '障害報告', html_url: 'https://www.saaske.com/trouble/' },
+          ],
+          [
+            { name: 'プライバシーポリシー', html_url: 'https://www.saaske.com/information/privacy.html' },
+            { name: '利用約款', html_url: 'https://www.saaske.com/information/rule.html' },
+          ],
+        ] }">
+        <template x-for="link in links">
+          <ul class="w-auto sm:w-40" x-data="{ link }">
+            <template x-for="item in link">
+              <li>
+                <a
+                  :href="item.html_url"
+                  target="_blank"
+                  class="text-sm text-gray-500"
+                  x-text="item.name"
+                ></a>
+              </li>
+            </template>
+          </ul>
+        </template>
       </div>
     </div>
 
