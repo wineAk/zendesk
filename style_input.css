@@ -155,6 +155,32 @@ a {
 }
 
 /**
+ * sweetalert2
+ */
+.swal2-container {
+  overflow: hidden !important;
+}
+.swal2-popup {
+  padding: 1rem;
+  height: auto;
+  width: auto;
+  max-height: calc(100vh - 1rem);
+  max-width: calc(100vw - 1rem);
+  overflow-y: auto;
+}
+.swal2-image {
+  margin: 0;
+}
+.swal2-close {
+  color: var(--color-neutral-100);
+  background-color: color-mix(in oklab,var(--color-neutral-500)50%,transparent);
+  &:hover {
+    color: var(--color-neutral-100);
+    background-color: color-mix(in oklab,var(--color-neutral-700)70%,transparent);
+  }
+}
+
+/**
  * tailwindcss
  */
 .collapsible-sidebar.lg\:sticky {
