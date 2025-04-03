@@ -1,3 +1,91 @@
+<section
+  x-data="{
+    bannerVisible: false,
+    summary: {
+      page: {
+        name: 'クラウドサービス サスケ',
+        url: 'https://saaske.instatus.com',
+        status: 'UP',
+      }
+    },
+    getData() {
+      fetch('https://saaske.instatus.com/summary.json')
+      .then(response => response.json())
+      .then(result => {
+        console.log('footer.hbs - getData - result:', result);
+        this.summary = result;
+        const { page, activeIncidents, activeMaintenances } = this.summary;
+        const changeStartToJST = str => new Date(str).toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).replace(/\//g, '/');
+        const statusJPs = {
+          // インシデント
+          INVESTIGATING: '調査中',
+          IDENTIFIED: '特定済み',
+          MONITORING: '監視中',
+          RESOLVED: '解決済み',
+          // メンテナンス
+          NOTSTARTEDYET: '予定',
+          INPROGRESS: '進行中',
+          COMPLETED: '完了',
+        };
+        const impactJPs = {
+          OPERATIONAL: '稼働中',
+          PARTIALOUTAGE: '一部にて障害',
+          MINOROUTAGE: '軽微な障害',
+          MAJOROUTAGE: '重大な障害',
+        };
+        if (activeIncidents) {
+          this.summary.activeIncidents = activeIncidents.map(activeIncident => {
+            const { started, status, impact } = activeIncident;
+            const startJST = changeStartToJST(started);
+            const statusJP = statusJPs[status] || status;
+            const impactJP = impactJPs[impact] || impact;
+            return {...activeIncident, startJST, statusJP, impactJP};
+          })
+        }
+        if (activeMaintenances) {
+          this.summary.activeMaintenances = activeMaintenances.map(activeMaintenance => {
+            const { start, status } = activeMaintenance;
+            const startJST = changeStartToJST(start);
+            const statusJP = statusJPs[status] || status;
+            return {...activeMaintenance, startJST, statusJP};
+          })
+        }
+        // インシデント または メンテナンス があるときは表示
+        if (activeIncidents || activeMaintenances) this.bannerVisible = true;
+      });
+    },
+  }"
+  x-show="bannerVisible"
+  x-transition:enter="transition ease-out duration-500"
+  x-transition:enter-start="translate-y-full"
+  x-transition:enter-end="translate-y-0"
+  x-transition:leave="transition ease-in duration-300"
+  x-transition:leave-start="translate-y-0"
+  x-transition:leave-end="translate-y-full"
+  x-init="getData()"
+  x-cloak
+  class="border-t border-slate-200 bg-white flex flex-col items-center px-2 py-4 fixed bottom-0 left-0 h-auto w-full shadow-sm duration-300 ease-out"
+  style="display: none;"
+  >
+    <div class="max-w-6xl w-full grid gap-2 text-xs">
+      <span class="rounded-full px-2.5 py-0.5 text-white font-semibold bg-black w-20 text-center">お知らせ</span>
+      <template x-for="activeIncident in summary.activeIncidents">
+        <p class="flex items-center gap-2">
+          <span x-text="activeIncident.startJST"></span>
+          <a :href="activeIncident.url" x-text="activeIncident.name"></a>
+          <span class="hidden rounded-full px-2.5 py-0.5 text-white font-semibold bg-black" x-text="`${activeIncident.impactJP} / ${activeIncident.statusJP}`"></span>
+        </p>
+      </template>
+      <template x-for="activeMaintenance in summary.activeMaintenances">
+        <p class="flex items-center gap-2">
+          <span x-text="activeMaintenance.startJST"></span>
+          <a :href="activeMaintenance.url" x-text="activeMaintenance.name"></a>
+          <span class="hidden rounded-full px-2.5 py-0.5 text-white font-semibold bg-black" x-text="activeMaintenance.statusJP"></span>
+        </p>
+      </template>
+    </div>
+</section>
+
 <footer class="relative border-t border-slate-200 bg-white flex flex-col items-center gap-8 p-6">
 
   <ul
