@@ -154,6 +154,48 @@ a {
   }
 }
 
+/* テーブル */
+.article-body table {
+  --border-color: var(--color-slate-200);
+  --spacing-2: calc(var(--spacing) * 2);
+  --spacing-4: calc(var(--spacing) * 4);
+  --spacing-6: calc(var(--spacing) * 6);
+  border: 1px solid var(--border-color);
+  border-collapse: separate !important;
+  border-radius: var(--radius-lg);
+  border-spacing: 0;
+  margin: var(--spacing-2) 0 var(--spacing-6);
+  tbody {
+    tr {
+      /* 上 */
+      &:first-child td {
+        /* 左上 */
+        &:first-child {
+          border-top-left-radius: var(--radius-lg);
+        }
+      }
+      /* 下 */
+      &:last-child td {
+        border-bottom: 0;
+        /* 左下 */
+        &:first-child {
+          border-bottom-left-radius: var(--radius-lg);
+        }
+      }
+      td {
+        padding: var(--spacing-2) var(--spacing-4);
+        border-bottom: 1px solid var(--border-color);
+        /* 左端 */
+        &:first-child {
+          background-color: var(--color-slate-50);
+          border-right: 1px solid var(--border-color);
+          font-weight: var(--font-weight-semibold);
+        }
+      }
+    }
+  }
+}
+
 /**
  * sweetalert2
  */
