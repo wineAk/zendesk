@@ -41,7 +41,6 @@
           }
         </style>
         {{#each categories}}
-          {{#if ../has_multiple_categories}}
             <a
               href='{{url}}'
               class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
@@ -58,25 +57,6 @@
                 </div>
               </div>
             </a>
-          {{else}}
-            {{#each sections}}
-              <a
-                href='{{url}}'
-                class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
-              >
-                <div class="flex flex-col gap-2 p-4 h-full">  
-                  <div>
-                    <p class="font-bold text-xl text-center text-gray-700 mb-1">
-                      {{name}}
-                    </p>
-                    <p class="text-gray-700">
-                      {{excerpt description}}
-                    </p>
-                  </div>
-                </div>
-              </a>
-            {{/each}}
-          {{/if}}
         {{/each}}
       </div>
       {{pagination}}
