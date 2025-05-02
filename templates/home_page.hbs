@@ -1,4 +1,4 @@
-<h1 class="visibility-hidden">{{ help_center.name }}</h1>
+<h1 class="visibility-hidden">{{help_center.name}}</h1>
 
 <section
   id="main-content"
@@ -19,7 +19,7 @@
       pauseEnd: 3000,
       pauseStart: 20,
       direction: 'forward',
-  }" 
+  }"
   x-init="$nextTick(() => {
       let typingInterval = setInterval(startTyping, $data.typeSpeed);
       function startTyping(){
@@ -55,33 +55,49 @@
           $refs.cursor.classList.add('hidden');
         }
       }, $data.cursorSpeed);
-  })">
+  })"
+>
   <div class="hero-inner">
     <div class="hero-title">
-      <div class="flex items-center justify-center mx-auto text-center">
-        <div class="relative flex items-center justify-center h-8">
-          <p class="text-2xl font-black leading-tight" x-text="text"></p>
-          <span class="absolute right-0 w-2 -mr-2 bg-green-800 h-3/4" x-ref="cursor"></span>
+      <div class="mx-auto flex items-center justify-center text-center">
+        <div class="relative flex h-8 items-center justify-center">
+          <p class="text-2xl leading-tight font-black" x-text="text"></p>
+          <span
+            class="absolute right-0 -mr-2 h-3/4 w-2 bg-green-800"
+            x-ref="cursor"
+          ></span>
         </div>
       </div>
     </div>
-    <p class="text-center my-2">あなたの悩みを検索してみましょう</p>
-    <h2 class="visibility-hidden">{{ t 'search' }}</h2>
+    <p class="my-2 text-center">あなたの悩みを検索してみましょう</p>
+    <h2 class="visibility-hidden">{{t "search"}}</h2>
     <div class="relative">
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
-        <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
-        <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        focusable="false"
+        viewBox="0 0 12 12"
+        class="search-icon"
+        aria-hidden="true"
+      >
+        <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor" />
+        <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5" />
       </svg>
-      {{search submit=false instant=settings.instant_search class='search search-full'}}
+      {{search
+        submit=false
+        instant=settings.instant_search
+        class="search search-full"
+      }}
     </div>
   </div>
 </section>
 
 <div class="container">
-  
+
   <section class="section home-section">
     <section class="categories blocks">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <a href="https://www.saaske.com/technology/" target="_blank" class="home_info technology"></a>
         <a href="https://timerex.net/s/interpark/deef14a3" target="_blank" class="home_info consulting"></a>
         <a href="https://help.works.app/hc/ja/requests/new" target="_blank" class="home_info works"></a>
@@ -91,9 +107,9 @@
 
   <section class="section home-section">
     <h2 class="font-bold">🗂️ カテゴリ一覧</h2>
-    <h2 class="visibility-hidden">{{ t 'categories' }}</h2>
+    <h2 class="visibility-hidden">{{t "categories"}}</h2>
     <section class="categories blocks">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         <style>
           /* お役立ち情報 */
           [data-category-id="46397455628697"] {
@@ -102,13 +118,13 @@
         </style>
         {{#each categories}}
           <a
-            href='{{url}}'
-            class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
+            href="{{url}}"
+            class="rounded-lg border border-slate-200 bg-white no-underline hover:bg-gray-50"
             data-category-id="{{id}}"
           >
-            <div class="flex flex-col gap-2 p-4 h-full">  
+            <div class="flex h-full flex-col gap-2 p-4">
               <div>
-                <p class="font-bold text-xl text-center text-gray-700 mb-1">
+                <p class="mb-1 text-center text-xl font-bold text-gray-700">
                   {{name}}
                 </p>
                 <p class="text-gray-700">
@@ -124,30 +140,31 @@
   </section>
 
   {{#if promoted_articles}}
-  <section class="section home-section">
-    <h2 class="font-bold">🔍 ピックアップ記事</h2>
-    <h2 class="visibility-hidden">{{t 'promoted_articles'}}</h2>
-    <section class="categories blocks">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {{#each promoted_articles}}
-          <a
-            href='{{url}}'
-            class="border border-slate-200 rounded-lg hover:bg-gray-50 no-underline text-gray-500"
-          >
-            <div class="flex flex-col gap-2 p-4 h-full">  
-              <div>
-                <p class="font-bold text-xl text-gray-700 mb-2 truncate">{{title}}</p>
-                <p>{{snippet}}</p>
+    <section class="section home-section">
+      <h2 class="font-bold">🔍 ピックアップ記事</h2>
+      <h2 class="visibility-hidden">{{t "promoted_articles"}}</h2>
+      <section class="categories blocks">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {{#each promoted_articles}}
+            <a
+              href="{{url}}"
+              class="rounded-lg border border-slate-200 text-gray-500 no-underline hover:bg-gray-50"
+            >
+              <div class="flex h-full flex-col gap-2 p-4">
+                <div>
+                  <p
+                    class="mb-2 truncate text-xl font-bold text-gray-700"
+                  >{{title}}</p>
+                  <p>{{snippet}}</p>
+                </div>
               </div>
-            </div>
-          </a>
-        {{/each}}
-      </div>
-      {{pagination}}
+            </a>
+          {{/each}}
+        </div>
+        {{pagination}}
+      </section>
     </section>
-  </section>
   {{/if}}
-  
 
   {{#if help_center.community_enabled}}
     <section class="section home-section community">
@@ -172,28 +189,35 @@
         });
       }
     }"
-    x-init="getData()">
+    x-init="getData()"
+  >
     <template x-for="category in categories">
       <section class="section home-section">
         <h2 class="font-bold" x-text="category.title"></h2>
         <section class="categories blocks">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             <template x-for="article in category.articles">
-              <a :href="article.html_url" class="border border-slate-200 rounded-lg hover:bg-gray-50 no-underline text-gray-500">
-                <div class="flex flex-col gap-2 p-4 h-full">
+              <a
+                :href="article.html_url"
+                class="rounded-lg border border-slate-200 text-gray-500 no-underline hover:bg-gray-50"
+              >
+                <div class="flex h-full flex-col gap-2 p-4">
                   <div>
-                    <nav class="flex text-gray-400 text-xs mb-2" aria-label="Breadcrumb">
+                    <nav
+                      class="mb-2 flex text-xs text-gray-400"
+                      aria-label="Breadcrumb"
+                    >
                       <ol class="flex items-center gap-2 truncate">
-                        <li><i class="fa-solid fa-house w-3 h-3"></i></li>
+                        <li><i class="fa-solid fa-house h-3 w-3"></i></li>
                         <li x-text="article.category_name"></li>
-                        <li><i class="fa-solid fa-chevron-right w-3 h-3"></i></li>
+                        <li><i class="fa-solid fa-chevron-right h-3 w-3"></i></li>
                         <li class="truncate" x-text="article.section_name"></li>
                       </ol>
                     </nav>
-                    <p class="font-bold text-xl text-gray-700 mb-2 truncate" x-text="article.name"></p>
+                    <p class="mb-2 truncate text-xl font-bold text-gray-700" x-text="article.name"></p>
                     <p x-text="article.body"></p>
                   </div>
-                  <p class="text-right text-sm mt-auto" x-text="article[`${category.sort_by}_timeAgo`]"></p>
+                  <p class="mt-auto text-right text-sm" x-text="article[`${category.sort_by}_timeAgo`]"></p>
                 </div>
               </a>
             </template>
@@ -204,18 +228,32 @@
   </section>
 
   <section class="section home-section">
-    <div x-data="{ 
-        activeAccordion: '', 
-        setActiveAccordion(id) { 
-            this.activeAccordion = (this.activeAccordion == id) ? '' : id 
-        } 
+    <div
+      x-data="{ 
+      activeAccordion: '', 
+      setActiveAccordion(id) { 
+          this.activeAccordion = (this.activeAccordion == id) ? '' : id 
+      } 
     }"
-    class="relative w-full mx-auto overflow-hidden text-sm font-normal bg-white border border-gray-200 divide-y divide-gray-200 rounded-md"
+      class="relative mx-auto w-full divide-y divide-gray-200 overflow-hidden rounded-md border border-gray-200 bg-white text-sm font-normal"
     >
-      <div x-data="{ id: $id('accordion') }" class="cursor-pointer group">
-        <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full p-4 text-left select-none group-hover:underline cursor-pointer">
-            <span class="font-bold">📜 旧マニュアルを閲覧する</span>
-            <svg class="w-4 h-4 duration-200 ease-out" :class="{ 'rotate-180': activeAccordion==id }" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      <div x-data="{ id: $id('accordion') }" class="group cursor-pointer">
+        <button
+          @click="setActiveAccordion(id)"
+          class="flex w-full cursor-pointer items-center justify-between p-4 text-left select-none"
+        >
+          <span class="font-bold">📜 旧マニュアルを閲覧する</span>
+          <svg
+            class="h-4 w-4 duration-200 ease-out"
+            :class="{ 'rotate-180': activeAccordion==id }"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div x-show="activeAccordion==id" x-collapse x-cloak>
           <div
@@ -260,7 +298,10 @@
                   'ユーザ': 'bg-gray-100 text-gray-700'
                 }[role] || '';
               }
-            }" id="old_manuals" class="grid grid-cols-1 divide-y-1 divide-solid divide-slate-200 border-t border-slate-200">
+            }"
+            id="old_manuals"
+            class="grid grid-cols-1 divide-y-1 divide-solid divide-slate-200 border-t border-slate-200"
+          >
             <template x-for="manual in manuals" :key="manual.fileName">
               <a :href="`https://www.saaske.com/document/${manual.fileName}.pdf`"
                 target="_blank"
