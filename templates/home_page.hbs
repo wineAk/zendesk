@@ -123,6 +123,32 @@
     </section>
   </section>
 
+  {{#if promoted_articles}}
+  <section class="section home-section">
+    <h2 class="font-bold">🔍 ピックアップ記事</h2>
+    <h2 class="visibility-hidden">{{t 'promoted_articles'}}</h2>
+    <section class="categories blocks">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {{#each promoted_articles}}
+          <a
+            href='{{url}}'
+            class="border border-slate-200 rounded-lg hover:bg-gray-50 no-underline text-gray-500"
+          >
+            <div class="flex flex-col gap-2 p-4 h-full">  
+              <div>
+                <p class="font-bold text-xl text-gray-700 mb-2 truncate">{{title}}</p>
+                <p>{{snippet}}</p>
+              </div>
+            </div>
+          </a>
+        {{/each}}
+      </div>
+      {{pagination}}
+    </section>
+  </section>
+  {{/if}}
+  
+
   {{#if help_center.community_enabled}}
     <section class="section home-section community">
       <h2 class="font-bold">{{t 'community'}}</h2>
