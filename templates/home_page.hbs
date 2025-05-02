@@ -34,11 +34,18 @@
     <h2 class="visibility-hidden">{{ t 'categories' }}</h2>
     <section class="categories blocks">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <style>
+          /* お役立ち情報 */
+          [data-category-id="46397455628697"] {
+            display: none !important;
+          }
+        </style>
         {{#each categories}}
           {{#if ../has_multiple_categories}}
             <a
               href='{{url}}'
               class="border border-slate-200 rounded-lg bg-white hover:bg-gray-50 no-underline"
+              data-category-id="{{id}}"
             >
               <div class="flex flex-col gap-2 p-4 h-full">  
                 <div>
