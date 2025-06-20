@@ -223,16 +223,20 @@
   </section>
 
   <section class="section home-section">
-    <h2 class="font-bold">🗂️ カテゴリ一覧</h2>
+    <h2 class="font-bold">{{settings.section_title_categories}}</h2>
     <h2 class="visibility-hidden">{{t "categories"}}</h2>
     <section class="categories blocks">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <style>
-          /* お役立ち情報 */
-          [data-category-id="46397455628697"] {
-            display: none !important;
-          }
-        </style>
+        <style id="hidden-categories"></style>
+        <script>
+          document.getElementById('hidden-categories').textContent = `{{settings.section_hidden_categories}}`
+            .split(',')
+            .map(id => {
+              const trimId = id.trim()
+              return `[data-category-id="${trimId}"] { display: none !important; }`
+            })
+            .join('\n');
+        </script>
         {{#each categories}}
           <a
             href="{{url}}"
@@ -258,7 +262,7 @@
 
   {{#if promoted_articles}}
     <section class="section home-section">
-      <h2 class="font-bold">🔍 ピックアップ記事</h2>
+      <h2 class="font-bold">{{settings.section_title_promoted_articles}}</h2>
       <h2 class="visibility-hidden">{{t "promoted_articles"}}</h2>
       <section class="categories blocks">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -286,12 +290,12 @@
   <section
     x-data="{
       categories: [
-        { articles: [], sort_by: 'created_at', title: '🚀 最新の投稿', },
-        { articles: [], sort_by: 'updated_at', title: '♻️ 最近のアップデート', }
+        { articles: [], sort_by: 'created_at', title: '{{settings.section_title_created_articles}}', per_page: {{settings.section_per_page_created_articles}} },
+        { articles: [], sort_by: 'updated_at', title: '{{settings.section_title_updated_articles}}', per_page: {{settings.section_per_page_updated_articles}} }
       ],
       getData() {
         this.categories.forEach(category => {
-          fetchAllZendeskArticles({ sort_by: category.sort_by, per_page: 12 }).then(data => category.articles = data)
+          fetchAllZendeskArticles({ sort_by: category.sort_by, per_page: category.per_page }).then(data => category.articles = data)
         });
       }
     }"
@@ -348,7 +352,7 @@
           @click="setActiveAccordion(id)"
           class="flex w-full cursor-pointer items-center justify-between p-4 text-left select-none"
         >
-          <span class="font-bold">📜 旧マニュアルを閲覧する</span>
+          <span class="font-bold">{{settings.section_title_old_manual}}</span>
           <svg
             class="h-4 w-4 duration-200 ease-out"
             :class="{ 'rotate-180': activeAccordion==id }"
