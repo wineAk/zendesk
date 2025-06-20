@@ -405,6 +405,74 @@
       ]
     },
     {
+      "label": "images_group_label",
+      "variables": [
+        {
+          "identifier": "dial_image",
+          "type": "file",
+          "description": "サポート番号の画像",
+          "label": "電話番号"
+        },
+        {
+          "identifier": "hero_background_image",
+          "type": "file",
+          "description": "24px × 24px の背景画像",
+          "label": "ヒーロー背景イメージ"
+        },
+        {
+          "identifier": "technology_url",
+          "type": "text",
+          "description": "URL",
+          "label": "サスケ活用講座URL",
+          "value": "https://www.saaske.com/technology/"
+        },
+        {
+          "identifier": "technology_image",
+          "type": "file",
+          "description": "バナー画像",
+          "label": "サスケ活用講座"
+        },
+        {
+          "identifier": "technology_background_image",
+          "type": "file",
+          "description": "背景画像",
+          "label": "サスケ活用講座"
+        },
+        {
+          "identifier": "consulting_url",
+          "type": "text",
+          "description": "URL",
+          "label": "個別相談会URL",
+          "value": "https://timerex.net/s/interpark/deef14a3/"
+        },
+        {
+          "identifier": "consulting_image",
+          "type": "file",
+          "description": "バナー画像",
+          "label": "個別相談会"
+        },
+        {
+          "identifier": "consulting_background_image",
+          "type": "file",
+          "description": "背景画像",
+          "label": "個別相談会"
+        },
+        {
+          "identifier": "works_helpcenter_url",
+          "type": "text",
+          "description": "URL",
+          "label": "WorksヘルプセンターURL",
+          "value": "https://help.works.app/hc/ja/requests/new"
+        },
+        {
+          "identifier": "works_helpcenter_image",
+          "type": "file",
+          "description": "バナー画像",
+          "label": "Worksヘルプセンター"
+        }
+      ]
+    },
+    {
       "label": "インフォメーション ①",
       "variables": [
         {

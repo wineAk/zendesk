@@ -3,6 +3,7 @@
 <section
   id="main-content"
   class="section hero"
+  style="background: url('{{settings.hero_background_image}}') repeat 50% 0;"
   x-data="{
       text: '',
       textArray : [
@@ -95,12 +96,46 @@
 
 <div class="container">
 
+  <style>
+    .home_info.technology {
+      background: url('{{settings.technology_background_image}}') repeat-x left top #64716d;
+      border-color: #3d4d48;
+    }
+    .home_info.technology:before {
+      background: url('{{settings.technology_image}}') center center no-repeat;
+      background-size: auto 100%;
+    }
+    .home_info.consulting {
+      background: url('{{settings.consulting_background_image}}') center center no-repeat #d7e7b9;
+      border-color: #6a9644;
+    }
+    .home_info.consulting:before {
+      background: url('{{settings.consulting_image}}') center center no-repeat;
+      background-size: auto 65%;
+    }
+    .home_info.works {
+      background-image: linear-gradient(
+        90deg,
+        rgba(37, 205, 190, 0.5),
+        rgba(37, 205, 190, 0.2) 15%,
+        rgba(255, 255, 255, 0) 30% 70%,
+        rgba(37, 205, 190, 0.2) 85%,
+        rgba(37, 205, 190, 0.5)
+      );
+      border-color: #25cdbe;
+      color: #fff;
+    }
+    .home_info.works:before {
+      background: url('{{settings.works_helpcenter_image}}') center center no-repeat;
+      background-size: auto 50%;
+    }
+  </style>
   <section class="section home-section">
     <section class="categories blocks">
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <a href="https://www.saaske.com/technology/" target="_blank" class="home_info technology"></a>
-        <a href="https://timerex.net/s/interpark/deef14a3" target="_blank" class="home_info consulting"></a>
-        <a href="https://help.works.app/hc/ja/requests/new" target="_blank" class="home_info works"></a>
+        <a href="{{settings.technology_url}}" target="_blank" class="home_info technology"></a>
+        <a href="{{settings.consulting_url}}" target="_blank" class="home_info consulting"></a>
+        <a href="{{settings.works_helpcenter_url}}" target="_blank" class="home_info works"></a>
       </div>
     </section>
   </section>
