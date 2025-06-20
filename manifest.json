@@ -403,6 +403,60 @@
           "value": false
         }
       ]
+    },
+    {
+      "label": "インフォメーション",
+      "variables": [
+        {
+          "identifier": "information_public",
+          "type": "checkbox",
+          "description": "チェックを入れると公開されます",
+          "label": "公開する",
+          "value": false
+        },
+        {
+          "identifier": "information_type",
+          "type": "list",
+          "description": "種類の説明",
+          "label": "種類",
+          "value": "info",
+          "options": [
+            {
+              "label": "（青）告知",
+              "value": "info"
+            },
+            {
+              "label": "（黄）警告",
+              "value": "warning"
+            },
+            {
+              "label": "（赤）重要",
+              "value": "important"
+            }
+          ]
+        },
+        {
+          "identifier": "information_title",
+          "type": "text",
+          "description": "タイトルの説明",
+          "label": "タイトル",
+          "value": "タイトル"
+        },
+        {
+          "identifier": "information_message",
+          "type": "text",
+          "description": "メッセージの説明",
+          "label": "メッセージ",
+          "value": "メッセージ"
+        },
+        {
+          "identifier": "information_url",
+          "type": "text",
+          "description": "URLの説明",
+          "label": "URL",
+          "value": "https://www.saaske.com/technology/entry/no634.htm"
+        }
+      ]
     }
   ]
 }
