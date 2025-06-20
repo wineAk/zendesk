@@ -405,7 +405,7 @@
       ]
     },
     {
-      "label": "🧩 サポート番号",
+      "label": "🧩 ヘッダー",
       "variables": [
         {
           "identifier": "dial_text",
@@ -415,9 +415,16 @@
           "value": "平日 9時～17時半"
         },
         {
+          "identifier": "dial_title",
+          "type": "text",
+          "description": "サポートセンターのタイトルを入力します",
+          "label": "タイトル",
+          "value": "サスケサポートセンター"
+        },
+        {
           "identifier": "dial_image",
           "type": "file",
-          "description": "サポート番号の画像",
+          "description": "サポートセンターの電話番号の画像",
           "label": "電話番号"
         }
       ]
@@ -429,19 +436,19 @@
           "identifier": "hero_background_image",
           "type": "file",
           "description": "24px × 24px の背景画像",
-          "label": "ヒーロー背景イメージ"
+          "label": "ヒーロー背景"
         },
         {
           "identifier": "hero_messages",
           "type": "text",
-          "description": "カンマ区切りで入力すること",
+          "description": "吹き出しに表示したいメッセージを入力します。複数ある場合は「半角のカンマ区切り」で入力すること",
           "label": "吹き出しメッセージ",
           "value": "なにかお困りですか？,インポート方法,メールの送信方法,電話番号の取得,ぜひ試してみてください！"
         },
         {
           "identifier": "hero_text",
           "type": "text",
-          "description": "ヒーローのテキストを入力します",
+          "description": "吹き出しの下に表示したいテキストを入力します",
           "label": "テキスト",
           "value": "あなたの悩みを検索してみましょう"
         }
