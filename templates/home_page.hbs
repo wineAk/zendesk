@@ -262,7 +262,7 @@
 
   {{#if promoted_articles}}
     <section class="section home-section">
-      <h2 class="font-bold">{{settings.section_title_promoted_articles}}</h2>
+      <h2 class="font-bold">{{settings.section_title_promoted}}</h2>
       <h2 class="visibility-hidden">{{t "promoted_articles"}}</h2>
       <section class="categories blocks">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -290,8 +290,8 @@
   <section
     x-data="{
       categories: [
-        { articles: [], sort_by: 'created_at', title: '{{settings.section_title_created_articles}}', per_page: {{settings.section_per_page_created_articles}} },
-        { articles: [], sort_by: 'updated_at', title: '{{settings.section_title_updated_articles}}', per_page: {{settings.section_per_page_updated_articles}} }
+        { articles: [], sort_by: 'created_at', title: '{{settings.section_title_created}}', per_page: {{settings.section_per_page_created}} },
+        { articles: [], sort_by: 'updated_at', title: '{{settings.section_title_updated}}', per_page: {{settings.section_per_page_updated}} }
       ],
       getData() {
         this.categories.forEach(category => {

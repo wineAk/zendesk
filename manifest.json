@@ -528,21 +528,21 @@
           "value": "46397455628697,46397455628698"
         },
         {
-          "identifier": "section_title_promoted_articles",
+          "identifier": "section_title_promoted",
           "type": "text",
           "description": "ピックアップ記事のタイトルを入力します",
           "label": "ピックアップ記事のタイトル",
           "value": "🔍 ピックアップ記事"
         },
         {
-          "identifier": "section_title_created_articles",
+          "identifier": "section_title_created",
           "type": "text",
           "description": "最新の投稿のタイトルを入力します",
           "label": "最新の投稿のタイトル",
           "value": "🚀 最新の投稿"
         },
         {
-          "identifier": "section_per_page_created_articles",
+          "identifier": "section_per_page_created",
           "type": "range",
           "description": "最新の投稿の表示数を入力します。6の倍数がオススメ（2カラム・3カラム表示のため）",
           "label": "最新の投稿の表示数",
@@ -551,14 +551,14 @@
           "value": 12
         },
         {
-          "identifier": "section_title_updated_articles",
+          "identifier": "section_title_updated",
           "type": "text",
           "description": "最近のアップデートのタイトルを入力します",
           "label": "最近のアップデートのタイトル",
           "value": "♻️ 最近のアップデート"
         },
         {
-          "identifier": "section_per_page_updated_articles",
+          "identifier": "section_per_page_updated",
           "type": "range",
           "description": "最近のアップデートの表示数を入力します。6の倍数がオススメ（2カラム・3カラム表示のため）",
           "label": "最近のアップデートの表示数",
@@ -573,7 +573,6 @@
           "label": "旧マニュアルのタイトル",
           "value": "📜 旧マニュアルを閲覧する"
         }
-
       ]
     },
     {
@@ -696,7 +695,7 @@
         },
         {
           "identifier": "information_type_3",
-          "type": "list", 
+          "type": "list",
           "description": "色を選択します",
           "label": "種類",
           "value": "info",
