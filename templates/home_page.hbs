@@ -6,13 +6,7 @@
   style="background: url('{{settings.hero_background_image}}') repeat 50% 0;"
   x-data="{
       text: '',
-      textArray : [
-        'なにかお困りですか？',
-        'インポート方法',
-        'メールの送信方法',
-        '電話番号の取得',
-        'ぜひ試してみてください！'
-      ],
+      textArray : `{{settings.hero_messages}}`.split(',').map(text => text.trim()),
       textIndex: 0,
       charIndex: 0,
       typeSpeed: 110,
@@ -70,7 +64,7 @@
         </div>
       </div>
     </div>
-    <p class="my-2 text-center">あなたの悩みを検索してみましょう</p>
+    <p class="my-2 text-center">{{settings.hero_text}}</p>
     <h2 class="visibility-hidden">{{t "search"}}</h2>
     <div class="relative">
       <svg

@@ -405,20 +405,51 @@
       ]
     },
     {
-      "label": "images_group_label",
+      "label": "🧩 サポート番号",
       "variables": [
+        {
+          "identifier": "dial_text",
+          "type": "text",
+          "description": "サポート対応できる時間を入力します",
+          "label": "時間帯",
+          "value": "平日 9時～17時半"
+        },
         {
           "identifier": "dial_image",
           "type": "file",
           "description": "サポート番号の画像",
           "label": "電話番号"
-        },
+        }
+      ]
+    },
+    {
+      "label": "🧩 ヒーロー",
+      "variables": [
         {
           "identifier": "hero_background_image",
           "type": "file",
           "description": "24px × 24px の背景画像",
           "label": "ヒーロー背景イメージ"
         },
+        {
+          "identifier": "hero_messages",
+          "type": "text",
+          "description": "カンマ区切りで入力すること",
+          "label": "吹き出しメッセージ",
+          "value": "なにかお困りですか？,インポート方法,メールの送信方法,電話番号の取得,ぜひ試してみてください！"
+        },
+        {
+          "identifier": "hero_text",
+          "type": "text",
+          "description": "ヒーローのテキストを入力します",
+          "label": "テキスト",
+          "value": "あなたの悩みを検索してみましょう"
+        }
+      ]
+    },
+    {
+      "label": "🧩 バナー",
+      "variables": [
         {
           "identifier": "technology_url",
           "type": "text",
@@ -473,7 +504,7 @@
       ]
     },
     {
-      "label": "インフォメーション ①",
+      "label": "🧩 インフォメーション ①",
       "variables": [
         {
           "identifier": "information_public_1",
@@ -527,7 +558,7 @@
       ]
     },
     {
-      "label": "インフォメーション ②",
+      "label": "🧩 インフォメーション ②",
       "variables": [
         {
           "identifier": "information_public_2",
@@ -581,7 +612,7 @@
       ]
     },
     {
-      "label": "インフォメーション ③",
+      "label": "🧩 インフォメーション ③",
       "variables": [
         {
           "identifier": "information_public_3",
