@@ -405,56 +405,164 @@
       ]
     },
     {
-      "label": "インフォメーション",
+      "label": "インフォメーション ①",
       "variables": [
         {
-          "identifier": "information_public",
+          "identifier": "information_public_1",
           "type": "checkbox",
           "description": "チェックを入れると公開されます",
           "label": "公開する",
           "value": false
         },
         {
-          "identifier": "information_type",
+          "identifier": "information_type_1",
           "type": "list",
-          "description": "種類の説明",
+          "description": "色を選択します",
           "label": "種類",
           "value": "info",
           "options": [
             {
-              "label": "（青）告知",
+              "label": "🟦告知",
               "value": "info"
             },
             {
-              "label": "（黄）警告",
+              "label": "🟨警告",
               "value": "warning"
             },
             {
-              "label": "（赤）重要",
+              "label": "🟥重要",
               "value": "important"
             }
           ]
         },
         {
-          "identifier": "information_title",
+          "identifier": "information_title_1",
           "type": "text",
-          "description": "タイトルの説明",
+          "description": "分かりやすいタイトル名を入力します",
           "label": "タイトル",
-          "value": "タイトル"
+          "value": ""
         },
         {
-          "identifier": "information_message",
+          "identifier": "information_message_1",
           "type": "text",
-          "description": "メッセージの説明",
+          "description": "説明文を入力します。改行はできません",
           "label": "メッセージ",
-          "value": "メッセージ"
+          "value": ""
         },
         {
-          "identifier": "information_url",
+          "identifier": "information_url_1",
           "type": "text",
-          "description": "URLの説明",
+          "description": "リンク先があれば記入します",
           "label": "URL",
-          "value": "https://www.saaske.com/technology/entry/no634.htm"
+          "value": ""
+        }
+      ]
+    },
+    {
+      "label": "インフォメーション ②",
+      "variables": [
+        {
+          "identifier": "information_public_2",
+          "type": "checkbox",
+          "description": "チェックを入れると公開されます",
+          "label": "公開する",
+          "value": false
+        },
+        {
+          "identifier": "information_type_2",
+          "type": "list",
+          "description": "色を選択します",
+          "label": "種類",
+          "value": "info",
+          "options": [
+            {
+              "label": "🟦告知",
+              "value": "info"
+            },
+            {
+              "label": "🟨警告",
+              "value": "warning"
+            },
+            {
+              "label": "🟥重要",
+              "value": "important"
+            }
+          ]
+        },
+        {
+          "identifier": "information_title_2",
+          "type": "text",
+          "description": "分かりやすいタイトル名を入力します",
+          "label": "タイトル",
+          "value": ""
+        },
+        {
+          "identifier": "information_message_2",
+          "type": "text",
+          "description": "説明文を入力します。改行はできません",
+          "label": "メッセージ",
+          "value": ""
+        },
+        {
+          "identifier": "information_url_2",
+          "type": "text",
+          "description": "リンク先があれば記入します",
+          "label": "URL",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "label": "インフォメーション ③",
+      "variables": [
+        {
+          "identifier": "information_public_3",
+          "type": "checkbox",
+          "description": "チェックを入れると公開されます",
+          "label": "公開する",
+          "value": false
+        },
+        {
+          "identifier": "information_type_3",
+          "type": "list", 
+          "description": "色を選択します",
+          "label": "種類",
+          "value": "info",
+          "options": [
+            {
+              "label": "🟦告知",
+              "value": "info"
+            },
+            {
+              "label": "🟨警告",
+              "value": "warning"
+            },
+            {
+              "label": "🟥重要",
+              "value": "important"
+            }
+          ]
+        },
+        {
+          "identifier": "information_title_3",
+          "type": "text",
+          "description": "分かりやすいタイトル名を入力します",
+          "label": "タイトル",
+          "value": ""
+        },
+        {
+          "identifier": "information_message_3",
+          "type": "text",
+          "description": "説明文を入力します。改行はできません",
+          "label": "メッセージ",
+          "value": ""
+        },
+        {
+          "identifier": "information_url_3",
+          "type": "text",
+          "description": "リンク先があれば記入します",
+          "label": "URL",
+          "value": ""
         }
       ]
     }
