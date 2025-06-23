@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
+:root {
+  --scrollbar-width: 0.5rem;
+  --scrollbar-height: calc(var(--scrollbar-width) * 1.5);
+}
 ::-webkit-scrollbar {
-  --scrollbar-width: .5rem;
   width: var(--scrollbar-width);
+  height: var(--scrollbar-height);
+}
+::-webkit-scrollbar:horizontal {
+  height: var(--scrollbar-height);
 }
 ::-webkit-scrollbar-track {
   background: var(--color-gray-300);
@@ -185,6 +192,50 @@ a {
       }
     }
   }
+}
+
+.article-body {
+  --text-color: var(--color-neutral-700);
+  --border-color: var(--color-neutral-900);
+  --background-color: var(--color-neutral-100);
+  h1 {
+    margin: 1.5rem 0;
+    padding: .5rem .7rem;
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-left: 8px solid var(--border-color);
+    background-color: var(--background-color);
+  }
+  h2 {
+    margin: 1.25rem 0;
+    padding: .5rem .7rem;
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 1.35rem;
+    border-bottom: 3px solid var(--border-color);
+  }
+  h3 {
+    margin: 1rem 0;
+    padding: .5rem .7rem;
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-left: 6px solid var(--border-color);
+  }
+  h4 {
+    margin: 0.75rem 0;
+    padding: .5rem .7rem;
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 1.05rem;
+    border-bottom: 3px dotted var(--border-color);
+  }
+}
+
+figure.wysiwyg-table {
+  overflow-x: auto;
+  display: block;
 }
 
 /**

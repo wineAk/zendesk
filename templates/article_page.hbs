@@ -447,3 +447,36 @@
 
   </div>
 </div>
+
+<script>
+  document.querySelectorAll('.article-body > pre').forEach(el => {
+    const text = el.textContent;
+    const largeElm = el.querySelector('.wysiwyg-font-size-large');
+    if (largeElm) {
+      el.outerHTML = `<h1>${text}</h1>`;
+    }
+  });
+  document.querySelectorAll('.article-body > p').forEach(el => {
+    // 子ノードの中に strong 以外が含まれていないかチェック
+    const children = Array.from(el.childNodes);
+    // 子ノードが1つだけを対象にする
+    if (children.length === 1) {
+      const node = children[0];
+      // タグ要素を持つものだけを対象とする
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        const tagName = node.tagName.toLowerCase();
+        const className = node.className;
+        const text = el.textContent;
+        if (tagName === 'span') {
+          if (className === 'wysiwyg-underline wysiwyg-font-size-large') {
+            el.outerHTML = `<h2>${text}</h2>`;
+          } else if (className === 'wysiwyg-underline') {
+            el.outerHTML = `<h3>${text}</h3>`;
+          }
+        } else if (tagName === 'strong') {
+          el.outerHTML = `<h4>${text}</h4>`;
+        }
+      }
+    }
+  })
+</script>
