@@ -537,12 +537,10 @@
         },
         {
           "identifier": "section_per_page_created",
-          "type": "range",
+          "type": "text",
           "description": "最新の投稿の表示数を入力します。6の倍数がオススメ（2カラム・3カラム表示のため）",
           "label": "最新の投稿の表示数",
-          "min": 1,
-          "max": 60,
-          "value": 12
+          "value": "12"
         },
         {
           "identifier": "section_title_updated",
@@ -553,12 +551,10 @@
         },
         {
           "identifier": "section_per_page_updated",
-          "type": "range",
+          "type": "text",
           "description": "最近のアップデートの表示数を入力します。6の倍数がオススメ（2カラム・3カラム表示のため）",
           "label": "最近のアップデートの表示数",
-          "min": 1,
-          "max": 60,
-          "value": 12
+          "value": "12"
         },
         {
           "identifier": "section_title_old_manual",

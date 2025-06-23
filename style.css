@@ -1,4 +1,16 @@
 @charset "UTF-8";
+
+/* add */
+.fa-saaske {
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask: url($assets-saaske-svg) no-repeat center;
+  mask: url($assets-saaske-svg) no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
 /***** Normalize.css *****/
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 html {
@@ -29,11 +41,11 @@ pre {
   font-family: monospace, monospace;
   font-size: 1em;
 }
-
+/* delete
 a {
   background-color: transparent;
 }
-
+*/
 abbr[title] {
   border-bottom: none;
   text-decoration: underline;
@@ -227,14 +239,14 @@ h4 {
   font-size: 16px;
 }
 
-a {
+.container a {
   color: $link_color;
   text-decoration: none;
 }
-a:visited {
+.container a:visited {
   color: $visited_link_color;
 }
-a:hover, a:active, a:focus {
+.container a:hover, .container a:active, .container a:focus {
   text-decoration: underline;
 }
 

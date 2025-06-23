@@ -87,7 +87,7 @@
   </div>
 </section>
 
-<div class="container">
+<div class="mx-auto max-w-[1160px] px-[5%] xl:px-0 xl:w-[90%]">
 
   <style>
     .home_info.technology {
@@ -225,37 +225,48 @@
     <h2 class="visibility-hidden">{{t "categories"}}</h2>
     <section class="categories blocks">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <style id="hidden-categories"></style>
-        <script>
-          document.getElementById('hidden-categories').textContent = `{{settings.section_hidden_categories}}`
-            .split(',')
-            .map(id => {
-              const trimId = id.trim()
-              return `[data-category-id="${trimId}"] { display: none !important; }`
-            })
-            .join('\n');
-        </script>
         {{#each categories}}
           <a
             href="{{url}}"
-            class="rounded-lg border border-slate-200 bg-white !no-underline hover:!bg-gray-50"
+            class="rounded-lg border border-slate-200 hover:bg-gray-50 relative overflow-hidden"
             data-category-id="{{id}}"
+            data-category-name="{{name}}"
           >
-            <div class="flex h-full flex-col gap-2 p-4">
-              <div>
-                <p class="mb-1 text-center text-xl font-bold text-gray-700">
+            <div class="p-4">
+              <div class="flex items-center justify-center gap-2">
+                <p class="text-xl font-bold">
                   {{name}}
                 </p>
-                <p class="text-gray-700">
-                  {{excerpt description}}
-                </p>
               </div>
+              <p>
+                {{excerpt description}}
+              </p>
             </div>
+            <i class="absolute opacity-20 fa-solid"></i>
           </a>
         {{/each}}
       </div>
       {{pagination}}
     </section>
+    <script>
+      // 非表示カテゴリ
+      `{{settings.section_hidden_categories}}`.split(',').forEach(id => {
+        const trimId = id.trim();
+        const element = document.querySelector(`[data-category-id="${trimId}"]`);
+        if (element) element.style.display = 'none';
+      });
+      // カテゴリカラー
+      document.querySelectorAll('[data-category-name]').forEach(el => {
+        const name = el.dataset.categoryName;
+        const color = getColor(name);
+        const icon = getCategoryIcon(name);
+        const iconElm = el.querySelector('i');
+        if (iconElm) {
+          if (icon) iconElm.classList.add(...icon.split(' '));
+          if (color?.text) iconElm.classList.add(color.text);
+        }
+      });
+    </script>
   </section>
 
   {{#if promoted_articles}}
@@ -315,7 +326,10 @@
                       class="mb-2 flex text-xs text-gray-400"
                       aria-label="Breadcrumb"
                     >
-                      <ol class="flex items-center gap-2 truncate">
+                      <ol
+                        class="flex items-center gap-2 truncate rounded-sm  text-xs px-2.5 py-0.5"
+                        :class="getColor(article.category_name).bg + ' ' + getColor(article.category_name).text"
+                      >
                         <li><i class="fa-solid fa-house h-3 w-3"></i></li>
                         <li x-text="article.category_name"></li>
                         <li><i class="fa-solid fa-chevron-right h-3 w-3"></i></li>
@@ -387,24 +401,12 @@
                 { fileName: '11M02', service: 'Cloud Scan',   role: 'ユーザ', type: 'タブレット操作',    title: 'タブレットマニュアル',            description: 'Cloud Scanアプリで使用するタブレット端末の操作・設定方法を解説しています。' },
               ],
               getServiceClass(service) {
-                return {
-                  'サスケ全般':   'bg-gray-100 text-gray-700',
-                  'サスケLead':   'bg-lime-50 text-lime-700',
-                  'サスケSales':  'bg-blue-50 text-blue-700',
-                  'テレアポ職人': 'bg-emerald-50 text-emerald-700',
-                  'Works':        '',
-                  'Webフォーム':  'bg-purple-50 text-purple-700',
-                  'Web行動解析':  'bg-amber-50 text-amber-700',
-                  'Cloud CTI':    'bg-cyan-50 text-cyan-700',
-                  'Cloud Scan':   'bg-red-50 text-red-700',
-                  'API':          'bg-indigo-50 text-indigo-700',
-                }[service] || '';
+                const color = getColor(service);
+                return [color.bg, color.text].join(' ');
               },
               getRoleClass(role) {
-                return {
-                  '管理者': 'bg-pink-50 text-pink-700',
-                  'ユーザ': 'bg-gray-100 text-gray-700'
-                }[role] || '';
+                const color = getColor(role);
+                return [color.bg, color.text].join(' ');
               }
             }"
             id="old_manuals"
