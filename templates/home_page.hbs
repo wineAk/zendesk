@@ -92,7 +92,7 @@
   <style>
     .home_info.technology {
       background: url('{{settings.technology_background_image}}') repeat-x left top #64716d;
-      border-color: #3d4d48;
+      border-color: var(--color-neutral-800);
     }
     .home_info.technology:before {
       background: url('{{settings.technology_image}}') center center no-repeat;
@@ -100,7 +100,7 @@
     }
     .home_info.consulting {
       background: url('{{settings.consulting_background_image}}') center center no-repeat #d7e7b9;
-      border-color: #6a9644;
+      border-color: var(--color-lime-600);
     }
     .home_info.consulting:before {
       background: url('{{settings.consulting_image}}') center center no-repeat;
@@ -111,12 +111,11 @@
         90deg,
         rgba(37, 205, 190, 0.5),
         rgba(37, 205, 190, 0.2) 15%,
-        rgba(255, 255, 255, 0) 30% 70%,
+        rgba(255, 255, 255, 1) 30% 70%,
         rgba(37, 205, 190, 0.2) 85%,
         rgba(37, 205, 190, 0.5)
       );
-      border-color: #25cdbe;
-      color: #fff;
+      border-color: var(--color-cyan-600);
     }
     .home_info.works:before {
       background: url('{{settings.works_helpcenter_image}}') center center no-repeat;
@@ -239,7 +238,7 @@
         {{#each categories}}
           <a
             href="{{url}}"
-            class="rounded-lg border border-slate-200 bg-white no-underline hover:bg-gray-50"
+            class="rounded-lg border border-slate-200 bg-white !no-underline hover:!bg-gray-50"
             data-category-id="{{id}}"
           >
             <div class="flex h-full flex-col gap-2 p-4">
@@ -268,7 +267,7 @@
           {{#each promoted_articles}}
             <a
               href="{{url}}"
-              class="rounded-lg border border-slate-200 text-gray-500 no-underline hover:bg-gray-50"
+              class="rounded-lg border border-slate-200 !text-gray-500 !no-underline hover:!bg-gray-50"
             >
               <div class="flex h-full flex-col gap-2 p-4">
                 <div>
@@ -308,7 +307,7 @@
             <template x-for="article in category.articles">
               <a
                 :href="article.html_url"
-                class="rounded-lg border border-slate-200 text-gray-500 no-underline hover:bg-gray-50"
+                class="rounded-lg border border-slate-200 !text-gray-500 !no-underline hover:!bg-gray-50"
               >
                 <div class="flex h-full flex-col gap-2 p-4">
                   <div>
@@ -414,7 +413,7 @@
             <template x-for="manual in manuals" :key="manual.fileName">
               <a :href="`https://www.saaske.com/document/${manual.fileName}.pdf`"
                 target="_blank"
-                class="grid grid-cols-1 gap-2 lg:flex p-4 hover:bg-gray-50 no-underline">
+                class="grid grid-cols-1 gap-2 lg:flex p-4 hover:!bg-gray-50 !no-underline after:!hidden">
                 <div class="flex flex-col sm:flex-row lg:items-center gap-2 sm:gap-4">
                   <div class="w-60 lg:w-30 grid grid-cols-2 lg:grid-cols-1 gap-2">
                     <p class="flex items-center justify-center text-xs px-2.5 py-0.5 rounded-sm" :class="getServiceClass(manual.service)">
@@ -426,7 +425,7 @@
                   </div>
                   <p class="font-bold text-xl text-gray-700 w-90" x-text="manual.title"></p>
                 </div>
-                <div class="flex items-center text-gray-500 lg:flex-1 sm:whitespace-pre-line" x-text="manual.description"></div>
+                <div class="flex items-center !text-gray-500 lg:flex-1 sm:whitespace-pre-line" x-text="manual.description"></div>
               </a>
             </template>
           </div>

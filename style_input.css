@@ -34,8 +34,7 @@ a {
   &[href^="./"],
   &[href^="../"],
   &[href^="http://saaske.zendesk.com/"],
-  &[href^="https://saaske.zendesk.com/"],
-  &[href^="https://www.saaske.com/document/"][href$=".pdf"] {
+  &[href^="https://saaske.zendesk.com/"] {
     &:after {
       display: none;
     }
@@ -226,25 +225,5 @@ a {
 .lg\:pr-2 {
   @media (width >= 64rem) {
       padding-right: calc(var(--spacing)* 2);
-  }
-}
-
-.hover\:bg-gray-50 {
-  &:hover {
-    @media (hover: hover) {
-      background-color: var(--color-gray-50);
-    }
-  }
-}
-
-a {
-  &.no-underline {
-    text-decoration-line: none;
-  }
-  &.flex {
-    display: flex;
-  }
-  &.text-gray-500 {
-    color: var(--color-gray-500);
   }
 }
