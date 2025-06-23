@@ -433,12 +433,6 @@
       "label": "🧩 ヒーロー",
       "variables": [
         {
-          "identifier": "hero_background_image",
-          "type": "file",
-          "description": "24px × 24px の背景画像",
-          "label": "ヒーロー背景"
-        },
-        {
           "identifier": "hero_messages",
           "type": "text",
           "description": "吹き出しに表示したいメッセージを入力します。複数ある場合は「半角のカンマ区切り」で入力すること",

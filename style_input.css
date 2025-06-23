@@ -42,6 +42,34 @@ a {
   }
 }
 
+#main-content.hero {
+  background-image:
+    /* 縦（前景） */
+    repeating-linear-gradient(
+      90deg,
+      var(--color-neutral-200) 0 1px,
+      transparent 1px 24px
+    ),
+    /* 横（前景） */
+    repeating-linear-gradient(
+      0deg,
+      var(--color-neutral-200) 0 1px,
+      transparent 1px 24px
+    ),
+    /* 縦（後景） */
+    repeating-linear-gradient(
+      90deg,
+      var(--color-neutral-100) 0 1px,
+      transparent 1px 6px
+    ),
+    /* 横（後景） */
+    repeating-linear-gradient(
+      0deg,
+      var(--color-neutral-100) 0 1px,
+      transparent 1px 6px
+    );
+}
+
 .home_info {
   background-size: contain;
   border: 1px solid #000;
