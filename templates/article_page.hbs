@@ -3,6 +3,9 @@
 <script src="{{asset 'article_page-image_modal.js'}}"></script>
 <script src="{{asset 'article_page-sidemenu.js'}}"></script>
 
+<link rel="stylesheet" href="{{asset 'module-prism.css'}}">
+<script src="{{asset 'module-prism.js'}}"></script>
+
 <div class="container-divider"></div>
 
 <div class="container">
@@ -479,4 +482,18 @@
       }
     }
   })
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('pre[class^="language-"]').forEach((pre) => {
+      if (pre.querySelector("code")) return;
+      const code = document.createElement("code");
+      code.className = pre.className;
+      code.textContent = pre.textContent;
+      pre.textContent = "";
+      pre.appendChild(code);
+      pre.classList.add('line-numbers');
+    });
+    Prism.highlightAll();
+  });
 </script>
