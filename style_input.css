@@ -1,9 +1,48 @@
 @import "tailwindcss";
 
 :root {
+  /* *****
+   * # Rule
+   * --(Elm|Class)-(any-)?(background|border|text)-color: var(--color-type-000);
+   * 
+   * 基本: neutral
+   * サブ: slate
+   * *****/
+  
+  /* スクロールバー*/
+  --scrollbar-track-background-color: var(--color-neutral-300);
+  --scrollbar-thumb-background-color: var(--color-neutral-500);
   --scrollbar-width: 0.5rem;
   --scrollbar-height: calc(var(--scrollbar-width) * 1.5);
+  /* ヒーロー */
+  --hero-bold-background-color: var(--color-neutral-200);
+  --hero-normal-background-color: var(--color-neutral-100);
+  --hero-title-text-color: #3d8256;
+  --hero-title-background-color: #ecf1e4;
+  --hero-title-border-color: #3d8256;
+  /* sweetalert2 */
+  --swal2-text-color
+  --swal2-normal-background-color
+  --swal2-hover-background-color
+  /* リンク */
+  --a-after-text-color: var(--color-neutral-500);
+  /* サイドバー */
+  --aside-border-color: var(--color-neutral-200);
+  /* キャプション */
+  --figcaption-background-color: var(--color-slate-50);
+  /* 見出し */
+  --h-text-color: var(--color-neutral-700);
+  --h-border-color: var(--color-neutral-900);
+  --h-background-color: var(--color-neutral-100);
+  /* テーブル */
+  --table-border-color: var(--color-slate-200);
+  --table-background-color: var(--color-slate-50);
+  /* スペーシング */
+  --spacing-2: calc(var(--spacing) * 2);
+  --spacing-4: calc(var(--spacing) * 4);
+  --spacing-6: calc(var(--spacing) * 6);
 }
+
 ::-webkit-scrollbar {
   width: var(--scrollbar-width);
   height: var(--scrollbar-height);
@@ -12,11 +51,11 @@
   height: var(--scrollbar-height);
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-gray-300);
+  background: var(--scrollbar-track-background-color);
   border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-gray-500);
+  background: var(--scrollbar-thumb-background-color);
   border-radius: 6px;
 }
 
@@ -29,7 +68,7 @@ a {
     font-weight: 900;
     display: inline-block;
     text-decoration: none;
-    color: var(--color-gray-500);
+    color: var(--a-after-text-color);
     font-size: 80%;
   }
   /* 内部 */
@@ -53,25 +92,25 @@ a {
     /* 縦（前景） */
     repeating-linear-gradient(
       90deg,
-      var(--color-neutral-200) 0 1px,
+      var(--hero-bold-background-color) 0 1px,
       transparent 1px 24px
     ),
     /* 横（前景） */
     repeating-linear-gradient(
       0deg,
-      var(--color-neutral-200) 0 1px,
+      var(--hero-bold-background-color) 0 1px,
       transparent 1px 24px
     ),
     /* 縦（後景） */
     repeating-linear-gradient(
       90deg,
-      var(--color-neutral-100) 0 1px,
+      var(--hero-normal-background-color) 0 1px,
       transparent 1px 6px
     ),
     /* 横（後景） */
     repeating-linear-gradient(
       0deg,
-      var(--color-neutral-100) 0 1px,
+      var(--hero-normal-background-color) 0 1px,
       transparent 1px 6px
     );
 }
@@ -95,9 +134,9 @@ a {
   margin-bottom: 30px;
   padding: 20px;
   border-radius: 30px;
-  background-color: #ecf1e4;
-  color: #3d8256;
-  border: 1px solid #3d8256;
+  background-color: var(--hero-title-background-color);
+  color: var(--hero-title-text-color);
+  border: 1px solid var(--hero-title-border-color);
   font-weight: bold;
   font-size: 28px;
   font-size: 1.75rem;
@@ -110,7 +149,7 @@ a {
     left: 50%;
     border-style: solid;
     border-width: 20px 10px 0 10px;
-    border-color: #3d8256 transparent transparent;
+    border-color: var(--hero-title-border-color) transparent transparent;
     translate: -50% 100%;
   }
   &:after {
@@ -120,7 +159,7 @@ a {
     left: 50%;
     border-style: solid;
     border-width: 19.8px 9.9px 0 9.9px;
-    border-color: #ecf1e4 transparent transparent;
+    border-color: var(--hero-title-background-color) transparent transparent;
     translate: -50% 90%;
   }
 }
@@ -129,20 +168,30 @@ a {
   margin-bottom: 0;
 }
 
-.article-body img {
-  cursor: pointer;
+
+/* キャプション */
+.article-body figure  figcaption {
+  background-color: var(--figcaption-background-color);
+  border-radius: var(--radius-lg);
+}
+
+.article-body figure.wysiwyg-image {
+  /* 画像 */
+  img {
+    cursor: pointer;
+  }
 }
 
 .article-container {
   ::-webkit-scrollbar {
-    --scrollbar-width: .25rem;
+    --scrollbar-width: .35rem;
   }
   aside {
     max-height: calc(100dvh - 168px + var(--js-scroll, 0px));
     .search,
     .search input[type="search"],
     .search .clear-button {
-      border-color: var(--color-gray-200);
+      border-color: var(--aside-border-color);
       border-radius: var(--radius-lg);
     }
     .js-toc > ol {
@@ -153,41 +202,67 @@ a {
 }
 
 /* テーブル */
-.article-body table {
-  --border-color: var(--color-slate-200);
-  --spacing-2: calc(var(--spacing) * 2);
-  --spacing-4: calc(var(--spacing) * 4);
-  --spacing-6: calc(var(--spacing) * 6);
-  border: 1px solid var(--border-color);
-  border-collapse: separate !important;
-  border-radius: var(--radius-lg);
-  border-spacing: 0;
-  margin: var(--spacing-2) 0 var(--spacing-6);
-  tbody {
-    tr {
-      /* 上 */
-      &:first-child td {
-        /* 左上 */
-        &:first-child {
-          border-top-left-radius: var(--radius-lg);
+.article-body figure.wysiwyg-table {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-x: auto;
+  /* テーブル */
+  table {
+    border-collapse: separate !important;
+    border-color: var(--table-border-color);
+    border-radius: var(--radius-lg);
+    margin: var(--spacing-2) 0 var(--spacing-4);
+    /* ヘッダーのデザイン（theadが無い場合は左端のセルをヘッダー化） */
+    thead tr th,
+    &:not(:has(thead)) tbody td:first-child {
+      background-color: var(--table-background-color);
+      font-weight: var(--font-weight-semibold);
+    }
+    /* セルのデザイン */
+    thead tr th,
+    tbody tr td {
+      border-color: var(--table-border-color);
+      padding: var(--spacing-2) var(--spacing-4);
+    }
+    /* 角丸 */
+    thead {
+      tr {
+        /* 上 */
+        &:first-child th {
+          /* 左上 */
+          &:first-child {
+            border-top-left-radius: var(--radius-lg);
+          }
+          /* 右上 */
+          &:last-child {
+            border-top-right-radius: var(--radius-lg);
+          }
         }
       }
-      /* 下 */
-      &:last-child td {
-        border-bottom: 0;
-        /* 左下 */
-        &:first-child {
-          border-bottom-left-radius: var(--radius-lg);
+    }
+    tbody {
+      tr {
+        /* 上 */
+        &:first-child td {
+          /* 左上 */
+          &:first-child {
+            border-top-left-radius: var(--radius-lg);
+          }
+          /* 右上 */
+          &:last-child {
+            border-top-right-radius: var(--radius-lg);
+          }
         }
-      }
-      td {
-        padding: var(--spacing-2) var(--spacing-4);
-        border-bottom: 1px solid var(--border-color);
-        /* 左端 */
-        &:first-child {
-          background-color: var(--color-slate-50);
-          border-right: 1px solid var(--border-color);
-          font-weight: var(--font-weight-semibold);
+        /* 下 */
+        &:last-child td {
+          /* 左下 */
+          &:first-child {
+            border-bottom-left-radius: var(--radius-lg);
+          }
+          /* 右下 */
+          &:last-child {
+            border-bottom-right-radius: var(--radius-lg);
+          }
         }
       }
     }
@@ -195,47 +270,42 @@ a {
 }
 
 .article-body {
-  --text-color: var(--color-neutral-700);
-  --border-color: var(--color-neutral-900);
-  --background-color: var(--color-neutral-100);
   h1 {
     margin: 1.5rem 0;
     padding: .5rem .7rem;
-    color: var(--text-color);
+    color: var(--h-text-color);
     font-weight: bold;
     font-size: 1.5rem;
-    border-left: 8px solid var(--border-color);
-    background-color: var(--background-color);
+    border-left: 8px solid var(--h-border-color);
+    background-color: var(--h-background-color);
   }
   h2 {
     margin: 1.25rem 0;
     padding: .5rem .7rem;
-    color: var(--text-color);
+    color: var(--h-text-color);
     font-weight: bold;
     font-size: 1.35rem;
-    border-bottom: 3px solid var(--border-color);
+    border-bottom: 3px solid var(--h-border-color);
   }
   h3 {
     margin: 1rem 0;
     padding: .5rem .7rem;
-    color: var(--text-color);
+    color: var(--h-text-color);
     font-weight: bold;
     font-size: 1.2rem;
-    border-left: 6px solid var(--border-color);
+    border-left: 6px solid var(--h-border-color);
   }
   h4 {
     margin: 0.75rem 0;
     padding: .5rem .7rem;
-    color: var(--text-color);
+    color: var(--h-text-color);
     font-weight: bold;
     font-size: 1.05rem;
-    border-bottom: 3px dotted var(--border-color);
+    border-bottom: 3px dotted var(--h-border-color);
   }
-}
-
-figure.wysiwyg-table {
-  overflow-x: auto;
-  display: block;
+  ol {
+    list-style-type: decimal;
+  }
 }
 
 /**
@@ -254,14 +324,6 @@ figure.wysiwyg-table {
 }
 .swal2-image {
   margin: 0;
-}
-.swal2-close {
-  color: var(--color-neutral-100);
-  background-color: color-mix(in oklab,var(--color-neutral-500)50%,transparent);
-  &:hover {
-    color: var(--color-neutral-100);
-    background-color: color-mix(in oklab,var(--color-neutral-700)70%,transparent);
-  }
 }
 
 /**

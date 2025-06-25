@@ -1781,6 +1781,7 @@ ul {
   padding: 0 5px;
   margin: 0 2px;
 }
+/*
 .article-body pre {
   background: darken($background_color, 3%);
   border: 1px solid #ddd;
@@ -1789,6 +1790,7 @@ ul {
   overflow: auto;
   white-space: pre;
 }
+*/
 .article-body blockquote {
   border-left: 1px solid #ddd;
   color: lighten($text_color, 20%);
@@ -1995,6 +1997,7 @@ ul {
 
 /***** Comments *****/
 /* Styles comments inside articles, posts and requests */
+/* delete
 .comment {
   border-bottom: 1px solid #ddd;
   padding: 20px 0;
@@ -2267,6 +2270,7 @@ ul {
 .comment-mark-as-solved {
   display: inline-block;
 }
+*/
 
 /***** Vote *****/
 /* Used in article comments, post comments and post */

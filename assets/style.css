@@ -851,9 +851,9 @@
       border-style: solid;
     }
   }
-  .divide-gray-200 {
+  .divide-neutral-200 {
     :where(& > :not(:last-child)) {
-      border-color: var(--color-gray-200);
+      border-color: var(--color-neutral-200);
     }
   }
   .divide-slate-200 {
@@ -910,6 +910,9 @@
   .border-lime-200 {
     border-color: var(--color-lime-200);
   }
+  .border-neutral-200 {
+    border-color: var(--color-neutral-200);
+  }
   .border-pink-200 {
     border-color: var(--color-pink-200);
   }
@@ -940,9 +943,6 @@
   .bg-emerald-50 {
     background-color: var(--color-emerald-50);
   }
-  .bg-gray-50 {
-    background-color: var(--color-gray-50);
-  }
   .bg-gray-100 {
     background-color: var(--color-gray-100);
   }
@@ -954,6 +954,12 @@
   }
   .bg-lime-50 {
     background-color: var(--color-lime-50);
+  }
+  .bg-neutral-50 {
+    background-color: var(--color-neutral-50);
+  }
+  .bg-neutral-100 {
+    background-color: var(--color-neutral-100);
   }
   .bg-pink-50 {
     background-color: var(--color-pink-50);
@@ -1071,11 +1077,11 @@
   .\!text-blue-800 {
     color: var(--color-blue-800) !important;
   }
-  .\!text-gray-500 {
-    color: var(--color-gray-500) !important;
+  .\!text-neutral-500 {
+    color: var(--color-neutral-500) !important;
   }
-  .\!text-gray-800 {
-    color: var(--color-gray-800) !important;
+  .\!text-neutral-800 {
+    color: var(--color-neutral-800) !important;
   }
   .\!text-red-800 {
     color: var(--color-red-800) !important;
@@ -1107,17 +1113,26 @@
   .text-gray-700 {
     color: var(--color-gray-700);
   }
-  .text-gray-800 {
-    color: var(--color-gray-800);
-  }
-  .text-gray-900 {
-    color: var(--color-gray-900);
-  }
   .text-indigo-700 {
     color: var(--color-indigo-700);
   }
   .text-lime-700 {
     color: var(--color-lime-700);
+  }
+  .text-neutral-400 {
+    color: var(--color-neutral-400);
+  }
+  .text-neutral-500 {
+    color: var(--color-neutral-500);
+  }
+  .text-neutral-700 {
+    color: var(--color-neutral-700);
+  }
+  .text-neutral-800 {
+    color: var(--color-neutral-800);
+  }
+  .text-neutral-900 {
+    color: var(--color-neutral-900);
   }
   .text-pink-700 {
     color: var(--color-pink-700);
@@ -1234,10 +1249,10 @@
       color: var(--color-blue-800) !important;
     }
   }
-  .after\:\!text-gray-800 {
+  .after\:\!text-neutral-800 {
     &::after {
       content: var(--tw-content);
-      color: var(--color-gray-800) !important;
+      color: var(--color-neutral-800) !important;
     }
   }
   .after\:\!text-red-800 {
@@ -1262,9 +1277,9 @@
       color: var(--color-blue-800) !important;
     }
   }
-  .visited\:\!text-gray-800 {
+  .visited\:\!text-neutral-800 {
     &:visited {
-      color: var(--color-gray-800) !important;
+      color: var(--color-neutral-800) !important;
     }
   }
   .visited\:\!text-red-800 {
@@ -1277,10 +1292,10 @@
       color: var(--color-yellow-800) !important;
     }
   }
-  .hover\:\!bg-gray-50 {
+  .hover\:\!bg-neutral-50 {
     &:hover {
       @media (hover: hover) {
-        background-color: var(--color-gray-50) !important;
+        background-color: var(--color-neutral-50) !important;
       }
     }
   }
@@ -1291,17 +1306,24 @@
       }
     }
   }
-  .hover\:bg-gray-100 {
+  .hover\:bg-neutral-50 {
     &:hover {
       @media (hover: hover) {
-        background-color: var(--color-gray-100);
+        background-color: var(--color-neutral-50);
       }
     }
   }
-  .hover\:bg-gray-200 {
+  .hover\:bg-neutral-100 {
     &:hover {
       @media (hover: hover) {
-        background-color: var(--color-gray-200);
+        background-color: var(--color-neutral-100);
+      }
+    }
+  }
+  .hover\:bg-neutral-200 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-neutral-200);
       }
     }
   }
@@ -1459,8 +1481,30 @@
   }
 }
 :root {
+  --scrollbar-track-background-color: var(--color-neutral-300);
+  --scrollbar-thumb-background-color: var(--color-neutral-500);
   --scrollbar-width: 0.5rem;
   --scrollbar-height: calc(var(--scrollbar-width) * 1.5);
+  --hero-bold-background-color: var(--color-neutral-200);
+  --hero-normal-background-color: var(--color-neutral-100);
+  --hero-title-text-color: #3d8256;
+  --hero-title-background-color: #ecf1e4;
+  --hero-title-border-color: #3d8256;
+  --swal2-text-color
+  --swal2-normal-background-color
+  --swal2-hover-background-color
+  /* リンク */
+  --a-after-text-color: var(--color-neutral-500);
+  --aside-border-color: var(--color-neutral-200);
+  --figcaption-background-color: var(--color-slate-50);
+  --h-text-color: var(--color-neutral-700);
+  --h-border-color: var(--color-neutral-900);
+  --h-background-color: var(--color-neutral-100);
+  --table-border-color: var(--color-slate-200);
+  --table-background-color: var(--color-slate-50);
+  --spacing-2: calc(var(--spacing) * 2);
+  --spacing-4: calc(var(--spacing) * 4);
+  --spacing-6: calc(var(--spacing) * 6);
 }
 ::-webkit-scrollbar {
   width: var(--scrollbar-width);
@@ -1470,11 +1514,11 @@
   height: var(--scrollbar-height);
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-gray-300);
+  background: var(--scrollbar-track-background-color);
   border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-gray-500);
+  background: var(--scrollbar-thumb-background-color);
   border-radius: 6px;
 }
 a {
@@ -1485,7 +1529,7 @@ a {
     font-weight: 900;
     display: inline-block;
     text-decoration: none;
-    color: var(--color-gray-500);
+    color: var(--a-after-text-color);
     font-size: 80%;
   }
   &:empty, &:not([href]), &[href=""], &[href^="#"], &[href^="/"], &[href^="./"], &[href^="../"], &[href^="http://saaske.zendesk.com/"], &[href^="https://saaske.zendesk.com/"] {
@@ -1495,7 +1539,7 @@ a {
   }
 }
 #main-content.hero {
-  background-image: repeating-linear-gradient( 90deg, var(--color-neutral-200) 0 1px, transparent 1px 24px ),  repeating-linear-gradient( 0deg, var(--color-neutral-200) 0 1px, transparent 1px 24px ),  repeating-linear-gradient( 90deg, var(--color-neutral-100) 0 1px, transparent 1px 6px ),  repeating-linear-gradient( 0deg, var(--color-neutral-100) 0 1px, transparent 1px 6px );
+  background-image: repeating-linear-gradient( 90deg, var(--hero-bold-background-color) 0 1px, transparent 1px 24px ),  repeating-linear-gradient( 0deg, var(--hero-bold-background-color) 0 1px, transparent 1px 24px ),  repeating-linear-gradient( 90deg, var(--hero-normal-background-color) 0 1px, transparent 1px 6px ),  repeating-linear-gradient( 0deg, var(--hero-normal-background-color) 0 1px, transparent 1px 6px );
 }
 .home_info {
   background-size: contain;
@@ -1515,9 +1559,9 @@ a {
   margin-bottom: 30px;
   padding: 20px;
   border-radius: 30px;
-  background-color: #ecf1e4;
-  color: #3d8256;
-  border: 1px solid #3d8256;
+  background-color: var(--hero-title-background-color);
+  color: var(--hero-title-text-color);
+  border: 1px solid var(--hero-title-border-color);
   font-weight: bold;
   font-size: 28px;
   font-size: 1.75rem;
@@ -1530,7 +1574,7 @@ a {
     left: 50%;
     border-style: solid;
     border-width: 20px 10px 0 10px;
-    border-color: #3d8256 transparent transparent;
+    border-color: var(--hero-title-border-color) transparent transparent;
     translate: -50% 100%;
   }
   &:after {
@@ -1540,24 +1584,30 @@ a {
     left: 50%;
     border-style: solid;
     border-width: 19.8px 9.9px 0 9.9px;
-    border-color: #ecf1e4 transparent transparent;
+    border-color: var(--hero-title-background-color) transparent transparent;
     translate: -50% 90%;
   }
 }
 .breadcrumbs {
   margin-bottom: 0;
 }
-.article-body img {
-  cursor: pointer;
+.article-body figure figcaption {
+  background-color: var(--figcaption-background-color);
+  border-radius: var(--radius-lg);
+}
+.article-body figure.wysiwyg-image {
+  img {
+    cursor: pointer;
+  }
 }
 .article-container {
   ::-webkit-scrollbar {
-    --scrollbar-width: .25rem;
+    --scrollbar-width: .35rem;
   }
   aside {
     max-height: calc(100dvh - 168px + var(--js-scroll, 0px));
     .search, .search input[type="search"], .search .clear-button {
-      border-color: var(--color-gray-200);
+      border-color: var(--aside-border-color);
       border-radius: var(--radius-lg);
     }
     .js-toc > ol {
@@ -1566,82 +1616,94 @@ a {
     }
   }
 }
-.article-body table {
-  --border-color: var(--color-slate-200);
-  --spacing-2: calc(var(--spacing) * 2);
-  --spacing-4: calc(var(--spacing) * 4);
-  --spacing-6: calc(var(--spacing) * 6);
-  border: 1px solid var(--border-color);
-  border-collapse: separate !important;
-  border-radius: var(--radius-lg);
-  border-spacing: 0;
-  margin: var(--spacing-2) 0 var(--spacing-6);
-  tbody {
-    tr {
-      &:first-child td {
-        &:first-child {
-          border-top-left-radius: var(--radius-lg);
+.article-body figure.wysiwyg-table {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-x: auto;
+  table {
+    border-collapse: separate !important;
+    border-color: var(--table-border-color);
+    border-radius: var(--radius-lg);
+    margin: var(--spacing-2) 0 var(--spacing-4);
+    thead tr th, &:not(:has(thead)) tbody td:first-child {
+      background-color: var(--table-background-color);
+      font-weight: var(--font-weight-semibold);
+    }
+    thead tr th, tbody tr td {
+      border-color: var(--table-border-color);
+      padding: var(--spacing-2) var(--spacing-4);
+    }
+    thead {
+      tr {
+        &:first-child th {
+          &:first-child {
+            border-top-left-radius: var(--radius-lg);
+          }
+          &:last-child {
+            border-top-right-radius: var(--radius-lg);
+          }
         }
       }
-      &:last-child td {
-        border-bottom: 0;
-        &:first-child {
-          border-bottom-left-radius: var(--radius-lg);
+    }
+    tbody {
+      tr {
+        &:first-child td {
+          &:first-child {
+            border-top-left-radius: var(--radius-lg);
+          }
+          &:last-child {
+            border-top-right-radius: var(--radius-lg);
+          }
         }
-      }
-      td {
-        padding: var(--spacing-2) var(--spacing-4);
-        border-bottom: 1px solid var(--border-color);
-        &:first-child {
-          background-color: var(--color-slate-50);
-          border-right: 1px solid var(--border-color);
-          font-weight: var(--font-weight-semibold);
+        &:last-child td {
+          &:first-child {
+            border-bottom-left-radius: var(--radius-lg);
+          }
+          &:last-child {
+            border-bottom-right-radius: var(--radius-lg);
+          }
         }
       }
     }
   }
 }
 .article-body {
-  --text-color: var(--color-neutral-700);
-  --border-color: var(--color-neutral-900);
-  --background-color: var(--color-neutral-100);
   h1 {
     margin: 1.5rem 0;
     padding: .5rem .7rem;
-    color: var(--text-color);
+    color: var(--h-text-color);
     font-weight: bold;
     font-size: 1.5rem;
-    border-left: 8px solid var(--border-color);
-    background-color: var(--background-color);
+    border-left: 8px solid var(--h-border-color);
+    background-color: var(--h-background-color);
   }
   h2 {
     margin: 1.25rem 0;
     padding: .5rem .7rem;
-    color: var(--text-color);
+    color: var(--h-text-color);
     font-weight: bold;
     font-size: 1.35rem;
-    border-bottom: 3px solid var(--border-color);
+    border-bottom: 3px solid var(--h-border-color);
   }
   h3 {
     margin: 1rem 0;
     padding: .5rem .7rem;
-    color: var(--text-color);
+    color: var(--h-text-color);
     font-weight: bold;
     font-size: 1.2rem;
-    border-left: 6px solid var(--border-color);
+    border-left: 6px solid var(--h-border-color);
   }
   h4 {
     margin: 0.75rem 0;
     padding: .5rem .7rem;
-    color: var(--text-color);
+    color: var(--h-text-color);
     font-weight: bold;
     font-size: 1.05rem;
-    border-bottom: 3px dotted var(--border-color);
+    border-bottom: 3px dotted var(--h-border-color);
   }
-}
-figure.wysiwyg-table {
-  overflow-x: auto;
-  display: block;
+  ol {
+    list-style-type: decimal;
+  }
 }
 .swal2-container {
   overflow: hidden !important;
@@ -1656,14 +1718,6 @@ figure.wysiwyg-table {
 }
 .swal2-image {
   margin: 0;
-}
-.swal2-close {
-  color: var(--color-neutral-100);
-  background-color: color-mix(in oklab,var(--color-neutral-500)50%,transparent);
-  &:hover {
-    color: var(--color-neutral-100);
-    background-color: color-mix(in oklab,var(--color-neutral-700)70%,transparent);
-  }
 }
 .collapsible-sidebar.lg\:sticky {
   @media (width >= 64rem) {

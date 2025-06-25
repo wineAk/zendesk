@@ -179,8 +179,8 @@
               titleClass = '!text-red-800 visited:!text-red-800 after:!text-red-800';
               break;
             default:
-              cardClass = 'bg-gray-50 text-gray-800';
-              titleClass = '!text-gray-800 visited:!text-gray-800 after:!text-gray-800';
+              cardClass = 'bg-neutral-50 text-neutral-800';
+              titleClass = '!text-neutral-800 visited:!text-neutral-800 after:!text-neutral-800';
           }
           return {
             ...info,
@@ -221,14 +221,14 @@
   </section>
 
   <section class="section home-section">
-    <h2 class="font-bold">{{settings.section_title_categories}}</h2>
+    <h2 class="text-2xl font-bold">{{settings.section_title_categories}}</h2>
     <h2 class="visibility-hidden">{{t "categories"}}</h2>
     <section class="categories blocks">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {{#each categories}}
           <a
             href="{{url}}"
-            class="rounded-lg border border-slate-200 hover:bg-gray-50 relative overflow-hidden"
+            class="rounded-lg border border-slate-200 hover:bg-neutral-50 relative overflow-hidden"
             data-category-id="{{id}}"
             data-category-name="{{name}}"
           >
@@ -271,19 +271,19 @@
 
   {{#if promoted_articles}}
     <section class="section home-section">
-      <h2 class="font-bold">{{settings.section_title_promoted}}</h2>
+      <h2 class="text-2xl font-bold">{{settings.section_title_promoted}}</h2>
       <h2 class="visibility-hidden">{{t "promoted_articles"}}</h2>
       <section class="categories blocks">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {{#each promoted_articles}}
             <a
               href="{{url}}"
-              class="rounded-lg border border-slate-200 !text-gray-500 !no-underline hover:!bg-gray-50"
+              class="rounded-lg border border-slate-200 !text-neutral-500 !no-underline hover:!bg-neutral-50"
             >
               <div class="flex h-full flex-col gap-2 p-4">
                 <div>
                   <p
-                    class="mb-2 truncate text-xl font-bold text-gray-700"
+                    class="mb-2 truncate text-xl font-bold text-neutral-700"
                   >{{title}}</p>
                   <p>{{snippet}}</p>
                 </div>
@@ -312,18 +312,18 @@
   >
     <template x-for="category in categories">
       <section class="section home-section">
-        <h2 class="font-bold" x-text="category.title"></h2>
+        <h2 class="text-2xl font-bold" x-text="category.title"></h2>
         <section class="categories blocks">
           <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             <template x-for="article in category.articles">
               <a
                 :href="article.html_url"
-                class="rounded-lg border border-slate-200 !text-gray-500 !no-underline hover:!bg-gray-50"
+                class="rounded-lg border border-slate-200 !text-neutral-500 !no-underline hover:!bg-neutral-50"
               >
                 <div class="flex h-full flex-col gap-2 p-4">
                   <div>
                     <nav
-                      class="mb-2 flex text-xs text-gray-400"
+                      class="mb-2 flex text-xs text-neutral-400"
                       aria-label="Breadcrumb"
                     >
                       <ol
@@ -336,7 +336,7 @@
                         <li class="truncate" x-text="article.section_name"></li>
                       </ol>
                     </nav>
-                    <p class="mb-2 truncate text-xl font-bold text-gray-700" x-text="article.name"></p>
+                    <p class="mb-2 truncate text-xl font-bold text-neutral-700" x-text="article.name"></p>
                     <p x-text="article.body"></p>
                   </div>
                   <p class="mt-auto text-right text-sm" x-text="article[`${category.sort_by}_timeAgo`]"></p>
@@ -357,7 +357,7 @@
           this.activeAccordion = (this.activeAccordion == id) ? '' : id 
       } 
     }"
-      class="relative mx-auto w-full divide-y divide-gray-200 overflow-hidden rounded-md border border-gray-200 bg-white text-sm font-normal"
+      class="relative mx-auto w-full divide-y divide-neutral-200 overflow-hidden rounded-md border border-neutral-200 bg-white text-sm font-normal"
     >
       <div x-data="{ id: $id('accordion') }" class="group cursor-pointer">
         <button
@@ -415,7 +415,7 @@
             <template x-for="manual in manuals" :key="manual.fileName">
               <a :href="`https://www.saaske.com/document/${manual.fileName}.pdf`"
                 target="_blank"
-                class="grid grid-cols-1 gap-2 lg:flex p-4 hover:!bg-gray-50 !no-underline after:!hidden">
+                class="grid grid-cols-1 gap-2 lg:flex p-4 hover:!bg-neutral-50 !no-underline after:!hidden">
                 <div class="flex flex-col sm:flex-row lg:items-center gap-2 sm:gap-4">
                   <div class="w-60 lg:w-30 grid grid-cols-2 lg:grid-cols-1 gap-2">
                     <p class="flex items-center justify-center text-xs px-2.5 py-0.5 rounded-sm" :class="getServiceClass(manual.service)">
@@ -425,9 +425,9 @@
                       <span x-text="manual.role"></span>
                     </p>
                   </div>
-                  <p class="font-bold text-xl text-gray-700 w-90" x-text="manual.title"></p>
+                  <p class="font-bold text-xl text-neutral-700 w-90" x-text="manual.title"></p>
                 </div>
-                <div class="flex items-center !text-gray-500 lg:flex-1 sm:whitespace-pre-line" x-text="manual.description"></div>
+                <div class="flex items-center !text-neutral-500 lg:flex-1 sm:whitespace-pre-line" x-text="manual.description"></div>
               </a>
             </template>
           </div>
