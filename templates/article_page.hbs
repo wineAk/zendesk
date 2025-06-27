@@ -495,6 +495,10 @@ document.querySelectorAll('.article-body > p').forEach(async (p) => {
     if (a.href !== a.textContent) {
       data.title = a.textContent;
     }
+    // 画像がない場合
+    if (data.image === "") {
+      data.image = "{{asset 'icon-not-found.svg'}}";
+    }
     data.url = a.href;
     p.replaceWith(createCard(data));
   } catch (err) {
