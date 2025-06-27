@@ -1,21 +1,31 @@
 <div class="container-divider"></div>
-<div id="main-content" class="error-page">
+<div id="main-content" class="max-w-6xl space-y-12 px-4 pt-0 pb-6 m-auto text-center">
   <h1>{{t 'oops'}}</h1>
 
   {{#is error 'unauthorized'}}
-    <h2>{{link 'sign_in'}}</h2>
+    <h2 class="text-2xl font-bold">{{link 'sign_in'}}</h2>
   {{/is}}
 
   {{#is error 'forbidden'}}
-    <h2>{{t 'not_authorized'}}</h2>
+    <h2 class="text-2xl font-bold">{{t 'not_authorized'}}</h2>
   {{/is}}
 
   {{#is error 'not_found'}}
-    <h2>{{t 'nonexistent_page'}}</h2>
-    <p>{{t 'mistyped_address_or_moved_page'}}</p>
+    <div class="space-y-4">
+      <h2 class="grid text-2xl font-bold">
+        <span class="text-base text-neutral-500 tracking-widest">404</span>
+        <span>{{t 'nonexistent_page'}}</span> 
+      </h2>
+      <p class="text-neutral-500">
+        {{t 'mistyped_address_or_moved_page'}}
+      </p>
+    </div>
   {{/is}}
 
   {{#link 'help_center'}}
-    {{t 'back_to_homepage'}}
+    <span class="text-blue-800">
+      <i class="fa-solid fa-arrow-left"></i>
+      {{t 'back_to_homepage'}}
+    </span>
   {{/link}}
 </div>
