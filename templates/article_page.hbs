@@ -452,6 +452,63 @@
 </div>
 
 <script>
+function createCard(data) {
+  const { title, description, url, image } = data;
+  const outer = document.createElement("div");
+  outer.innerHTML = `
+    <a href="${url}" target="_blank" rel="noopener noreferrer" class="block !no-underline">
+      <div class="max-w-sm lg:max-w-full p-6 mt-2 mb-8 border rounded-lg shadow-sm border-neutral-200 space-y-2">
+        <div class="flex items-center gap-2">
+          <img src="${image}" alt="${title}" class="w-6 h-6 rounded-lg">
+          <h5 class="text-xl font-bold text-neutral-900 truncate">${title}</h5>
+        </div>
+        <p class="text-neutral-500">${description}</p>
+        <div class="border-t border-neutral-200 pt-4 mt-4">
+          <p class="text-xs text-neutral-500 break-all">${url}</p>
+        </div>
+      </div>
+    </a>
+  `;
+  return outer;
+}
+document.querySelectorAll('.article-body > p').forEach(async (p) => {
+  const a = p.querySelector("a");
+  if (!a || p.childNodes.length !== 1) return;
+  try {
+    const res = await fetch("https://api.linkpreview.net/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Linkpreview-Api-Key": "{{settings.api_linkpreview}}"
+      },
+      body: JSON.stringify({ q: a.href })
+    });
+    const data = await res.json();
+    // エラーがある場合
+    // https://docs.linkpreview.net/#errors
+    if (data.error) {
+      data.title = a.textContent;
+      data.description = "";
+      data.image = "{{asset 'icon-not-found.svg'}}";
+    }
+    // URLとテキストを変えてる場合のみ、テキストをタイトルにする
+    if (a.href !== a.textContent) {
+      data.title = a.textContent;
+    }
+    data.url = a.href;
+    p.replaceWith(createCard(data));
+  } catch (err) {
+    const data = {
+      title: a.textContent,
+      description: "",
+      image: "{{asset 'icon-not-found.svg'}}",
+      url: a.href,
+    }
+    p.replaceWith(createCard(data));
+  }
+});
+</script>
+<script>
   document.querySelectorAll('.article-body > pre').forEach(el => {
     const text = el.textContent;
     const largeElm = el.querySelector('.wysiwyg-font-size-large');

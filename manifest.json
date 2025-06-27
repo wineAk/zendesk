@@ -726,6 +726,18 @@
           "value": ""
         }
       ]
+    },
+    {
+      "label": "🛠️ APIキー",
+      "variables": [
+        {
+          "identifier": "api_linkpreview",
+          "type": "text",
+          "description": "LinkPreview APIのAPIキーを入力します",
+          "label": "LinkPreview API",
+          "value": ""
+        }
+      ]
     }
   ]
 }
