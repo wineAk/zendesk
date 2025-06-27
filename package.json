@@ -5,12 +5,12 @@
     "preview": "zcli themes:preview"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.0.6",
+    "@tailwindcss/cli": "^4.1.11",
     "@zendesk/zcli": "^1.0.0-beta.52",
-    "tailwindcss": "^4.0.6"
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "prettier": "^3.5.2",
-    "prettier-plugin-tailwindcss": "^0.6.11"
+    "prettier": "^3.6.1",
+    "prettier-plugin-tailwindcss": "^0.6.13"
   }
 }
