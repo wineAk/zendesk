@@ -169,8 +169,26 @@
         <ul class="search-results-list">
           {{#each results}}
             <li>
-              <article>
+              <article class="px-6 py-4 rounded-lg border border-slate-200 space-y-2">
                 <header>
+                  <div class="search-result-meta-container">
+                    <nav 
+                      class="mb-2 flex text-xs text-neutral-400"
+                      {{#is type 'article'}}aria-label='{{t 'article_location_with_title' title=title}}'{{/is}}
+                      {{#is type 'community_post'}}aria-label='{{t 'post_location_with_title' title=title}}'{{/is}}
+                      {{#is type 'external_content_record'}}aria-label='{{t 'external_content_location_with_title' title=title}}'{{/is}}
+                    >
+                      <ol class="flex items-center gap-2 truncate rounded-sm text-xs py-0.5 [&>li:nth-child(2)]:hidden">
+                        <li><i class="fa-solid fa-house h-3 w-3"></i></li>
+                        {{#each path_steps}}
+                          <li class="before:hidden"><i class="fa-solid fa-chevron-right h-3 w-3"></i></li>
+                          <li class="before:hidden">
+                            <a href="{{url}}" target="{{target}}">{{name}}</a>
+                          </li>
+                        {{/each}}
+                      </ol>
+                    </nav>
+                  </div>
                   <div class="search-result-title-container">
                     <h2 class="search-result-title">
                       <a href="{{url}}" {{#if is_external}} target="_blank" {{/if}}>
@@ -215,25 +233,15 @@
                       {{/if}}
                     </div>
                   </div>
-                  <div class="search-result-meta-container">
-                    <nav 
-                      {{#is type 'article'}}aria-label='{{t 'article_location_with_title' title=title}}'{{/is}}
-                      {{#is type 'community_post'}}aria-label='{{t 'post_location_with_title' title=title}}'{{/is}}
-                      {{#is type 'external_content_record'}}aria-label='{{t 'external_content_location_with_title' title=title}}'{{/is}}
-                    >
-                      <ol class="breadcrumbs search-result-breadcrumbs">
-                        {{#each path_steps}}
-                          <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
-                        {{/each}}
-                      </ol>
-                    </nav>
-                    {{#unless is_external}}
-                      <span class="meta-data">{{author.name}}</span>
-                    {{/unless}}
-                    <span class="meta-data">{{date created_at}}</span>
-                  </div>
                 </header>
-                <p class="search-result-description">{{text}}</p>
+                <p
+                  class="break-all [&>em]:not-italic [&>em]:font-semibold [&>em]:underline [&>em]:decoration-sky-500 [&>em]:decoration-wavy"
+                >
+                  {{text}}
+                </p>
+                <footer class="text-right">
+                    <span class="text-sm text-neutral-500">{{date created_at}}</span>
+                </footer>
               </article>
             </li>
           {{/each}}
