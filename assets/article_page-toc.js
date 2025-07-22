@@ -28,5 +28,14 @@ document.addEventListener("DOMContentLoaded", function () {
     listItemClass: 'toc-list-item my-2 pl-2',
     // アクティブなリストアイテムに追加するクラスです。
     activeListItemClass: 'is-active-li',
-  })
+  });
+  // 目次描画後に、空リンクをテキストに置換
+  setTimeout(() => {
+    document.querySelectorAll('.js-toc a[href="#"]').forEach((a) => {
+      const span = document.createElement('span');
+      span.textContent = a.textContent;
+      span.className = 'text-gray-600 cursor-not-allowed';
+      a.replaceWith(span);
+    });
+  }, 0);
 })
