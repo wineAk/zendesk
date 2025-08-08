@@ -33,7 +33,6 @@
     --color-blue-200: oklch(88.2% 0.059 254.128);
     --color-blue-700: oklch(48.8% 0.243 264.376);
     --color-blue-800: oklch(42.4% 0.199 265.638);
-    --color-blue-900: oklch(37.9% 0.146 265.522);
     --color-indigo-50: oklch(96.2% 0.018 272.314);
     --color-indigo-200: oklch(87% 0.065 274.039);
     --color-indigo-700: oklch(45.7% 0.24 277.023);
@@ -267,9 +266,6 @@
   .sticky {
     position: sticky;
   }
-  .-top-0 {
-    top: calc(var(--spacing) * -0);
-  }
   .-top-3 {
     top: calc(var(--spacing) * -3);
   }
@@ -282,17 +278,11 @@
   .top-\[2px\] {
     top: 2px;
   }
-  .top-\[4px\] {
-    top: 4px;
-  }
   .-right-3 {
     right: calc(var(--spacing) * -3);
   }
   .-right-5 {
     right: calc(var(--spacing) * -5);
-  }
-  .-right-6 {
-    right: calc(var(--spacing) * -6);
   }
   .right-0 {
     right: calc(var(--spacing) * 0);
@@ -487,20 +477,11 @@
   .flex-1 {
     flex: 1;
   }
-  .flex-shrink {
-    flex-shrink: 1;
-  }
   .shrink {
     flex-shrink: 1;
   }
-  .flex-grow {
-    flex-grow: 1;
-  }
   .grow {
     flex-grow: 1;
-  }
-  .border-collapse {
-    border-collapse: collapse;
   }
   .translate-y-0 {
     --tw-translate-y: calc(var(--spacing) * 0);
@@ -515,9 +496,6 @@
   }
   .rotate-0 {
     rotate: 0deg;
-  }
-  .rotate-10 {
-    rotate: 10deg;
   }
   .rotate-90 {
     rotate: 90deg;
@@ -708,9 +686,6 @@
   .border-slate-200 {
     border-color: var(--color-slate-200);
   }
-  .border-violet-200 {
-    border-color: var(--color-violet-200);
-  }
   .bg-\[oklch\(0\.949_0\.004_281\.245\)\] {
     background-color: oklch(0.949 0.004 281.245);
   }
@@ -756,9 +731,6 @@
   .bg-red-50 {
     background-color: var(--color-red-50);
   }
-  .bg-violet-50 {
-    background-color: var(--color-violet-50);
-  }
   .bg-white {
     background-color: var(--color-white);
   }
@@ -788,9 +760,6 @@
   }
   .px-\[5\%\] {
     padding-inline: 5%;
-  }
-  .py-0 {
-    padding-block: calc(var(--spacing) * 0);
   }
   .py-0\.5 {
     padding-block: calc(var(--spacing) * 0.5);
@@ -964,9 +933,6 @@
   .text-red-800 {
     color: var(--color-red-800);
   }
-  .text-violet-700 {
-    color: var(--color-violet-700);
-  }
   .text-white {
     color: var(--color-white);
   }
@@ -1002,10 +968,6 @@
   .shadow-sm {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .blur {
     --tw-blur: blur(8px);
@@ -1739,11 +1701,6 @@ a {
   inherits: false;
   initial-value: 0 0 #0000;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-blur {
   syntax: "*";
   inherits: false;
@@ -1847,7 +1804,6 @@ a {
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
-      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;
