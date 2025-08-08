@@ -10,6 +10,15 @@
   -webkit-mask-size: contain;
   mask-size: contain;
 }
+.fa-kagemaru {
+  width: 1.5em;
+  height: 1.5em;
+  background-color: currentColor;
+  -webkit-mask: url($assets-kagemaru-svg) no-repeat center;
+  mask: url($assets-kagemaru-svg) no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
 
 /***** Normalize.css *****/
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */

@@ -56,6 +56,11 @@ function getColor(key) {
       text: 'text-indigo-700',
       border: 'border-indigo-200'
     },
+    'カゲマル': {
+      bg: 'bg-indigo-50',
+      text: 'text-indigo-700',
+      border: 'border-indigo-200'
+    },
     // ロール
     '管理者': {
       bg: 'bg-pink-50',
@@ -82,5 +87,6 @@ function getCategoryIcon(key) {
     'Cloud CTI': 'top-0 -right-3 -rotate-10 text-7xl fa-phone-volume',
     'Cloud Scan': 'top-0 -right-3 -rotate-10 text-7xl fa-address-card',
     'API': 'top-0 right-0 -rotate-10 text-[4rem] fa-plug',
+    'カゲマル': '-top-3 -right-5 -rotate-10 text-6xl fa-kagemaru',
   }[key] || '';
 }
