@@ -36,9 +36,6 @@
     --color-indigo-50: oklch(96.2% 0.018 272.314);
     --color-indigo-200: oklch(87% 0.065 274.039);
     --color-indigo-700: oklch(45.7% 0.24 277.023);
-    --color-violet-50: oklch(96.9% 0.016 293.756);
-    --color-violet-200: oklch(89.4% 0.057 293.283);
-    --color-violet-700: oklch(49.1% 0.27 292.581);
     --color-purple-50: oklch(97.7% 0.014 308.299);
     --color-purple-200: oklch(90.2% 0.063 306.703);
     --color-purple-700: oklch(49.6% 0.265 301.924);
@@ -1435,6 +1432,9 @@ a {
       max-height: calc(100dvh - 326px + var(--js-scroll, 0px) - 1rem);
     }
   }
+}
+.article-body p > img {
+  display: inline;
 }
 .article-body figure.wysiwyg-table {
   display: flex;

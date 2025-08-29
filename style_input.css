@@ -201,6 +201,11 @@ a {
   }
 }
 
+/* インラインの画像 */
+.article-body p > img {
+  display: inline;
+}
+
 /* テーブル */
 .article-body figure.wysiwyg-table {
   display: flex;
