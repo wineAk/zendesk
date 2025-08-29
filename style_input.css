@@ -175,11 +175,14 @@ a {
   border-radius: var(--radius-lg);
 }
 
-.article-body figure.wysiwyg-image {
-  /* 画像 */
-  img {
-    cursor: pointer;
-  }
+/* 画像 */
+.article-body img {
+  cursor: pointer;
+}
+
+/* インラインの画像 */
+.article-body p > img {
+  display: inline;
 }
 
 .article-container {
@@ -199,11 +202,6 @@ a {
       max-height: calc(100dvh - 326px + var(--js-scroll, 0px) - 1rem);
     }
   }
-}
-
-/* インラインの画像 */
-.article-body p > img {
-  display: inline;
 }
 
 /* テーブル */

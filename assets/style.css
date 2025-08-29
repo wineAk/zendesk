@@ -1412,10 +1412,11 @@ a {
   background-color: var(--figcaption-background-color);
   border-radius: var(--radius-lg);
 }
-.article-body figure.wysiwyg-image {
-  img {
-    cursor: pointer;
-  }
+.article-body img {
+  cursor: pointer;
+}
+.article-body p > img {
+  display: inline;
 }
 .article-container {
   ::-webkit-scrollbar {
@@ -1432,9 +1433,6 @@ a {
       max-height: calc(100dvh - 326px + var(--js-scroll, 0px) - 1rem);
     }
   }
-}
-.article-body p > img {
-  display: inline;
 }
 .article-body figure.wysiwyg-table {
   display: flex;
