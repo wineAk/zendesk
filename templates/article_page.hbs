@@ -13,7 +13,7 @@
 
 <div class="container-divider"></div>
 
-<div class="container lg:px-0! lg:w-full! lg:max-w-full!">
+<div class="container">
   <!-- パンくず -->
   <div class="flex items-center text-neutral-400 text-xs mb-8 lg:pl-4">
     <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -26,9 +26,11 @@
     <!-- Split Panel https://shoelace.style/components/split-panel -->
     <sl-split-panel position-in-pixels="200" class="block lg:grid grid-cols-[200px_1fr]">
       <!-- 左メニュー -->
-      <aside slot="start" class="bg-neutral-50 p-4 rounded-xl lg:rounded-none" aria-labelledby="section-articles-title">
+      <aside slot="start" class="p-4 space-y-8 rounded-xl lg:rounded-none" aria-labelledby="section-articles-title">
+        <!-- search and copy -->
+        <div class="space-y-4">
         <!-- search -->
-        <div class="search-container mb-4">
+        <div class="search-container">
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
             <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
             <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
@@ -63,6 +65,7 @@
             </span>
           </button>
         </div>
+        </div>
         <!-- toc -->
         <div class="collapsible-sidebar">
           <button type="button" class="collapsible-sidebar-toggle" aria-labelledby="section-articles-title" aria-expanded="false">
@@ -95,7 +98,7 @@
                 {{#each section.articles}}
                   <li>
                     <a href="{{url}}" 
-                      class="sidenav-item {{#is id ../article.id}}current-article{{/is}}"
+                      class="sidenav-item m-0! py-1.25 {{#is id ../article.id}}current-article{{/is}}"
                       {{#is id ../article.id}}aria-current="page"{{/is}}>
                         {{title}}
                     </a>
@@ -109,7 +112,7 @@
           </div>
         {{/if}}
         <!-- すべての記事 -->
-        <div class="hidden lg:block mb-4">
+        <div class="hidden lg:block">
           <span class="collapsible-sidebar-title sidenav-title">
             すべての記事
           </span>
@@ -439,6 +442,11 @@
     </article>
 
     </sl-split-panel>
+    <style>
+      #article-container sl-split-panel {
+        --divider-width: 2px;
+      }
+    </style>
 
   </div>
 </div>
