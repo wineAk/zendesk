@@ -121,7 +121,24 @@
           x-data="{
             categories:[],
             getData() {
-              fetchZendeskHierarchy().then(data => this.categories = data)
+              fetchZendeskHierarchy().then(data => {
+                this.categories = data
+                this.$nextTick(() => this.expandToCurrent())
+              })
+            },
+            expandToCurrent() {
+              const currentUrl = window.location.href
+              // 現在ページに一致する href を探す
+              const link = document.querySelector(`sl-tree a[href='${currentUrl}']`)
+              if (!link) return
+              // そのリンクの親の sl-tree-item（記事）
+              let item = link.closest('sl-tree-item')
+              item.selected = true;
+              // 祖先方向にさかのぼりながら expanded を付与
+              while (item) {
+                item.expanded = true
+                item = item.parentElement?.closest('sl-tree-item')
+              }
             }
           }"
           x-init="getData()">
