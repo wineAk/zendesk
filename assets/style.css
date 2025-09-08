@@ -378,6 +378,9 @@
   .inline {
     display: inline;
   }
+  .inline\! {
+    display: inline !important;
+  }
   .inline-block {
     display: inline-block;
   }

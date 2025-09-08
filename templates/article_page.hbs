@@ -89,9 +89,9 @@
             <div class="collapsible-sidebar-body">
               <ul>
                 {{#each section.articles}}
-                  <li>
+                  <li class="my-2">
                     <a href="{{url}}" 
-                      class="sidenav-item m-0! py-1.25 {{#is id ../article.id}}current-article{{/is}}"
+                      class="sidenav-item m-0! inline! {{#is id ../article.id}}current-article{{/is}}"
                       {{#is id ../article.id}}aria-current="page"{{/is}}>
                         {{title}}
                     </a>
@@ -161,6 +161,11 @@
             sl-tree {
               --indent-guide-width: 1px;
             }
+            sl-tree-item::part(item),
+            sl-tree-item::part(children),
+            sl-tree-item sl-tree-item sl-tree-item::part(expand-button) {
+              cursor: auto;
+            }
             sl-tree-item::part(label) {
               font-family: inherit;
               font-size: 15px;
@@ -186,14 +191,14 @@
     <!-- 記事 -->
     <article slot="end" id="main-content" class="px-4">
       <header class="article-header">
-        <h1 title="{{article.title}}" class="article-title">
-          {{article.title}}
+        <h1 title="{{article.title}}" class="article-title flex items-center gap-2">
           {{#if article.internal}}
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 16 16" class="icon-lock" title="{{t 'internal'}}">
               <rect width="12" height="9" x="2" y="7" fill="currentColor" rx="1" ry="1"/>
               <path fill="none" stroke="currentColor" d="M4.5 7.5V4a3.5 3.5 0 017 0v3.5"/>
             </svg>
           {{/if}}
+          {{article.title}}
         </h1>
 
         <div class="article-author">
