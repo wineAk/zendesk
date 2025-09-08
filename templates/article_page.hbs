@@ -1,13 +1,6 @@
 <script src="{{asset 'module-tocbot.min.js'}}"></script>
 <script src="{{asset 'article_page-toc.js'}}"></script>
 <script src="{{asset 'article_page-image_modal.js'}}"></script>
-<!-- Shoelace -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
-<!-- サイドメニュー -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
-
-<!--<script src="{{asset 'article_page-sidemenu.js'}}"></script>-->
-<!-- Prism -->
 <link rel="stylesheet" href="{{asset 'module-prism.css'}}">
 <script src="{{asset 'module-prism.js'}}"></script>
 
@@ -127,13 +120,17 @@
               })
             },
             expandToCurrent() {
-              const currentUrl = window.location.href
+              const currentHref = window.location.href
+              const currentHrefRep = currentHref.replace(/(categories|sections|articles)(\/\d+)(\-.*)/, '$1$2') 
               // 現在ページに一致する href を探す
-              const link = document.querySelector(`sl-tree a[href='${currentUrl}']`)
+              const link = document.querySelector(`sl-tree a[href$='${currentHref}'], sl-tree a[href$='${currentHrefRep}']`)
               if (!link) return
               // そのリンクの親の sl-tree-item（記事）
               let item = link.closest('sl-tree-item')
+              // 選択状態にする
               item.selected = true;
+              // 選択状態を保持する
+              item.dataset.selected = 'true';
               // 祖先方向にさかのぼりながら expanded を付与
               while (item) {
                 item.expanded = true
@@ -173,6 +170,15 @@
               white-space: nowrap;
             }
           </style>
+          <script>
+            // ツリーの選択状態をdata-selectedのみにする
+            document.addEventListener('DOMContentLoaded', function() {
+              document.querySelector("sl-tree").addEventListener('click', (e) => {
+                e.target.selected = false;
+                document.querySelector("[data-selected]").selected = true;
+              })
+            })
+          </script>
 
         </div>
       </aside>
