@@ -38,6 +38,7 @@
 <link rel="stylesheet" href="{{asset 'style.css'}}">
 <script src="{{asset 'module-getZendeskAPI.js'}}"></script>
 <script src="{{asset 'module-getColor.js'}}"></script>
+{{! エージェント もしくは 管理者 のみ読み込み }}
 {{#if user.agent}}
   <script>console.log('USER', {{json user}});</script>
   <script defer src="{{asset 'document_head-admin_menu.js'}}"></script>

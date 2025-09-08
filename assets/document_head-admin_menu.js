@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const adminMenu = document.querySelector('#navbar-container, #preview-bar-container');
-  if (!adminMenu) return;
   const footer = document.querySelector("body > footer");
   if (!footer) return;
   // フッターに管理メニューを追加
