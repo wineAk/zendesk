@@ -51,7 +51,7 @@ async function fetchZendeskCategories() {
 
 /**
  * セクション情報を取得する関数
- * @returns {Promise<Sections[]>} セクション情報のオブジェクト
+ * @returns {Promise<Section[]>} セクション情報のオブジェクト
  */
 async function fetchZendeskSections() {
   const name = 'sections'
@@ -125,7 +125,7 @@ async function fetchZendeskArticles() {
 /**
  * API経由でZendeskのコンテンツを取得
  * @param {string} name categories | sections | articles
- * @returns {Category[] | Sections[] | Article[]}
+ * @returns {Category[] | Section[] | Article[]}
  */
 async function fetchZendeskContentByType(name) {
   let list = []
@@ -142,7 +142,7 @@ async function fetchZendeskContentByType(name) {
 /**
  * ローカルストレージにキャッシュとして保存
  * @param {string} cacheName storage名
- * @param {Category[] | Sections[] | Article[]} data データ
+ * @param {Category[] | Section[] | Article[]} data データ
  */
 function cacheZendeskData(cacheName, data) {
   const cacheData = {
@@ -156,7 +156,7 @@ function cacheZendeskData(cacheName, data) {
  * ローカルストレージからキャッシュを取得する関数
  * @param {string} cacheName - 取得するキャッシュのキー名。
  * @param {number} [cacheTime=24] - キャッシュの有効時間（時間単位）。
- * @returns {Category[] | Sections[] | Article[] | null} 有効なキャッシュデータがあれば返し、なければ null を返す。
+ * @returns {Category[] | Section[] | Article[] | null} 有効なキャッシュデータがあれば返し、なければ null を返す。
  */
 function retrieveZendeskCache(cacheName, cacheTime = 24) {
   const cacheLifetime = cacheTime * 60 * 60 * 1000 // 指定時間（ミリ秒）
