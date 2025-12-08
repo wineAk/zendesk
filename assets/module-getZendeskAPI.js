@@ -107,11 +107,11 @@ async function fetchZendeskArticles() {
   // 1. アーティクルを取得
   const articles = await fetchZendeskContentByType(name)
   // 2. bodyを70文字に制限する
+  const parser = new DOMParser()
   const mappedArticles = articles.map(article => {
     const { body, ...rest } = article
-    const divElm = document.createElement('div')
-    divElm.innerHTML = body
-    const text = divElm.innerText || divElm.textContent
+    const doc = parser.parseFromString(body, 'text/html')
+    const text = doc.body.textContent || ''
     const replaceText = text.replace(/\n/g, '')
     const maxLen = 70
     const maxBody = replaceText.length > maxLen ? replaceText.slice(0, maxLen) + '…' : replaceText
