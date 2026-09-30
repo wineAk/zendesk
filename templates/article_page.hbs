@@ -474,6 +474,11 @@
       #article-container sl-split-panel {
         --divider-width: 2px;
       }
+      /* コードブロックなど幅の広い要素で記事側の列が押し広げられ、横スクロールが出るのを防ぐ */
+      #article-container #main-content {
+        min-width: 0;
+        overflow-x: hidden;
+      }
     </style>
 
   </div>
